@@ -60,11 +60,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Form\AddTourForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form\AddTourForm.designer.cs">
+      <DependentUpon>AddTourForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddClientForm.designer.cs">
+      <DependentUpon>AddClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddDiscountForm.designer.cs">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddExcursionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddExcursionForm.designer.cs">
+      <DependentUpon>AddExcursionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddHotelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddHotelForm.designer.cs">
+      <DependentUpon>AddHotelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddMealForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddMealForm.designer.cs">
+      <DependentUpon>AddMealForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AddTransportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddTransportForm.designer.cs">
+      <DependentUpon>AddTransportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ValidateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\GridHelper.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,8 +119,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TourDb.dbml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Form\AddTourForm.resx">
+      <DependentUpon>AddTourForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddClientForm.resx">
+      <DependentUpon>AddClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddDiscountForm.resx">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddExcursionForm.resx">
+      <DependentUpon>AddExcursionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddHotelForm.resx">
+      <DependentUpon>AddHotelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddMealForm.resx">
+      <DependentUpon>AddMealForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddTransportForm.resx">
+      <DependentUpon>AddTransportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ValidateForm.resx">
+      <DependentUpon>ValidateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
