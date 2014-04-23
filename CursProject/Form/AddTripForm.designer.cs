@@ -31,17 +31,11 @@ namespace CursProject.Form
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.labelTourId = new System.Windows.Forms.Label();
-            this.txtTourId = new System.Windows.Forms.TextBox();
             this.labelMeal = new System.Windows.Forms.Label();
-            this.txtMeal = new System.Windows.Forms.TextBox();
             this.labelTransport = new System.Windows.Forms.Label();
-            this.txtTransport = new System.Windows.Forms.TextBox();
             this.labelHotel = new System.Windows.Forms.Label();
-            this.txtHotel = new System.Windows.Forms.TextBox();
             this.labelDateDeparture = new System.Windows.Forms.Label();
-            this.txtDateDeparture = new System.Windows.Forms.TextBox();
             this.labelDateArival = new System.Windows.Forms.Label();
-            this.txtDateArival = new System.Windows.Forms.TextBox();
             this.labelNights = new System.Windows.Forms.Label();
             this.txtNights = new System.Windows.Forms.TextBox();
             this.labelAmount = new System.Windows.Forms.Label();
@@ -54,6 +48,12 @@ namespace CursProject.Form
             this.txtTransportPrice = new System.Windows.Forms.TextBox();
             this.labelHotelPrice = new System.Windows.Forms.Label();
             this.txtHotelPrice = new System.Windows.Forms.TextBox();
+            this.ddlTours = new System.Windows.Forms.ComboBox();
+            this.ddlMeals = new System.Windows.Forms.ComboBox();
+            this.ddlTransports = new System.Windows.Forms.ComboBox();
+            this.ddlHotels = new System.Windows.Forms.ComboBox();
+            this.dtpDateDeparture = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateArival = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -85,14 +85,6 @@ namespace CursProject.Form
             this.labelTourId.TabIndex = 6;
             this.labelTourId.Text = "Тур: ";
             // 
-            // txtTourId
-            // 
-            this.txtTourId.Location = new System.Drawing.Point(147, 4);
-            this.txtTourId.MaxLength = 255;
-            this.txtTourId.Name = "txtTourId";
-            this.txtTourId.Size = new System.Drawing.Size(188, 20);
-            this.txtTourId.TabIndex = 1;
-            // 
             // labelMeal
             // 
             this.labelMeal.AutoSize = true;
@@ -101,14 +93,6 @@ namespace CursProject.Form
             this.labelMeal.Size = new System.Drawing.Size(56, 13);
             this.labelMeal.TabIndex = 6;
             this.labelMeal.Text = "Питание: ";
-            // 
-            // txtMeal
-            // 
-            this.txtMeal.Location = new System.Drawing.Point(147, 30);
-            this.txtMeal.MaxLength = 255;
-            this.txtMeal.Name = "txtMeal";
-            this.txtMeal.Size = new System.Drawing.Size(188, 20);
-            this.txtMeal.TabIndex = 2;
             // 
             // labelTransport
             // 
@@ -119,14 +103,6 @@ namespace CursProject.Form
             this.labelTransport.TabIndex = 6;
             this.labelTransport.Text = "Транспорт: ";
             // 
-            // txtTransport
-            // 
-            this.txtTransport.Location = new System.Drawing.Point(147, 56);
-            this.txtTransport.MaxLength = 255;
-            this.txtTransport.Name = "txtTransport";
-            this.txtTransport.Size = new System.Drawing.Size(188, 20);
-            this.txtTransport.TabIndex = 3;
-            // 
             // labelHotel
             // 
             this.labelHotel.AutoSize = true;
@@ -135,14 +111,6 @@ namespace CursProject.Form
             this.labelHotel.Size = new System.Drawing.Size(44, 13);
             this.labelHotel.TabIndex = 6;
             this.labelHotel.Text = "Отель: ";
-            // 
-            // txtHotel
-            // 
-            this.txtHotel.Location = new System.Drawing.Point(147, 82);
-            this.txtHotel.MaxLength = 255;
-            this.txtHotel.Name = "txtHotel";
-            this.txtHotel.Size = new System.Drawing.Size(188, 20);
-            this.txtHotel.TabIndex = 4;
             // 
             // labelDateDeparture
             // 
@@ -153,14 +121,6 @@ namespace CursProject.Form
             this.labelDateDeparture.TabIndex = 6;
             this.labelDateDeparture.Text = "Дата отбытия: ";
             // 
-            // txtDateDeparture
-            // 
-            this.txtDateDeparture.Location = new System.Drawing.Point(147, 108);
-            this.txtDateDeparture.MaxLength = 255;
-            this.txtDateDeparture.Name = "txtDateDeparture";
-            this.txtDateDeparture.Size = new System.Drawing.Size(188, 20);
-            this.txtDateDeparture.TabIndex = 5;
-            // 
             // labelDateArival
             // 
             this.labelDateArival.AutoSize = true;
@@ -169,14 +129,6 @@ namespace CursProject.Form
             this.labelDateArival.Size = new System.Drawing.Size(91, 13);
             this.labelDateArival.TabIndex = 6;
             this.labelDateArival.Text = "Дата прибытия: ";
-            // 
-            // txtDateArival
-            // 
-            this.txtDateArival.Location = new System.Drawing.Point(147, 134);
-            this.txtDateArival.MaxLength = 255;
-            this.txtDateArival.Name = "txtDateArival";
-            this.txtDateArival.Size = new System.Drawing.Size(188, 20);
-            this.txtDateArival.TabIndex = 6;
             // 
             // labelNights
             // 
@@ -280,22 +232,68 @@ namespace CursProject.Form
             this.txtHotelPrice.Size = new System.Drawing.Size(188, 20);
             this.txtHotelPrice.TabIndex = 12;
             // 
+            // ddlTours
+            // 
+            this.ddlTours.FormattingEnabled = true;
+            this.ddlTours.Location = new System.Drawing.Point(147, 4);
+            this.ddlTours.Name = "ddlTours";
+            this.ddlTours.Size = new System.Drawing.Size(188, 21);
+            this.ddlTours.TabIndex = 13;
+            // 
+            // ddlMeals
+            // 
+            this.ddlMeals.FormattingEnabled = true;
+            this.ddlMeals.Location = new System.Drawing.Point(147, 30);
+            this.ddlMeals.Name = "ddlMeals";
+            this.ddlMeals.Size = new System.Drawing.Size(188, 21);
+            this.ddlMeals.TabIndex = 14;
+            // 
+            // ddlTransports
+            // 
+            this.ddlTransports.FormattingEnabled = true;
+            this.ddlTransports.Location = new System.Drawing.Point(147, 56);
+            this.ddlTransports.Name = "ddlTransports";
+            this.ddlTransports.Size = new System.Drawing.Size(188, 21);
+            this.ddlTransports.TabIndex = 15;
+            // 
+            // ddlHotels
+            // 
+            this.ddlHotels.FormattingEnabled = true;
+            this.ddlHotels.Location = new System.Drawing.Point(147, 82);
+            this.ddlHotels.Name = "ddlHotels";
+            this.ddlHotels.Size = new System.Drawing.Size(188, 21);
+            this.ddlHotels.TabIndex = 16;
+            // 
+            // dtpDateDeparture
+            // 
+            this.dtpDateDeparture.Location = new System.Drawing.Point(147, 108);
+            this.dtpDateDeparture.Name = "dtpDateDeparture";
+            this.dtpDateDeparture.Size = new System.Drawing.Size(188, 20);
+            this.dtpDateDeparture.TabIndex = 17;
+            // 
+            // dtpDateArival
+            // 
+            this.dtpDateArival.Location = new System.Drawing.Point(147, 134);
+            this.dtpDateArival.Name = "dtpDateArival";
+            this.dtpDateArival.Size = new System.Drawing.Size(188, 20);
+            this.dtpDateArival.TabIndex = 18;
+            // 
             // AddTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 348);
-            this.Controls.Add(this.txtTourId);
+            this.Controls.Add(this.dtpDateArival);
+            this.Controls.Add(this.dtpDateDeparture);
+            this.Controls.Add(this.ddlHotels);
+            this.Controls.Add(this.ddlTransports);
+            this.Controls.Add(this.ddlMeals);
+            this.Controls.Add(this.ddlTours);
             this.Controls.Add(this.labelTourId);
-            this.Controls.Add(this.txtMeal);
             this.Controls.Add(this.labelMeal);
-            this.Controls.Add(this.txtTransport);
             this.Controls.Add(this.labelTransport);
-            this.Controls.Add(this.txtHotel);
             this.Controls.Add(this.labelHotel);
-            this.Controls.Add(this.txtDateDeparture);
             this.Controls.Add(this.labelDateDeparture);
-            this.Controls.Add(this.txtDateArival);
             this.Controls.Add(this.labelDateArival);
             this.Controls.Add(this.txtNights);
             this.Controls.Add(this.labelNights);
@@ -324,18 +322,11 @@ namespace CursProject.Form
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAdd;
-
-        private System.Windows.Forms.TextBox txtTourId;
         private System.Windows.Forms.Label labelTourId;
-        private System.Windows.Forms.TextBox txtMeal;
         private System.Windows.Forms.Label labelMeal;
-        private System.Windows.Forms.TextBox txtTransport;
         private System.Windows.Forms.Label labelTransport;
-        private System.Windows.Forms.TextBox txtHotel;
         private System.Windows.Forms.Label labelHotel;
-        private System.Windows.Forms.TextBox txtDateDeparture;
         private System.Windows.Forms.Label labelDateDeparture;
-        private System.Windows.Forms.TextBox txtDateArival;
         private System.Windows.Forms.Label labelDateArival;
         private System.Windows.Forms.TextBox txtNights;
         private System.Windows.Forms.Label labelNights;
@@ -349,6 +340,12 @@ namespace CursProject.Form
         private System.Windows.Forms.Label labelTransportPrice;
         private System.Windows.Forms.TextBox txtHotelPrice;
         private System.Windows.Forms.Label labelHotelPrice;
+        private System.Windows.Forms.ComboBox ddlTours;
+        private System.Windows.Forms.ComboBox ddlMeals;
+        private System.Windows.Forms.ComboBox ddlTransports;
+        private System.Windows.Forms.ComboBox ddlHotels;
+        private System.Windows.Forms.DateTimePicker dtpDateDeparture;
+        private System.Windows.Forms.DateTimePicker dtpDateArival;
 
     }
 }

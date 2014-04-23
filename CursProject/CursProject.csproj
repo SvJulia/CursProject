@@ -194,10 +194,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TourDb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TourDb_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>TourDb.mdf</DependentUpon>
     </Content>
   </ItemGroup>
