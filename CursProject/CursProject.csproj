@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Form\AddTourForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +126,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TourDb.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Types\HotelType.cs" />
+    <Compile Include="Types\TransportType.cs" />
+    <Compile Include="Types\MealType.cs" />
     <EmbeddedResource Include="Form\AddTourForm.resx">
       <DependentUpon>AddTourForm.cs</DependentUpon>
     </EmbeddedResource>

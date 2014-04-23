@@ -145,6 +145,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Tours.DeleteAllOnSubmit(from t in db.Tours where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshTours();
         }
@@ -200,6 +201,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Excursions.DeleteAllOnSubmit(from t in db.Excursions where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshExcursions();
         }
@@ -256,6 +258,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Meals.DeleteAllOnSubmit(from t in db.Meals where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshMeals();
         }
@@ -312,6 +315,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Transports.DeleteAllOnSubmit(from t in db.Transports where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshTransports();
         }
@@ -368,6 +372,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Hotels.DeleteAllOnSubmit(from t in db.Hotels where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshHotels();
         }
@@ -424,6 +429,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Discounts.DeleteAllOnSubmit(from t in db.Discounts where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshDiscounts();
         }        
@@ -479,6 +485,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Clients.DeleteAllOnSubmit(from t in db.Clients where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshClients();
         }
@@ -536,6 +543,7 @@ namespace CursProject
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Trips.DeleteAllOnSubmit(from t in db.Trips where t.Id == id select t);
+            db.SubmitChanges();
 
             RefreshTrips();
         }

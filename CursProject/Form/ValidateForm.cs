@@ -12,24 +12,24 @@ namespace CursProject.Form
             return isNumberic ? ValidateNumbericControl(control) : ValidateStringControl(control);
         }
 
-        public bool ValidateStringControl(Control control)
+        public bool ValidateControl(ComboBox comboBox)
+        {
+            comboBox.BackColor = IsValidComboBox(comboBox) ? Color.White : Color.Salmon;
+            return IsValidComboBox(comboBox);
+        }
+
+        private bool ValidateStringControl(Control control)
         {
             string text = control.Text;
             control.BackColor = IsValidString(text) ? Color.White : Color.Salmon;
             return IsValidString(text);
         }
 
-        public bool ValidateNumbericControl(Control control)
+        private bool ValidateNumbericControl(Control control)
         {
             string strNumber = control.Text;
             control.BackColor = IsValidNumber(strNumber) ? Color.White : Color.Salmon;
             return IsValidNumber(strNumber);
-        }
-
-        public bool ValidateComboBox(ComboBox comboBox)
-        {
-            comboBox.BackColor = IsValidComboBox(comboBox) ? Color.White : Color.Salmon;
-            return IsValidComboBox(comboBox);
         }
 
         private bool IsValidString(string text)

@@ -33,7 +33,7 @@ namespace CursProject.Form
             this.labelName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.labelType = new System.Windows.Forms.Label();
-            this.txtType = new System.Windows.Forms.TextBox();
+            this.ddlTransportTypes = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -82,22 +82,22 @@ namespace CursProject.Form
             this.labelType.TabIndex = 6;
             this.labelType.Text = "Тип транспорта: ";
             // 
-            // txtType
+            // ddlTransportTypes
             // 
-            this.txtType.Location = new System.Drawing.Point(111, 38);
-            this.txtType.MaxLength = 255;
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(188, 20);
-            this.txtType.TabIndex = 2;
+            this.ddlTransportTypes.FormattingEnabled = true;
+            this.ddlTransportTypes.Location = new System.Drawing.Point(111, 37);
+            this.ddlTransportTypes.Name = "ddlTransportTypes";
+            this.ddlTransportTypes.Size = new System.Drawing.Size(188, 21);
+            this.ddlTransportTypes.TabIndex = 8;
             // 
             // AddTransportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 98);
+            this.Controls.Add(this.ddlTransportTypes);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.labelName);
-            this.Controls.Add(this.txtType);
             this.Controls.Add(this.labelType);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
@@ -117,8 +117,8 @@ namespace CursProject.Form
 	
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.ComboBox ddlTransportTypes;
 
     }
 }
