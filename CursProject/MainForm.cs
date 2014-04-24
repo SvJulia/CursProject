@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using CursProject.Classes;
 using CursProject.Form;
 using CursProject.Helpers;
 using CursProject.Properties;
@@ -13,9 +14,6 @@ namespace CursProject
         public MainForm()
         {
             InitializeComponent();
-
-            TourSortColumn = 6;
-            TourSortOrder = SortOrder.Descending;
 
             RefreshAllGrids();
         }
@@ -36,6 +34,7 @@ namespace CursProject
             RefreshMeals();
             RefreshExcursions();
             RefreshTrips();
+            RefreshTripClients();
         }
 
         private void RefreshTours()
@@ -94,20 +93,16 @@ namespace CursProject
             tripGrid.DataSource = list;
         }
 
+        private void RefreshTripClients()
+        {
+            var db = new TourDbDataContext();
+            List<TripClient> list = db.TripClients.ToList();
+            tripClientGrid.DataSource = list;
+        }
+
         /*
          **********   Tours   **********
          */
-
-        private void tourGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(tourGrid.Rows[e.RowIndex], 0);
-            EditTour(id);
-        }
 
         private void btnAddTour_Click(object sender, EventArgs e)
         {
@@ -153,17 +148,6 @@ namespace CursProject
         /*
          **********   Excursions   **********
          */
-
-        private void excursionGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(excursionGrid.Rows[e.RowIndex], 0);
-            EditExcursion(id);
-        }
 
         private void btnAddExcursion_Click(object sender, EventArgs e)
         {
@@ -211,17 +195,6 @@ namespace CursProject
          **********   Meals   **********
          */
 
-        private void mealGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(mealGrid.Rows[e.RowIndex], 0);
-            EditMeal(id);
-        }
-
         private void btnAddMeal_Click(object sender, EventArgs e)
         {
             var form = new AddMealForm();
@@ -267,17 +240,6 @@ namespace CursProject
         /*
          **********   Transports   **********
          */
-
-        private void transportGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(transportGrid.Rows[e.RowIndex], 0);
-            EditTransport(id);
-        }
 
         private void btnAddTransport_Click(object sender, EventArgs e)
         {
@@ -325,17 +287,6 @@ namespace CursProject
          **********   Hotels   **********
          */
 
-        private void hotelGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(hotelGrid.Rows[e.RowIndex], 0);
-            EditHotel(id);
-        }
-
         private void btnAddHotel_Click(object sender, EventArgs e)
         {
             var form = new AddHotelForm();
@@ -381,18 +332,7 @@ namespace CursProject
         /*
          **********   Discounts   **********
          */
-
-        private void discountGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(discountGrid.Rows[e.RowIndex], 0);
-            EditDiscount(id);
-        }
-
+                 
         private void btnAddDiscount_Click(object sender, EventArgs e)
         {
             var form = new AddDiscountForm();
@@ -437,17 +377,6 @@ namespace CursProject
         /*
          **********   Clients   **********
          */
-
-        private void clientGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(clientGrid.Rows[e.RowIndex], 0);
-            EditClient(id);
-        }
 
         private void btnAddClient_Click(object sender, EventArgs e)
         {
@@ -496,17 +425,6 @@ namespace CursProject
          **********   Trips   **********
          */
 
-        private void tripGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int id = GridHelper.GetIntFromRow(tripGrid.Rows[e.RowIndex], 0);
-            EditTrip(id);
-        }
-
         private void btnAddTrip_Click(object sender, EventArgs e)
         {
             var form = new AddTripForm();
@@ -521,7 +439,7 @@ namespace CursProject
                 return;
             }
 
-            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
             EditTrip(id);
         }
 
@@ -539,13 +457,67 @@ namespace CursProject
                 return;
             }
 
-            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Trips.DeleteAllOnSubmit(from t in db.Trips where t.Id == id select t);
             db.SubmitChanges();
 
             RefreshTrips();
+        }
+
+
+
+        /*
+         **********   TripClients   **********
+         */
+               
+        private void btnAddTripClient_Click(object sender, EventArgs e)
+        {
+            if (tripGrid.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
+
+            var form = new AddTripClientForm(0, id);
+            form.ShowDialog();
+            RefreshTripClients();
+        }
+
+        private void btnEditTripClient_Click(object sender, EventArgs e)
+        {
+            if (tripClientGrid.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int id = GridHelper.GetIntFromRow(tripClientGrid.SelectedRows[0], 0);
+            EditTripClient(id);
+        }
+
+        private void EditTripClient(int id)
+        {
+            var form = new AddTripClientForm(id);
+            form.ShowDialog();
+            RefreshTripClients();
+        }
+
+        private void btnDeleteTripClient_Click(object sender, EventArgs e)
+        {
+            if (tripClientGrid.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            int id = GridHelper.GetIntFromRow(tripClientGrid.SelectedRows[0], 0);
+
+            var db = new TourDbDataContext(Settings.Default.ConnectionString);
+            db.TripClients.DeleteAllOnSubmit(from t in db.TripClients where t.Id == id select t);
+            db.SubmitChanges();
+
+            RefreshTripClients();
         }
     }
 }

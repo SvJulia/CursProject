@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using CursProject.Classes;
 using CursProject.Properties;
 
 namespace CursProject.Form
@@ -59,11 +60,7 @@ namespace CursProject.Form
             if (ValidateControls())
             {
                 Trip trip = GetFromControls();
-                if (Id > 0)
-                {
-                    db.Refresh(RefreshMode.OverwriteCurrentValues, trip);
-                }
-                else
+                if (Id <= 0)
                 {
                     db.Trips.InsertOnSubmit(trip);
                 }

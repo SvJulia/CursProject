@@ -60,6 +60,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Discount.cs" />
+    <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\Transport.cs" />
+    <Compile Include="Classes\Meal.cs" />
+    <Compile Include="Classes\Hotel.cs" />
+    <Compile Include="Classes\Trip.cs" />
+    <Compile Include="Classes\Tour.cs" />
+    <Compile Include="Classes\Excursion.cs" />
+    <Compile Include="Classes\City.cs" />
+    <Compile Include="Form\AddTripClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AddTripClientForm.designer.cs">
+      <DependentUpon>AddTripClientForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Form\AddTourForm.cs">
       <SubType>Form</SubType>
@@ -121,7 +137,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TourDb.designer.cs">
+    <Compile Include="Classes\TourDb.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TourDb.dbml</DependentUpon>
@@ -150,6 +166,9 @@
     <EmbeddedResource Include="Form\AddTransportForm.resx">
       <DependentUpon>AddTransportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\AddTripClientForm.resx">
+      <DependentUpon>AddTripClientForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\AddTripForm.resx">
       <DependentUpon>AddTripForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,7 +187,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="TourDb.dbml.layout">
+    <None Include="Classes\TourDb.dbml.layout">
       <DependentUpon>TourDb.dbml</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
@@ -180,7 +199,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="TourDb.dbml">
+    <None Include="Classes\TourDb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>TourDb.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

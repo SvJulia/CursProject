@@ -46,7 +46,7 @@ namespace CursProject.Form
             this.btnCancel.Location = new System.Drawing.Point(238, 116);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -55,7 +55,7 @@ namespace CursProject.Form
             this.btnAdd.Location = new System.Drawing.Point(157, 116);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -75,7 +75,7 @@ namespace CursProject.Form
             this.txtFio.MaxLength = 255;
             this.txtFio.Name = "txtFio";
             this.txtFio.Size = new System.Drawing.Size(188, 20);
-            this.txtFio.TabIndex = 2;
+            this.txtFio.TabIndex = 0;
             // 
             // labelDocType
             // 
@@ -92,7 +92,7 @@ namespace CursProject.Form
             this.txtDocType.MaxLength = 255;
             this.txtDocType.Name = "txtDocType";
             this.txtDocType.Size = new System.Drawing.Size(188, 20);
-            this.txtDocType.TabIndex = 3;
+            this.txtDocType.TabIndex = 1;
             // 
             // labelDocData
             // 
@@ -109,7 +109,7 @@ namespace CursProject.Form
             this.txtDocData.MaxLength = 255;
             this.txtDocData.Name = "txtDocData";
             this.txtDocData.Size = new System.Drawing.Size(188, 20);
-            this.txtDocData.TabIndex = 4;
+            this.txtDocData.TabIndex = 2;
             // 
             // labelEmail
             // 
@@ -126,7 +126,7 @@ namespace CursProject.Form
             this.txtEmail.MaxLength = 255;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(188, 20);
-            this.txtEmail.TabIndex = 5;
+            this.txtEmail.TabIndex = 3;
             // 
             // AddClientForm
             // 

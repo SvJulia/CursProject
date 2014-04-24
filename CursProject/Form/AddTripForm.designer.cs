@@ -59,19 +59,19 @@ namespace CursProject.Form
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(260, 319);
+            this.btnCancel.Location = new System.Drawing.Point(260, 320);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(179, 319);
+            this.btnAdd.Location = new System.Drawing.Point(179, 320);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -88,7 +88,7 @@ namespace CursProject.Form
             // labelMeal
             // 
             this.labelMeal.AutoSize = true;
-            this.labelMeal.Location = new System.Drawing.Point(85, 33);
+            this.labelMeal.Location = new System.Drawing.Point(85, 34);
             this.labelMeal.Name = "labelMeal";
             this.labelMeal.Size = new System.Drawing.Size(56, 13);
             this.labelMeal.TabIndex = 6;
@@ -97,7 +97,7 @@ namespace CursProject.Form
             // labelTransport
             // 
             this.labelTransport.AutoSize = true;
-            this.labelTransport.Location = new System.Drawing.Point(74, 59);
+            this.labelTransport.Location = new System.Drawing.Point(74, 87);
             this.labelTransport.Name = "labelTransport";
             this.labelTransport.Size = new System.Drawing.Size(67, 13);
             this.labelTransport.TabIndex = 6;
@@ -106,7 +106,7 @@ namespace CursProject.Form
             // labelHotel
             // 
             this.labelHotel.AutoSize = true;
-            this.labelHotel.Location = new System.Drawing.Point(97, 85);
+            this.labelHotel.Location = new System.Drawing.Point(97, 140);
             this.labelHotel.Name = "labelHotel";
             this.labelHotel.Size = new System.Drawing.Size(44, 13);
             this.labelHotel.TabIndex = 6;
@@ -115,7 +115,7 @@ namespace CursProject.Form
             // labelDateDeparture
             // 
             this.labelDateDeparture.AutoSize = true;
-            this.labelDateDeparture.Location = new System.Drawing.Point(57, 111);
+            this.labelDateDeparture.Location = new System.Drawing.Point(57, 271);
             this.labelDateDeparture.Name = "labelDateDeparture";
             this.labelDateDeparture.Size = new System.Drawing.Size(84, 13);
             this.labelDateDeparture.TabIndex = 6;
@@ -124,7 +124,7 @@ namespace CursProject.Form
             // labelDateArival
             // 
             this.labelDateArival.AutoSize = true;
-            this.labelDateArival.Location = new System.Drawing.Point(50, 137);
+            this.labelDateArival.Location = new System.Drawing.Point(50, 297);
             this.labelDateArival.Name = "labelDateArival";
             this.labelDateArival.Size = new System.Drawing.Size(91, 13);
             this.labelDateArival.TabIndex = 6;
@@ -133,7 +133,7 @@ namespace CursProject.Form
             // labelNights
             // 
             this.labelNights.AutoSize = true;
-            this.labelNights.Location = new System.Drawing.Point(62, 163);
+            this.labelNights.Location = new System.Drawing.Point(62, 219);
             this.labelNights.Name = "labelNights";
             this.labelNights.Size = new System.Drawing.Size(79, 13);
             this.labelNights.TabIndex = 6;
@@ -141,16 +141,16 @@ namespace CursProject.Form
             // 
             // txtNights
             // 
-            this.txtNights.Location = new System.Drawing.Point(147, 160);
+            this.txtNights.Location = new System.Drawing.Point(147, 216);
             this.txtNights.MaxLength = 255;
             this.txtNights.Name = "txtNights";
             this.txtNights.Size = new System.Drawing.Size(188, 20);
-            this.txtNights.TabIndex = 7;
+            this.txtNights.TabIndex = 8;
             // 
             // labelAmount
             // 
             this.labelAmount.AutoSize = true;
-            this.labelAmount.Location = new System.Drawing.Point(51, 189);
+            this.labelAmount.Location = new System.Drawing.Point(51, 245);
             this.labelAmount.Name = "labelAmount";
             this.labelAmount.Size = new System.Drawing.Size(90, 13);
             this.labelAmount.TabIndex = 6;
@@ -158,16 +158,16 @@ namespace CursProject.Form
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(147, 186);
+            this.txtAmount.Location = new System.Drawing.Point(147, 242);
             this.txtAmount.MaxLength = 255;
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(188, 20);
-            this.txtAmount.TabIndex = 8;
+            this.txtAmount.TabIndex = 9;
             // 
             // labelTourPrice
             // 
             this.labelTourPrice.AutoSize = true;
-            this.labelTourPrice.Location = new System.Drawing.Point(48, 215);
+            this.labelTourPrice.Location = new System.Drawing.Point(48, 193);
             this.labelTourPrice.Name = "labelTourPrice";
             this.labelTourPrice.Size = new System.Drawing.Size(93, 13);
             this.labelTourPrice.TabIndex = 6;
@@ -175,16 +175,16 @@ namespace CursProject.Form
             // 
             // txtTourPrice
             // 
-            this.txtTourPrice.Location = new System.Drawing.Point(147, 212);
+            this.txtTourPrice.Location = new System.Drawing.Point(147, 190);
             this.txtTourPrice.MaxLength = 255;
             this.txtTourPrice.Name = "txtTourPrice";
             this.txtTourPrice.Size = new System.Drawing.Size(188, 20);
-            this.txtTourPrice.TabIndex = 9;
+            this.txtTourPrice.TabIndex = 7;
             // 
             // labelMealPrice
             // 
             this.labelMealPrice.AutoSize = true;
-            this.labelMealPrice.Location = new System.Drawing.Point(29, 241);
+            this.labelMealPrice.Location = new System.Drawing.Point(29, 61);
             this.labelMealPrice.Name = "labelMealPrice";
             this.labelMealPrice.Size = new System.Drawing.Size(112, 13);
             this.labelMealPrice.TabIndex = 6;
@@ -192,16 +192,16 @@ namespace CursProject.Form
             // 
             // txtMealPrice
             // 
-            this.txtMealPrice.Location = new System.Drawing.Point(147, 238);
+            this.txtMealPrice.Location = new System.Drawing.Point(147, 58);
             this.txtMealPrice.MaxLength = 255;
             this.txtMealPrice.Name = "txtMealPrice";
             this.txtMealPrice.Size = new System.Drawing.Size(188, 20);
-            this.txtMealPrice.TabIndex = 10;
+            this.txtMealPrice.TabIndex = 2;
             // 
             // labelTransportPrice
             // 
             this.labelTransportPrice.AutoSize = true;
-            this.labelTransportPrice.Location = new System.Drawing.Point(12, 267);
+            this.labelTransportPrice.Location = new System.Drawing.Point(12, 114);
             this.labelTransportPrice.Name = "labelTransportPrice";
             this.labelTransportPrice.Size = new System.Drawing.Size(129, 13);
             this.labelTransportPrice.TabIndex = 6;
@@ -209,16 +209,16 @@ namespace CursProject.Form
             // 
             // txtTransportPrice
             // 
-            this.txtTransportPrice.Location = new System.Drawing.Point(147, 264);
+            this.txtTransportPrice.Location = new System.Drawing.Point(147, 111);
             this.txtTransportPrice.MaxLength = 255;
             this.txtTransportPrice.Name = "txtTransportPrice";
             this.txtTransportPrice.Size = new System.Drawing.Size(188, 20);
-            this.txtTransportPrice.TabIndex = 11;
+            this.txtTransportPrice.TabIndex = 4;
             // 
             // labelHotelPrice
             // 
             this.labelHotelPrice.AutoSize = true;
-            this.labelHotelPrice.Location = new System.Drawing.Point(41, 293);
+            this.labelHotelPrice.Location = new System.Drawing.Point(41, 167);
             this.labelHotelPrice.Name = "labelHotelPrice";
             this.labelHotelPrice.Size = new System.Drawing.Size(100, 13);
             this.labelHotelPrice.TabIndex = 6;
@@ -226,11 +226,11 @@ namespace CursProject.Form
             // 
             // txtHotelPrice
             // 
-            this.txtHotelPrice.Location = new System.Drawing.Point(147, 290);
+            this.txtHotelPrice.Location = new System.Drawing.Point(147, 164);
             this.txtHotelPrice.MaxLength = 255;
             this.txtHotelPrice.Name = "txtHotelPrice";
             this.txtHotelPrice.Size = new System.Drawing.Size(188, 20);
-            this.txtHotelPrice.TabIndex = 12;
+            this.txtHotelPrice.TabIndex = 6;
             // 
             // ddlTours
             // 
@@ -238,57 +238,57 @@ namespace CursProject.Form
             this.ddlTours.Location = new System.Drawing.Point(147, 4);
             this.ddlTours.Name = "ddlTours";
             this.ddlTours.Size = new System.Drawing.Size(188, 21);
-            this.ddlTours.TabIndex = 13;
+            this.ddlTours.TabIndex = 0;
             // 
             // ddlMeals
             // 
             this.ddlMeals.FormattingEnabled = true;
-            this.ddlMeals.Location = new System.Drawing.Point(147, 30);
+            this.ddlMeals.Location = new System.Drawing.Point(147, 31);
             this.ddlMeals.Name = "ddlMeals";
             this.ddlMeals.Size = new System.Drawing.Size(188, 21);
-            this.ddlMeals.TabIndex = 14;
+            this.ddlMeals.TabIndex = 1;
             // 
             // ddlTransports
             // 
             this.ddlTransports.FormattingEnabled = true;
-            this.ddlTransports.Location = new System.Drawing.Point(147, 56);
+            this.ddlTransports.Location = new System.Drawing.Point(147, 84);
             this.ddlTransports.Name = "ddlTransports";
             this.ddlTransports.Size = new System.Drawing.Size(188, 21);
-            this.ddlTransports.TabIndex = 15;
+            this.ddlTransports.TabIndex = 3;
             // 
             // ddlHotels
             // 
             this.ddlHotels.FormattingEnabled = true;
-            this.ddlHotels.Location = new System.Drawing.Point(147, 82);
+            this.ddlHotels.Location = new System.Drawing.Point(147, 137);
             this.ddlHotels.Name = "ddlHotels";
             this.ddlHotels.Size = new System.Drawing.Size(188, 21);
-            this.ddlHotels.TabIndex = 16;
+            this.ddlHotels.TabIndex = 5;
             // 
             // dtpDateDeparture
             // 
-            this.dtpDateDeparture.Location = new System.Drawing.Point(147, 108);
+            this.dtpDateDeparture.Location = new System.Drawing.Point(147, 268);
             this.dtpDateDeparture.Name = "dtpDateDeparture";
             this.dtpDateDeparture.Size = new System.Drawing.Size(188, 20);
-            this.dtpDateDeparture.TabIndex = 17;
+            this.dtpDateDeparture.TabIndex = 10;
             // 
             // dtpDateArival
             // 
-            this.dtpDateArival.Location = new System.Drawing.Point(147, 134);
+            this.dtpDateArival.Location = new System.Drawing.Point(147, 294);
             this.dtpDateArival.Name = "dtpDateArival";
             this.dtpDateArival.Size = new System.Drawing.Size(188, 20);
-            this.dtpDateArival.TabIndex = 18;
+            this.dtpDateArival.TabIndex = 11;
             // 
             // AddTripForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 348);
+            this.ClientSize = new System.Drawing.Size(342, 350);
+            this.Controls.Add(this.ddlTours);
             this.Controls.Add(this.dtpDateArival);
             this.Controls.Add(this.dtpDateDeparture);
             this.Controls.Add(this.ddlHotels);
             this.Controls.Add(this.ddlTransports);
             this.Controls.Add(this.ddlMeals);
-            this.Controls.Add(this.ddlTours);
             this.Controls.Add(this.labelTourId);
             this.Controls.Add(this.labelMeal);
             this.Controls.Add(this.labelTransport);

@@ -44,7 +44,7 @@ namespace CursProject.Form
             this.btnCancel.Location = new System.Drawing.Point(207, 86);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -53,7 +53,7 @@ namespace CursProject.Form
             this.btnAdd.Location = new System.Drawing.Point(126, 86);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -73,7 +73,7 @@ namespace CursProject.Form
             this.txtName.MaxLength = 255;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(188, 20);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 0;
             // 
             // labelDiscount
             // 
@@ -90,7 +90,7 @@ namespace CursProject.Form
             this.txtDiscount.MaxLength = 255;
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(188, 20);
-            this.txtDiscount.TabIndex = 2;
+            this.txtDiscount.TabIndex = 1;
             // 
             // labelRange
             // 
@@ -107,7 +107,7 @@ namespace CursProject.Form
             this.txtRange.MaxLength = 255;
             this.txtRange.Name = "txtRange";
             this.txtRange.Size = new System.Drawing.Size(188, 20);
-            this.txtRange.TabIndex = 3;
+            this.txtRange.TabIndex = 2;
             // 
             // AddDiscountForm
             // 

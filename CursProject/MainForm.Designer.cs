@@ -46,6 +46,22 @@ namespace CursProject
             this.btnDeleteExcursion = new System.Windows.Forms.Button();
             this.btnEditExcursion = new System.Windows.Forms.Button();
             this.btnAddExcursion = new System.Windows.Forms.Button();
+            this.tripsTab = new System.Windows.Forms.TabPage();
+            this.btnAddTripClient = new System.Windows.Forms.Button();
+            this.tripGrid = new System.Windows.Forms.DataGridView();
+            this.btnDeleteTrip = new System.Windows.Forms.Button();
+            this.btnEditTrip = new System.Windows.Forms.Button();
+            this.btnAddTrip = new System.Windows.Forms.Button();
+            this.clientsTab = new System.Windows.Forms.TabPage();
+            this.clientGrid = new System.Windows.Forms.DataGridView();
+            this.btnDeleteClient = new System.Windows.Forms.Button();
+            this.btnEditClient = new System.Windows.Forms.Button();
+            this.btnAddClient = new System.Windows.Forms.Button();
+            this.discountsTab = new System.Windows.Forms.TabPage();
+            this.discountGrid = new System.Windows.Forms.DataGridView();
+            this.btnDeleteDiscount = new System.Windows.Forms.Button();
+            this.btnEditDiscount = new System.Windows.Forms.Button();
+            this.btnAddDiscount = new System.Windows.Forms.Button();
             this.mealsTab = new System.Windows.Forms.TabPage();
             this.mealGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteMeal = new System.Windows.Forms.Button();
@@ -61,38 +77,29 @@ namespace CursProject
             this.btnDeleteHotel = new System.Windows.Forms.Button();
             this.btnEditHotel = new System.Windows.Forms.Button();
             this.btnAddHotel = new System.Windows.Forms.Button();
-            this.discountsTab = new System.Windows.Forms.TabPage();
-            this.discountGrid = new System.Windows.Forms.DataGridView();
-            this.btnDeleteDiscount = new System.Windows.Forms.Button();
-            this.btnEditDiscount = new System.Windows.Forms.Button();
-            this.btnAddDiscount = new System.Windows.Forms.Button();
-            this.clientsTab = new System.Windows.Forms.TabPage();
-            this.clientGrid = new System.Windows.Forms.DataGridView();
-            this.btnDeleteClient = new System.Windows.Forms.Button();
-            this.btnEditClient = new System.Windows.Forms.Button();
-            this.btnAddClient = new System.Windows.Forms.Button();
-            this.tripsTab = new System.Windows.Forms.TabPage();
-            this.tripGrid = new System.Windows.Forms.DataGridView();
-            this.btnDeleteTrip = new System.Windows.Forms.Button();
-            this.btnEditTrip = new System.Windows.Forms.Button();
-            this.btnAddTrip = new System.Windows.Forms.Button();
+            this.tripClientsTab = new System.Windows.Forms.TabPage();
+            this.tripClientGrid = new System.Windows.Forms.DataGridView();
+            this.btnDeleteTripClient = new System.Windows.Forms.Button();
+            this.btnEditTripClient = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.toursTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).BeginInit();
             this.excursionsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.excursionGrid)).BeginInit();
+            this.tripsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tripGrid)).BeginInit();
+            this.clientsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clientGrid)).BeginInit();
+            this.discountsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.discountGrid)).BeginInit();
             this.mealsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mealGrid)).BeginInit();
             this.transportsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transportGrid)).BeginInit();
             this.hotelsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hotelGrid)).BeginInit();
-            this.discountsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discountGrid)).BeginInit();
-            this.clientsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientGrid)).BeginInit();
-            this.tripsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tripGrid)).BeginInit();
+            this.tripClientsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -105,11 +112,12 @@ namespace CursProject
             this.tabControl.Controls.Add(this.mealsTab);
             this.tabControl.Controls.Add(this.transportsTab);
             this.tabControl.Controls.Add(this.hotelsTab);
+            this.tabControl.Controls.Add(this.tripClientsTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(792, 573);
+            this.tabControl.Size = new System.Drawing.Size(791, 573);
             this.tabControl.TabIndex = 0;
             // 
             // toursTab
@@ -121,7 +129,7 @@ namespace CursProject
             this.toursTab.Location = new System.Drawing.Point(4, 22);
             this.toursTab.Name = "toursTab";
             this.toursTab.Padding = new System.Windows.Forms.Padding(3);
-            this.toursTab.Size = new System.Drawing.Size(784, 547);
+            this.toursTab.Size = new System.Drawing.Size(783, 547);
             this.toursTab.TabIndex = 0;
             this.toursTab.Text = "Туры";
             this.toursTab.UseVisualStyleBackColor = true;
@@ -144,7 +152,6 @@ namespace CursProject
             this.tourGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tourGrid.Size = new System.Drawing.Size(768, 504);
             this.tourGrid.TabIndex = 0;
-            this.tourGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tourGrid_CellDoubleClick);
             // 
             // btnDeleteTour
             // 
@@ -188,7 +195,7 @@ namespace CursProject
             this.excursionsTab.Location = new System.Drawing.Point(4, 22);
             this.excursionsTab.Name = "excursionsTab";
             this.excursionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.excursionsTab.Size = new System.Drawing.Size(784, 547);
+            this.excursionsTab.Size = new System.Drawing.Size(783, 547);
             this.excursionsTab.TabIndex = 1;
             this.excursionsTab.Text = "Экскурсии";
             this.excursionsTab.UseVisualStyleBackColor = true;
@@ -245,6 +252,213 @@ namespace CursProject
             this.btnAddExcursion.UseVisualStyleBackColor = true;
             this.btnAddExcursion.Click += new System.EventHandler(this.btnAddExcursion_Click);
             // 
+            // tripsTab
+            // 
+            this.tripsTab.Controls.Add(this.btnAddTripClient);
+            this.tripsTab.Controls.Add(this.tripGrid);
+            this.tripsTab.Controls.Add(this.btnDeleteTrip);
+            this.tripsTab.Controls.Add(this.btnEditTrip);
+            this.tripsTab.Controls.Add(this.btnAddTrip);
+            this.tripsTab.Location = new System.Drawing.Point(4, 22);
+            this.tripsTab.Name = "tripsTab";
+            this.tripsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.tripsTab.Size = new System.Drawing.Size(783, 547);
+            this.tripsTab.TabIndex = 1;
+            this.tripsTab.Text = "Путешествия";
+            this.tripsTab.UseVisualStyleBackColor = true;
+            // 
+            // btnAddTripClient
+            // 
+            this.btnAddTripClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTripClient.Location = new System.Drawing.Point(457, 516);
+            this.btnAddTripClient.Name = "btnAddTripClient";
+            this.btnAddTripClient.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTripClient.TabIndex = 8;
+            this.btnAddTripClient.Text = "Продать";
+            this.btnAddTripClient.UseVisualStyleBackColor = true;
+            this.btnAddTripClient.Click += new System.EventHandler(this.btnAddTripClient_Click);
+            // 
+            // tripGrid
+            // 
+            this.tripGrid.AllowUserToAddRows = false;
+            this.tripGrid.AllowUserToDeleteRows = false;
+            this.tripGrid.AllowUserToOrderColumns = true;
+            this.tripGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tripGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tripGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.tripGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tripGrid.Location = new System.Drawing.Point(8, 6);
+            this.tripGrid.Name = "tripGrid";
+            this.tripGrid.ReadOnly = true;
+            this.tripGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tripGrid.Size = new System.Drawing.Size(767, 504);
+            this.tripGrid.TabIndex = 4;
+            // 
+            // btnDeleteTrip
+            // 
+            this.btnDeleteTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteTrip.Location = new System.Drawing.Point(700, 516);
+            this.btnDeleteTrip.Name = "btnDeleteTrip";
+            this.btnDeleteTrip.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteTrip.TabIndex = 7;
+            this.btnDeleteTrip.Text = "Удалить";
+            this.btnDeleteTrip.UseVisualStyleBackColor = true;
+            this.btnDeleteTrip.Click += new System.EventHandler(this.btnDeleteTrip_Click);
+            // 
+            // btnEditTrip
+            // 
+            this.btnEditTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditTrip.Location = new System.Drawing.Point(619, 516);
+            this.btnEditTrip.Name = "btnEditTrip";
+            this.btnEditTrip.Size = new System.Drawing.Size(75, 23);
+            this.btnEditTrip.TabIndex = 6;
+            this.btnEditTrip.Text = "Изменить";
+            this.btnEditTrip.UseVisualStyleBackColor = true;
+            this.btnEditTrip.Click += new System.EventHandler(this.btnEditTrip_Click);
+            // 
+            // btnAddTrip
+            // 
+            this.btnAddTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTrip.Location = new System.Drawing.Point(538, 516);
+            this.btnAddTrip.Name = "btnAddTrip";
+            this.btnAddTrip.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTrip.TabIndex = 5;
+            this.btnAddTrip.Text = "Добавить";
+            this.btnAddTrip.UseVisualStyleBackColor = true;
+            this.btnAddTrip.Click += new System.EventHandler(this.btnAddTrip_Click);
+            // 
+            // clientsTab
+            // 
+            this.clientsTab.Controls.Add(this.clientGrid);
+            this.clientsTab.Controls.Add(this.btnDeleteClient);
+            this.clientsTab.Controls.Add(this.btnEditClient);
+            this.clientsTab.Controls.Add(this.btnAddClient);
+            this.clientsTab.Location = new System.Drawing.Point(4, 22);
+            this.clientsTab.Name = "clientsTab";
+            this.clientsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.clientsTab.Size = new System.Drawing.Size(783, 547);
+            this.clientsTab.TabIndex = 1;
+            this.clientsTab.Text = "Клиенты";
+            this.clientsTab.UseVisualStyleBackColor = true;
+            // 
+            // clientGrid
+            // 
+            this.clientGrid.AllowUserToAddRows = false;
+            this.clientGrid.AllowUserToDeleteRows = false;
+            this.clientGrid.AllowUserToOrderColumns = true;
+            this.clientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.clientGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clientGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.clientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clientGrid.Location = new System.Drawing.Point(8, 6);
+            this.clientGrid.Name = "clientGrid";
+            this.clientGrid.ReadOnly = true;
+            this.clientGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.clientGrid.Size = new System.Drawing.Size(768, 504);
+            this.clientGrid.TabIndex = 4;
+            // 
+            // btnDeleteClient
+            // 
+            this.btnDeleteClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteClient.Location = new System.Drawing.Point(701, 516);
+            this.btnDeleteClient.Name = "btnDeleteClient";
+            this.btnDeleteClient.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteClient.TabIndex = 7;
+            this.btnDeleteClient.Text = "Удалить";
+            this.btnDeleteClient.UseVisualStyleBackColor = true;
+            this.btnDeleteClient.Click += new System.EventHandler(this.btnDeleteClient_Click);
+            // 
+            // btnEditClient
+            // 
+            this.btnEditClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditClient.Location = new System.Drawing.Point(620, 516);
+            this.btnEditClient.Name = "btnEditClient";
+            this.btnEditClient.Size = new System.Drawing.Size(75, 23);
+            this.btnEditClient.TabIndex = 6;
+            this.btnEditClient.Text = "Изменить";
+            this.btnEditClient.UseVisualStyleBackColor = true;
+            this.btnEditClient.Click += new System.EventHandler(this.btnEditClient_Click);
+            // 
+            // btnAddClient
+            // 
+            this.btnAddClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddClient.Location = new System.Drawing.Point(539, 516);
+            this.btnAddClient.Name = "btnAddClient";
+            this.btnAddClient.Size = new System.Drawing.Size(75, 23);
+            this.btnAddClient.TabIndex = 5;
+            this.btnAddClient.Text = "Добавить";
+            this.btnAddClient.UseVisualStyleBackColor = true;
+            this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
+            // 
+            // discountsTab
+            // 
+            this.discountsTab.Controls.Add(this.discountGrid);
+            this.discountsTab.Controls.Add(this.btnDeleteDiscount);
+            this.discountsTab.Controls.Add(this.btnEditDiscount);
+            this.discountsTab.Controls.Add(this.btnAddDiscount);
+            this.discountsTab.Location = new System.Drawing.Point(4, 22);
+            this.discountsTab.Name = "discountsTab";
+            this.discountsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.discountsTab.Size = new System.Drawing.Size(783, 547);
+            this.discountsTab.TabIndex = 1;
+            this.discountsTab.Text = "Скидки";
+            this.discountsTab.UseVisualStyleBackColor = true;
+            // 
+            // discountGrid
+            // 
+            this.discountGrid.AllowUserToAddRows = false;
+            this.discountGrid.AllowUserToDeleteRows = false;
+            this.discountGrid.AllowUserToOrderColumns = true;
+            this.discountGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.discountGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.discountGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.discountGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.discountGrid.Location = new System.Drawing.Point(8, 6);
+            this.discountGrid.Name = "discountGrid";
+            this.discountGrid.ReadOnly = true;
+            this.discountGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.discountGrid.Size = new System.Drawing.Size(768, 504);
+            this.discountGrid.TabIndex = 4;
+            // 
+            // btnDeleteDiscount
+            // 
+            this.btnDeleteDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteDiscount.Location = new System.Drawing.Point(701, 516);
+            this.btnDeleteDiscount.Name = "btnDeleteDiscount";
+            this.btnDeleteDiscount.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteDiscount.TabIndex = 7;
+            this.btnDeleteDiscount.Text = "Удалить";
+            this.btnDeleteDiscount.UseVisualStyleBackColor = true;
+            this.btnDeleteDiscount.Click += new System.EventHandler(this.btnDeleteDiscount_Click);
+            // 
+            // btnEditDiscount
+            // 
+            this.btnEditDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditDiscount.Location = new System.Drawing.Point(620, 516);
+            this.btnEditDiscount.Name = "btnEditDiscount";
+            this.btnEditDiscount.Size = new System.Drawing.Size(75, 23);
+            this.btnEditDiscount.TabIndex = 6;
+            this.btnEditDiscount.Text = "Изменить";
+            this.btnEditDiscount.UseVisualStyleBackColor = true;
+            this.btnEditDiscount.Click += new System.EventHandler(this.btnEditDiscount_Click);
+            // 
+            // btnAddDiscount
+            // 
+            this.btnAddDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddDiscount.Location = new System.Drawing.Point(539, 516);
+            this.btnAddDiscount.Name = "btnAddDiscount";
+            this.btnAddDiscount.Size = new System.Drawing.Size(75, 23);
+            this.btnAddDiscount.TabIndex = 5;
+            this.btnAddDiscount.Text = "Добавить";
+            this.btnAddDiscount.UseVisualStyleBackColor = true;
+            this.btnAddDiscount.Click += new System.EventHandler(this.btnAddDiscount_Click);
+            // 
             // mealsTab
             // 
             this.mealsTab.Controls.Add(this.mealGrid);
@@ -254,7 +468,7 @@ namespace CursProject
             this.mealsTab.Location = new System.Drawing.Point(4, 22);
             this.mealsTab.Name = "mealsTab";
             this.mealsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.mealsTab.Size = new System.Drawing.Size(784, 547);
+            this.mealsTab.Size = new System.Drawing.Size(783, 547);
             this.mealsTab.TabIndex = 1;
             this.mealsTab.Text = "Питание";
             this.mealsTab.UseVisualStyleBackColor = true;
@@ -319,7 +533,7 @@ namespace CursProject
             this.transportsTab.Location = new System.Drawing.Point(4, 22);
             this.transportsTab.Name = "transportsTab";
             this.transportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.transportsTab.Size = new System.Drawing.Size(784, 547);
+            this.transportsTab.Size = new System.Drawing.Size(783, 547);
             this.transportsTab.TabIndex = 1;
             this.transportsTab.Text = "Транпорт";
             this.transportsTab.UseVisualStyleBackColor = true;
@@ -384,7 +598,7 @@ namespace CursProject
             this.hotelsTab.Location = new System.Drawing.Point(4, 22);
             this.hotelsTab.Name = "hotelsTab";
             this.hotelsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.hotelsTab.Size = new System.Drawing.Size(784, 547);
+            this.hotelsTab.Size = new System.Drawing.Size(783, 547);
             this.hotelsTab.TabIndex = 1;
             this.hotelsTab.Text = "Отели";
             this.hotelsTab.UseVisualStyleBackColor = true;
@@ -440,206 +654,64 @@ namespace CursProject
             this.btnAddHotel.UseVisualStyleBackColor = true;
             this.btnAddHotel.Click += new System.EventHandler(this.btnAddHotel_Click);
             // 
-            // discountsTab
+            // tripClientsTab
             // 
-            this.discountsTab.Controls.Add(this.discountGrid);
-            this.discountsTab.Controls.Add(this.btnDeleteDiscount);
-            this.discountsTab.Controls.Add(this.btnEditDiscount);
-            this.discountsTab.Controls.Add(this.btnAddDiscount);
-            this.discountsTab.Location = new System.Drawing.Point(4, 22);
-            this.discountsTab.Name = "discountsTab";
-            this.discountsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.discountsTab.Size = new System.Drawing.Size(784, 547);
-            this.discountsTab.TabIndex = 1;
-            this.discountsTab.Text = "Скидки";
-            this.discountsTab.UseVisualStyleBackColor = true;
+            this.tripClientsTab.Controls.Add(this.tripClientGrid);
+            this.tripClientsTab.Controls.Add(this.btnDeleteTripClient);
+            this.tripClientsTab.Controls.Add(this.btnEditTripClient);
+            this.tripClientsTab.Location = new System.Drawing.Point(4, 22);
+            this.tripClientsTab.Name = "tripClientsTab";
+            this.tripClientsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.tripClientsTab.Size = new System.Drawing.Size(783, 547);
+            this.tripClientsTab.TabIndex = 1;
+            this.tripClientsTab.Text = "Продажи";
+            this.tripClientsTab.UseVisualStyleBackColor = true;
             // 
-            // discountGrid
+            // tripClientGrid
             // 
-            this.discountGrid.AllowUserToAddRows = false;
-            this.discountGrid.AllowUserToDeleteRows = false;
-            this.discountGrid.AllowUserToOrderColumns = true;
-            this.discountGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.discountGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tripClientGrid.AllowUserToAddRows = false;
+            this.tripClientGrid.AllowUserToDeleteRows = false;
+            this.tripClientGrid.AllowUserToOrderColumns = true;
+            this.tripClientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tripClientGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.discountGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.discountGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.discountGrid.Location = new System.Drawing.Point(8, 6);
-            this.discountGrid.Name = "discountGrid";
-            this.discountGrid.ReadOnly = true;
-            this.discountGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.discountGrid.Size = new System.Drawing.Size(768, 504);
-            this.discountGrid.TabIndex = 4;
+            this.tripClientGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.tripClientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tripClientGrid.Location = new System.Drawing.Point(8, 6);
+            this.tripClientGrid.Name = "tripClientGrid";
+            this.tripClientGrid.ReadOnly = true;
+            this.tripClientGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tripClientGrid.Size = new System.Drawing.Size(768, 504);
+            this.tripClientGrid.TabIndex = 4;
             // 
-            // btnDeleteDiscount
+            // btnDeleteTripClient
             // 
-            this.btnDeleteDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteDiscount.Location = new System.Drawing.Point(701, 516);
-            this.btnDeleteDiscount.Name = "btnDeleteDiscount";
-            this.btnDeleteDiscount.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteDiscount.TabIndex = 7;
-            this.btnDeleteDiscount.Text = "Удалить";
-            this.btnDeleteDiscount.UseVisualStyleBackColor = true;
-            this.btnDeleteDiscount.Click += new System.EventHandler(this.btnDeleteDiscount_Click);
+            this.btnDeleteTripClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteTripClient.Location = new System.Drawing.Point(701, 516);
+            this.btnDeleteTripClient.Name = "btnDeleteTripClient";
+            this.btnDeleteTripClient.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteTripClient.TabIndex = 7;
+            this.btnDeleteTripClient.Text = "Удалить";
+            this.btnDeleteTripClient.UseVisualStyleBackColor = true;
+            this.btnDeleteTripClient.Click += new System.EventHandler(this.btnDeleteTripClient_Click);
             // 
-            // btnEditDiscount
+            // btnEditTripClient
             // 
-            this.btnEditDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditDiscount.Location = new System.Drawing.Point(620, 516);
-            this.btnEditDiscount.Name = "btnEditDiscount";
-            this.btnEditDiscount.Size = new System.Drawing.Size(75, 23);
-            this.btnEditDiscount.TabIndex = 6;
-            this.btnEditDiscount.Text = "Изменить";
-            this.btnEditDiscount.UseVisualStyleBackColor = true;
-            this.btnEditDiscount.Click += new System.EventHandler(this.btnEditDiscount_Click);
-            // 
-            // btnAddDiscount
-            // 
-            this.btnAddDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddDiscount.Location = new System.Drawing.Point(539, 516);
-            this.btnAddDiscount.Name = "btnAddDiscount";
-            this.btnAddDiscount.Size = new System.Drawing.Size(75, 23);
-            this.btnAddDiscount.TabIndex = 5;
-            this.btnAddDiscount.Text = "Добавить";
-            this.btnAddDiscount.UseVisualStyleBackColor = true;
-            this.btnAddDiscount.Click += new System.EventHandler(this.btnAddDiscount_Click);
-            // 
-            // clientsTab
-            // 
-            this.clientsTab.Controls.Add(this.clientGrid);
-            this.clientsTab.Controls.Add(this.btnDeleteClient);
-            this.clientsTab.Controls.Add(this.btnEditClient);
-            this.clientsTab.Controls.Add(this.btnAddClient);
-            this.clientsTab.Location = new System.Drawing.Point(4, 22);
-            this.clientsTab.Name = "clientsTab";
-            this.clientsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.clientsTab.Size = new System.Drawing.Size(784, 547);
-            this.clientsTab.TabIndex = 1;
-            this.clientsTab.Text = "Клиенты";
-            this.clientsTab.UseVisualStyleBackColor = true;
-            // 
-            // clientGrid
-            // 
-            this.clientGrid.AllowUserToAddRows = false;
-            this.clientGrid.AllowUserToDeleteRows = false;
-            this.clientGrid.AllowUserToOrderColumns = true;
-            this.clientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.clientGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clientGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.clientGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.clientGrid.Location = new System.Drawing.Point(8, 6);
-            this.clientGrid.Name = "clientGrid";
-            this.clientGrid.ReadOnly = true;
-            this.clientGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.clientGrid.Size = new System.Drawing.Size(768, 504);
-            this.clientGrid.TabIndex = 4;
-            // 
-            // btnDeleteClient
-            // 
-            this.btnDeleteClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteClient.Location = new System.Drawing.Point(701, 516);
-            this.btnDeleteClient.Name = "btnDeleteClient";
-            this.btnDeleteClient.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteClient.TabIndex = 7;
-            this.btnDeleteClient.Text = "Удалить";
-            this.btnDeleteClient.UseVisualStyleBackColor = true;
-            this.btnDeleteClient.Click += new System.EventHandler(this.btnDeleteClient_Click);
-            // 
-            // btnEditClient
-            // 
-            this.btnEditClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditClient.Location = new System.Drawing.Point(620, 516);
-            this.btnEditClient.Name = "btnEditClient";
-            this.btnEditClient.Size = new System.Drawing.Size(75, 23);
-            this.btnEditClient.TabIndex = 6;
-            this.btnEditClient.Text = "Изменить";
-            this.btnEditClient.UseVisualStyleBackColor = true;
-            this.btnEditClient.Click += new System.EventHandler(this.btnEditClient_Click);
-            // 
-            // btnAddClient
-            // 
-            this.btnAddClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddClient.Location = new System.Drawing.Point(539, 516);
-            this.btnAddClient.Name = "btnAddClient";
-            this.btnAddClient.Size = new System.Drawing.Size(75, 23);
-            this.btnAddClient.TabIndex = 5;
-            this.btnAddClient.Text = "Добавить";
-            this.btnAddClient.UseVisualStyleBackColor = true;
-            this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
-            // 
-            // tripsTab
-            // 
-            this.tripsTab.Controls.Add(this.tripGrid);
-            this.tripsTab.Controls.Add(this.btnDeleteTrip);
-            this.tripsTab.Controls.Add(this.btnEditTrip);
-            this.tripsTab.Controls.Add(this.btnAddTrip);
-            this.tripsTab.Location = new System.Drawing.Point(4, 22);
-            this.tripsTab.Name = "tripsTab";
-            this.tripsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.tripsTab.Size = new System.Drawing.Size(784, 547);
-            this.tripsTab.TabIndex = 1;
-            this.tripsTab.Text = "Путешествия";
-            this.tripsTab.UseVisualStyleBackColor = true;
-            // 
-            // tripGrid
-            // 
-            this.tripGrid.AllowUserToAddRows = false;
-            this.tripGrid.AllowUserToDeleteRows = false;
-            this.tripGrid.AllowUserToOrderColumns = true;
-            this.tripGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.tripGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tripGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.tripGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tripGrid.Location = new System.Drawing.Point(8, 6);
-            this.tripGrid.Name = "tripGrid";
-            this.tripGrid.ReadOnly = true;
-            this.tripGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tripGrid.Size = new System.Drawing.Size(768, 504);
-            this.tripGrid.TabIndex = 4;
-            // 
-            // btnDeleteTrip
-            // 
-            this.btnDeleteTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteTrip.Location = new System.Drawing.Point(701, 516);
-            this.btnDeleteTrip.Name = "btnDeleteTrip";
-            this.btnDeleteTrip.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteTrip.TabIndex = 7;
-            this.btnDeleteTrip.Text = "Удалить";
-            this.btnDeleteTrip.UseVisualStyleBackColor = true;
-            this.btnDeleteTrip.Click += new System.EventHandler(this.btnDeleteTrip_Click);
-            // 
-            // btnEditTrip
-            // 
-            this.btnEditTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditTrip.Location = new System.Drawing.Point(620, 516);
-            this.btnEditTrip.Name = "btnEditTrip";
-            this.btnEditTrip.Size = new System.Drawing.Size(75, 23);
-            this.btnEditTrip.TabIndex = 6;
-            this.btnEditTrip.Text = "Изменить";
-            this.btnEditTrip.UseVisualStyleBackColor = true;
-            this.btnEditTrip.Click += new System.EventHandler(this.btnEditTrip_Click);
-            // 
-            // btnAddTrip
-            // 
-            this.btnAddTrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTrip.Location = new System.Drawing.Point(539, 516);
-            this.btnAddTrip.Name = "btnAddTrip";
-            this.btnAddTrip.Size = new System.Drawing.Size(75, 23);
-            this.btnAddTrip.TabIndex = 5;
-            this.btnAddTrip.Text = "Добавить";
-            this.btnAddTrip.UseVisualStyleBackColor = true;
-            this.btnAddTrip.Click += new System.EventHandler(this.btnAddTrip_Click);
+            this.btnEditTripClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditTripClient.Location = new System.Drawing.Point(620, 516);
+            this.btnEditTripClient.Name = "btnEditTripClient";
+            this.btnEditTripClient.Size = new System.Drawing.Size(75, 23);
+            this.btnEditTripClient.TabIndex = 6;
+            this.btnEditTripClient.Text = "Изменить";
+            this.btnEditTripClient.UseVisualStyleBackColor = true;
+            this.btnEditTripClient.Click += new System.EventHandler(this.btnEditTripClient_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 573);
+            this.ClientSize = new System.Drawing.Size(791, 573);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
@@ -650,18 +722,20 @@ namespace CursProject
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).EndInit();
             this.excursionsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.excursionGrid)).EndInit();
+            this.tripsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tripGrid)).EndInit();
+            this.clientsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.clientGrid)).EndInit();
+            this.discountsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.discountGrid)).EndInit();
             this.mealsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mealGrid)).EndInit();
             this.transportsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.transportGrid)).EndInit();
             this.hotelsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.hotelGrid)).EndInit();
-            this.discountsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.discountGrid)).EndInit();
-            this.clientsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.clientGrid)).EndInit();
-            this.tripsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tripGrid)).EndInit();
+            this.tripClientsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -720,6 +794,12 @@ namespace CursProject
         private Button btnDeleteTrip;
         private Button btnEditTrip;
         private Button btnAddTrip;
+
+        private TabPage tripClientsTab;
+        private DataGridView tripClientGrid;
+        private Button btnDeleteTripClient;
+        private Button btnEditTripClient;
+        private Button btnAddTripClient;
     }
 }
 

@@ -42,7 +42,7 @@ namespace CursProject.Form
             this.btnCancel.Location = new System.Drawing.Point(197, 64);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -51,7 +51,7 @@ namespace CursProject.Form
             this.btnAdd.Location = new System.Drawing.Point(116, 64);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -71,7 +71,7 @@ namespace CursProject.Form
             this.txtName.MaxLength = 255;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(188, 20);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 0;
             // 
             // labelType
             // 
@@ -88,7 +88,7 @@ namespace CursProject.Form
             this.ddlHotelTypes.Location = new System.Drawing.Point(84, 37);
             this.ddlHotelTypes.Name = "ddlHotelTypes";
             this.ddlHotelTypes.Size = new System.Drawing.Size(188, 21);
-            this.ddlHotelTypes.TabIndex = 8;
+            this.ddlHotelTypes.TabIndex = 1;
             // 
             // AddHotelForm
             // 

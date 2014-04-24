@@ -1,6 +1,7 @@
 using System;
 using System.Data.Linq;
 using System.Linq;
+using CursProject.Classes;
 using CursProject.Helpers;
 using CursProject.Properties;
 using CursProject.Types;
@@ -42,11 +43,7 @@ namespace CursProject.Form
             if (ValidateControls())
             {
                 Transport transport = GetFromControls();
-                if (Id > 0)
-                {
-                    db.Refresh(RefreshMode.OverwriteCurrentValues, transport);
-                }
-                else
+                if (Id <= 0)
                 {
                     db.Transports.InsertOnSubmit(transport);
                 }

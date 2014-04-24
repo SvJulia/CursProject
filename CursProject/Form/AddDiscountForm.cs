@@ -1,6 +1,7 @@
 using System;
 using System.Data.Linq;
 using System.Linq;
+using CursProject.Classes;
 using CursProject.Properties;
 
 namespace CursProject.Form
@@ -34,11 +35,7 @@ namespace CursProject.Form
             if (ValidateControls())
             {
                 Discount discount = GetFromControls();
-                if (Id > 0)
-                {
-                    db.Refresh(RefreshMode.OverwriteCurrentValues, discount);
-                }
-                else
+                if (Id <= 0)
                 {
                     db.Discounts.InsertOnSubmit(discount);
                 }

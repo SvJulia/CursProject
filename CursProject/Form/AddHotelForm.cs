@@ -1,6 +1,7 @@
 using System;
 using System.Data.Linq;
 using System.Linq;
+using CursProject.Classes;
 using CursProject.Helpers;
 using CursProject.Properties;
 using CursProject.Types;
@@ -42,11 +43,7 @@ namespace CursProject.Form
             if (ValidateControls())
             {
                 Hotel hotel = GetFromControls();
-                if (Id > 0)
-                {
-                    db.Refresh(RefreshMode.OverwriteCurrentValues, hotel);
-                }
-                else
+                if (Id <= 0)
                 {
                     db.Hotels.InsertOnSubmit(hotel);
                 }
