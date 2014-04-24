@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -63,9 +69,13 @@
     <Compile Include="Classes\Discount.cs" />
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\TourDb.cs">
+      <DependentUpon>TourDb.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Transport.cs" />
     <Compile Include="Classes\Meal.cs" />
     <Compile Include="Classes\Hotel.cs" />
+    <Compile Include="Classes\TripClient.cs" />
     <Compile Include="Classes\Trip.cs" />
     <Compile Include="Classes\Tour.cs" />
     <Compile Include="Classes\Excursion.cs" />
@@ -76,6 +86,15 @@
     <Compile Include="Form\AddTripClientForm.designer.cs">
       <DependentUpon>AddTripClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grids\GridClient.cs" />
+    <Compile Include="Grids\GridExcursion.cs" />
+    <Compile Include="Grids\GridDiscount.cs" />
+    <Compile Include="Grids\GridTransport.cs" />
+    <Compile Include="Grids\GridTripClient.cs" />
+    <Compile Include="Grids\GridTrip.cs" />
+    <Compile Include="Grids\GridHotel.cs" />
+    <Compile Include="Grids\GridMeal.cs" />
+    <Compile Include="Grids\GridTour.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Form\AddTourForm.cs">
       <SubType>Form</SubType>
@@ -128,7 +147,9 @@
     <Compile Include="Form\ValidateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\GridHelper.cs" />
+    <Compile Include="Helpers\WordHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +225,9 @@
       <LastGenOutput>TourDb.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\Dogovor.doc" />
+    <None Include="Resources\Schet.doc" />
+    <None Include="Resources\Statistichesky_Otchet.xls" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -238,6 +262,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo F | xcopy "$(ProjectDir)Resources\Dogovor.doc" "$(TargetDir)Dogovor.doc" /Y /F</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

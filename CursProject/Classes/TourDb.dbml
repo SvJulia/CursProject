@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TourDb" Class="TourDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\TourDb.mdf;Integrated Security=True" SettingsObjectName="CursProject.Properties.Settings" SettingsPropertyName="TourDbConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.City" Member="Cities">
-    <Type Name="City">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="CountryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="City_Tour" Member="Tours" ThisKey="Id" OtherKey="CityId" Type="Tour" />
-      <Association Name="Country_City" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Country" Member="Countries">
     <Type Name="Country">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -39,39 +30,6 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Type" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="Meal_Trip" Member="Trips" ThisKey="Id" OtherKey="MealId" Type="Trip" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Tour" Member="Tours">
-    <Type Name="Tour">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="NameForClients" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Tour_Trip" Member="Trips" ThisKey="Id" OtherKey="TourId" Type="Trip" />
-      <Association Name="Tour_TourExcursion" Member="TourExcursions" ThisKey="Id" OtherKey="TourId" Type="TourExcursion" />
-      <Association Name="City_Tour" Member="City" ThisKey="CityId" OtherKey="Id" Type="City" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Trip" Member="Trips">
-    <Type Name="Trip">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TourId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MealId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TransportId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="HotelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DateDeparture" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DateArival" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Nights" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TourPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MealPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TransportPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="HotelPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Trip_TripClient" Member="TripClients" ThisKey="Id" OtherKey="TripId" Type="TripClient" />
-      <Association Name="Hotel_Trip" Member="Hotel" ThisKey="HotelId" OtherKey="Id" Type="Hotel" IsForeignKey="true" />
-      <Association Name="Meal_Trip" Member="Meal" ThisKey="MealId" OtherKey="Id" Type="Meal" IsForeignKey="true" />
-      <Association Name="Tour_Trip" Member="Tour" ThisKey="TourId" OtherKey="Id" Type="Tour" IsForeignKey="true" />
-      <Association Name="Transport_Trip" Member="Transport" ThisKey="TransportId" OtherKey="Id" Type="Transport" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Transport" Member="Transports">
@@ -117,6 +75,48 @@
       <Column Name="TotalPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Client_TripClient" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
       <Association Name="Trip_TripClient" Member="Trip" ThisKey="TripId" OtherKey="Id" Type="Trip" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="City_Tour" Member="Tours" ThisKey="Id" OtherKey="CityId" Type="Tour" />
+      <Association Name="Country_City" Member="Country" ThisKey="CountryId" OtherKey="Id" Type="Country" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tour" Member="Tours">
+    <Type Name="Tour">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="NameForClients" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tour_TourExcursion" Member="TourExcursions" ThisKey="Id" OtherKey="TourId" Type="TourExcursion" />
+      <Association Name="Tour_Trip" Member="Trips" ThisKey="Id" OtherKey="TourId" Type="Trip" />
+      <Association Name="City_Tour" Member="City" ThisKey="CityId" OtherKey="Id" Type="City" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Trip" Member="Trips">
+    <Type Name="Trip">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TourId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MealId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransportId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HotelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateDeparture" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateArival" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Nights" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TourPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MealPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransportPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HotelPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Trip_TripClient" Member="TripClients" ThisKey="Id" OtherKey="TripId" Type="TripClient" />
+      <Association Name="Hotel_Trip" Member="Hotel" ThisKey="HotelId" OtherKey="Id" Type="Hotel" IsForeignKey="true" />
+      <Association Name="Meal_Trip" Member="Meal" ThisKey="MealId" OtherKey="Id" Type="Meal" IsForeignKey="true" />
+      <Association Name="Tour_Trip" Member="Tour" ThisKey="TourId" OtherKey="Id" Type="Tour" IsForeignKey="true" />
+      <Association Name="Transport_Trip" Member="Transport" ThisKey="TransportId" OtherKey="Id" Type="Transport" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

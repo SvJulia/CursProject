@@ -30,9 +30,6 @@ namespace CursProject.Classes
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertCity(City instance);
-    partial void UpdateCity(City instance);
-    partial void DeleteCity(City instance);
     partial void InsertCountry(Country instance);
     partial void UpdateCountry(Country instance);
     partial void DeleteCountry(Country instance);
@@ -45,12 +42,6 @@ namespace CursProject.Classes
     partial void InsertMeal(Meal instance);
     partial void UpdateMeal(Meal instance);
     partial void DeleteMeal(Meal instance);
-    partial void InsertTour(Tour instance);
-    partial void UpdateTour(Tour instance);
-    partial void DeleteTour(Tour instance);
-    partial void InsertTrip(Trip instance);
-    partial void UpdateTrip(Trip instance);
-    partial void DeleteTrip(Trip instance);
     partial void InsertTransport(Transport instance);
     partial void UpdateTransport(Transport instance);
     partial void DeleteTransport(Transport instance);
@@ -66,6 +57,15 @@ namespace CursProject.Classes
     partial void InsertTripClient(TripClient instance);
     partial void UpdateTripClient(TripClient instance);
     partial void DeleteTripClient(TripClient instance);
+    partial void InsertCity(City instance);
+    partial void UpdateCity(City instance);
+    partial void DeleteCity(City instance);
+    partial void InsertTour(Tour instance);
+    partial void UpdateTour(Tour instance);
+    partial void DeleteTour(Tour instance);
+    partial void InsertTrip(Trip instance);
+    partial void UpdateTrip(Trip instance);
+    partial void DeleteTrip(Trip instance);
     #endregion
 		
 		public TourDbDataContext() : 
@@ -98,14 +98,6 @@ namespace CursProject.Classes
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<City> Cities
-		{
-			get
-			{
-				return this.GetTable<City>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Country> Countries
 		{
 			get
@@ -135,22 +127,6 @@ namespace CursProject.Classes
 			get
 			{
 				return this.GetTable<Meal>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Tour> Tours
-		{
-			get
-			{
-				return this.GetTable<Tour>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Trip> Trips
-		{
-			get
-			{
-				return this.GetTable<Trip>();
 			}
 		}
 		
@@ -193,184 +169,29 @@ namespace CursProject.Classes
 				return this.GetTable<TripClient>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
-	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private int _CountryId;
-		
-		private EntitySet<Tour> _Tours;
-		
-		private EntityRef<Country> _Country;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnCountryIdChanging(int value);
-    partial void OnCountryIdChanged();
-    #endregion
-		
-		public City()
-		{
-			this._Tours = new EntitySet<Tour>(new Action<Tour>(this.attach_Tours), new Action<Tour>(this.detach_Tours));
-			this._Country = default(EntityRef<Country>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<City> Cities
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
+				return this.GetTable<City>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Name
+		public System.Data.Linq.Table<Tour> Tours
 		{
 			get
 			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
+				return this.GetTable<Tour>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountryId", DbType="Int NOT NULL")]
-		public int CountryId
+		public System.Data.Linq.Table<Trip> Trips
 		{
 			get
 			{
-				return this._CountryId;
+				return this.GetTable<Trip>();
 			}
-			set
-			{
-				if ((this._CountryId != value))
-				{
-					if (this._Country.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCountryIdChanging(value);
-					this.SendPropertyChanging();
-					this._CountryId = value;
-					this.SendPropertyChanged("CountryId");
-					this.OnCountryIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Tour", Storage="_Tours", ThisKey="Id", OtherKey="CityId")]
-		public EntitySet<Tour> Tours
-		{
-			get
-			{
-				return this._Tours;
-			}
-			set
-			{
-				this._Tours.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_City", Storage="_Country", ThisKey="CountryId", OtherKey="Id", IsForeignKey=true)]
-		public Country Country
-		{
-			get
-			{
-				return this._Country.Entity;
-			}
-			set
-			{
-				Country previousValue = this._Country.Entity;
-				if (((previousValue != value) 
-							|| (this._Country.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Country.Entity = null;
-						previousValue.Cities.Remove(this);
-					}
-					this._Country.Entity = value;
-					if ((value != null))
-					{
-						value.Cities.Add(this);
-						this._CountryId = value.Id;
-					}
-					else
-					{
-						this._CountryId = default(int);
-					}
-					this.SendPropertyChanged("Country");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Tours(Tour entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = this;
-		}
-		
-		private void detach_Tours(Tour entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = null;
 		}
 	}
 	
@@ -923,779 +744,6 @@ namespace CursProject.Classes
 		{
 			this.SendPropertyChanging();
 			entity.Meal = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tour")]
-	public partial class Tour : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _NameForClients;
-		
-		private int _CityId;
-		
-		private EntitySet<Trip> _Trips;
-		
-		private EntitySet<TourExcursion> _TourExcursions;
-		
-		private EntityRef<City> _City;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnNameForClientsChanging(string value);
-    partial void OnNameForClientsChanged();
-    partial void OnCityIdChanging(int value);
-    partial void OnCityIdChanged();
-    #endregion
-		
-		public Tour()
-		{
-			this._Trips = new EntitySet<Trip>(new Action<Trip>(this.attach_Trips), new Action<Trip>(this.detach_Trips));
-			this._TourExcursions = new EntitySet<TourExcursion>(new Action<TourExcursion>(this.attach_TourExcursions), new Action<TourExcursion>(this.detach_TourExcursions));
-			this._City = default(EntityRef<City>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameForClients", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string NameForClients
-		{
-			get
-			{
-				return this._NameForClients;
-			}
-			set
-			{
-				if ((this._NameForClients != value))
-				{
-					this.OnNameForClientsChanging(value);
-					this.SendPropertyChanging();
-					this._NameForClients = value;
-					this.SendPropertyChanged("NameForClients");
-					this.OnNameForClientsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int NOT NULL")]
-		public int CityId
-		{
-			get
-			{
-				return this._CityId;
-			}
-			set
-			{
-				if ((this._CityId != value))
-				{
-					if (this._City.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCityIdChanging(value);
-					this.SendPropertyChanging();
-					this._CityId = value;
-					this.SendPropertyChanged("CityId");
-					this.OnCityIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_Trip", Storage="_Trips", ThisKey="Id", OtherKey="TourId")]
-		public EntitySet<Trip> Trips
-		{
-			get
-			{
-				return this._Trips;
-			}
-			set
-			{
-				this._Trips.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_TourExcursion", Storage="_TourExcursions", ThisKey="Id", OtherKey="TourId")]
-		public EntitySet<TourExcursion> TourExcursions
-		{
-			get
-			{
-				return this._TourExcursions;
-			}
-			set
-			{
-				this._TourExcursions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Tour", Storage="_City", ThisKey="CityId", OtherKey="Id", IsForeignKey=true)]
-		public City City
-		{
-			get
-			{
-				return this._City.Entity;
-			}
-			set
-			{
-				City previousValue = this._City.Entity;
-				if (((previousValue != value) 
-							|| (this._City.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City.Entity = null;
-						previousValue.Tours.Remove(this);
-					}
-					this._City.Entity = value;
-					if ((value != null))
-					{
-						value.Tours.Add(this);
-						this._CityId = value.Id;
-					}
-					else
-					{
-						this._CityId = default(int);
-					}
-					this.SendPropertyChanged("City");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Trips(Trip entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tour = this;
-		}
-		
-		private void detach_Trips(Trip entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tour = null;
-		}
-		
-		private void attach_TourExcursions(TourExcursion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tour = this;
-		}
-		
-		private void detach_TourExcursions(TourExcursion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tour = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Trip")]
-	public partial class Trip : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _TourId;
-		
-		private int _MealId;
-		
-		private int _TransportId;
-		
-		private int _HotelId;
-		
-		private System.DateTime _DateDeparture;
-		
-		private System.DateTime _DateArival;
-		
-		private int _Nights;
-		
-		private int _Amount;
-		
-		private int _TourPrice;
-		
-		private int _MealPrice;
-		
-		private int _TransportPrice;
-		
-		private int _HotelPrice;
-		
-		private EntitySet<TripClient> _TripClients;
-		
-		private EntityRef<Hotel> _Hotel;
-		
-		private EntityRef<Meal> _Meal;
-		
-		private EntityRef<Tour> _Tour;
-		
-		private EntityRef<Transport> _Transport;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnTourIdChanging(int value);
-    partial void OnTourIdChanged();
-    partial void OnMealIdChanging(int value);
-    partial void OnMealIdChanged();
-    partial void OnTransportIdChanging(int value);
-    partial void OnTransportIdChanged();
-    partial void OnHotelIdChanging(int value);
-    partial void OnHotelIdChanged();
-    partial void OnDateDepartureChanging(System.DateTime value);
-    partial void OnDateDepartureChanged();
-    partial void OnDateArivalChanging(System.DateTime value);
-    partial void OnDateArivalChanged();
-    partial void OnNightsChanging(int value);
-    partial void OnNightsChanged();
-    partial void OnAmountChanging(int value);
-    partial void OnAmountChanged();
-    partial void OnTourPriceChanging(int value);
-    partial void OnTourPriceChanged();
-    partial void OnMealPriceChanging(int value);
-    partial void OnMealPriceChanged();
-    partial void OnTransportPriceChanging(int value);
-    partial void OnTransportPriceChanged();
-    partial void OnHotelPriceChanging(int value);
-    partial void OnHotelPriceChanged();
-    #endregion
-		
-		public Trip()
-		{
-			this._TripClients = new EntitySet<TripClient>(new Action<TripClient>(this.attach_TripClients), new Action<TripClient>(this.detach_TripClients));
-			this._Hotel = default(EntityRef<Hotel>);
-			this._Meal = default(EntityRef<Meal>);
-			this._Tour = default(EntityRef<Tour>);
-			this._Transport = default(EntityRef<Transport>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int NOT NULL")]
-		public int TourId
-		{
-			get
-			{
-				return this._TourId;
-			}
-			set
-			{
-				if ((this._TourId != value))
-				{
-					if (this._Tour.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTourIdChanging(value);
-					this.SendPropertyChanging();
-					this._TourId = value;
-					this.SendPropertyChanged("TourId");
-					this.OnTourIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MealId", DbType="Int NOT NULL")]
-		public int MealId
-		{
-			get
-			{
-				return this._MealId;
-			}
-			set
-			{
-				if ((this._MealId != value))
-				{
-					if (this._Meal.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMealIdChanging(value);
-					this.SendPropertyChanging();
-					this._MealId = value;
-					this.SendPropertyChanged("MealId");
-					this.OnMealIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportId", DbType="Int NOT NULL")]
-		public int TransportId
-		{
-			get
-			{
-				return this._TransportId;
-			}
-			set
-			{
-				if ((this._TransportId != value))
-				{
-					if (this._Transport.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTransportIdChanging(value);
-					this.SendPropertyChanging();
-					this._TransportId = value;
-					this.SendPropertyChanged("TransportId");
-					this.OnTransportIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HotelId", DbType="Int NOT NULL")]
-		public int HotelId
-		{
-			get
-			{
-				return this._HotelId;
-			}
-			set
-			{
-				if ((this._HotelId != value))
-				{
-					if (this._Hotel.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnHotelIdChanging(value);
-					this.SendPropertyChanging();
-					this._HotelId = value;
-					this.SendPropertyChanged("HotelId");
-					this.OnHotelIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateDeparture", DbType="DateTime NOT NULL")]
-		public System.DateTime DateDeparture
-		{
-			get
-			{
-				return this._DateDeparture;
-			}
-			set
-			{
-				if ((this._DateDeparture != value))
-				{
-					this.OnDateDepartureChanging(value);
-					this.SendPropertyChanging();
-					this._DateDeparture = value;
-					this.SendPropertyChanged("DateDeparture");
-					this.OnDateDepartureChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateArival", DbType="DateTime NOT NULL")]
-		public System.DateTime DateArival
-		{
-			get
-			{
-				return this._DateArival;
-			}
-			set
-			{
-				if ((this._DateArival != value))
-				{
-					this.OnDateArivalChanging(value);
-					this.SendPropertyChanging();
-					this._DateArival = value;
-					this.SendPropertyChanged("DateArival");
-					this.OnDateArivalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nights", DbType="Int NOT NULL")]
-		public int Nights
-		{
-			get
-			{
-				return this._Nights;
-			}
-			set
-			{
-				if ((this._Nights != value))
-				{
-					this.OnNightsChanging(value);
-					this.SendPropertyChanging();
-					this._Nights = value;
-					this.SendPropertyChanged("Nights");
-					this.OnNightsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int NOT NULL")]
-		public int Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourPrice", DbType="Int NOT NULL")]
-		public int TourPrice
-		{
-			get
-			{
-				return this._TourPrice;
-			}
-			set
-			{
-				if ((this._TourPrice != value))
-				{
-					this.OnTourPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TourPrice = value;
-					this.SendPropertyChanged("TourPrice");
-					this.OnTourPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MealPrice", DbType="Int NOT NULL")]
-		public int MealPrice
-		{
-			get
-			{
-				return this._MealPrice;
-			}
-			set
-			{
-				if ((this._MealPrice != value))
-				{
-					this.OnMealPriceChanging(value);
-					this.SendPropertyChanging();
-					this._MealPrice = value;
-					this.SendPropertyChanged("MealPrice");
-					this.OnMealPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportPrice", DbType="Int NOT NULL")]
-		public int TransportPrice
-		{
-			get
-			{
-				return this._TransportPrice;
-			}
-			set
-			{
-				if ((this._TransportPrice != value))
-				{
-					this.OnTransportPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TransportPrice = value;
-					this.SendPropertyChanged("TransportPrice");
-					this.OnTransportPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HotelPrice", DbType="Int NOT NULL")]
-		public int HotelPrice
-		{
-			get
-			{
-				return this._HotelPrice;
-			}
-			set
-			{
-				if ((this._HotelPrice != value))
-				{
-					this.OnHotelPriceChanging(value);
-					this.SendPropertyChanging();
-					this._HotelPrice = value;
-					this.SendPropertyChanged("HotelPrice");
-					this.OnHotelPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trip_TripClient", Storage="_TripClients", ThisKey="Id", OtherKey="TripId")]
-		public EntitySet<TripClient> TripClients
-		{
-			get
-			{
-				return this._TripClients;
-			}
-			set
-			{
-				this._TripClients.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotel_Trip", Storage="_Hotel", ThisKey="HotelId", OtherKey="Id", IsForeignKey=true)]
-		public Hotel Hotel
-		{
-			get
-			{
-				return this._Hotel.Entity;
-			}
-			set
-			{
-				Hotel previousValue = this._Hotel.Entity;
-				if (((previousValue != value) 
-							|| (this._Hotel.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Hotel.Entity = null;
-						previousValue.Trips.Remove(this);
-					}
-					this._Hotel.Entity = value;
-					if ((value != null))
-					{
-						value.Trips.Add(this);
-						this._HotelId = value.Id;
-					}
-					else
-					{
-						this._HotelId = default(int);
-					}
-					this.SendPropertyChanged("Hotel");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Meal_Trip", Storage="_Meal", ThisKey="MealId", OtherKey="Id", IsForeignKey=true)]
-		public Meal Meal
-		{
-			get
-			{
-				return this._Meal.Entity;
-			}
-			set
-			{
-				Meal previousValue = this._Meal.Entity;
-				if (((previousValue != value) 
-							|| (this._Meal.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Meal.Entity = null;
-						previousValue.Trips.Remove(this);
-					}
-					this._Meal.Entity = value;
-					if ((value != null))
-					{
-						value.Trips.Add(this);
-						this._MealId = value.Id;
-					}
-					else
-					{
-						this._MealId = default(int);
-					}
-					this.SendPropertyChanged("Meal");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_Trip", Storage="_Tour", ThisKey="TourId", OtherKey="Id", IsForeignKey=true)]
-		public Tour Tour
-		{
-			get
-			{
-				return this._Tour.Entity;
-			}
-			set
-			{
-				Tour previousValue = this._Tour.Entity;
-				if (((previousValue != value) 
-							|| (this._Tour.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Tour.Entity = null;
-						previousValue.Trips.Remove(this);
-					}
-					this._Tour.Entity = value;
-					if ((value != null))
-					{
-						value.Trips.Add(this);
-						this._TourId = value.Id;
-					}
-					else
-					{
-						this._TourId = default(int);
-					}
-					this.SendPropertyChanged("Tour");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Trip", Storage="_Transport", ThisKey="TransportId", OtherKey="Id", IsForeignKey=true)]
-		public Transport Transport
-		{
-			get
-			{
-				return this._Transport.Entity;
-			}
-			set
-			{
-				Transport previousValue = this._Transport.Entity;
-				if (((previousValue != value) 
-							|| (this._Transport.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Transport.Entity = null;
-						previousValue.Trips.Remove(this);
-					}
-					this._Transport.Entity = value;
-					if ((value != null))
-					{
-						value.Trips.Add(this);
-						this._TransportId = value.Id;
-					}
-					else
-					{
-						this._TransportId = default(int);
-					}
-					this.SendPropertyChanged("Transport");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TripClients(TripClient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Trip = this;
-		}
-		
-		private void detach_TripClients(TripClient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Trip = null;
 		}
 	}
 	
@@ -2562,6 +1610,958 @@ namespace CursProject.Classes
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private int _CountryId;
+		
+		private EntitySet<Tour> _Tours;
+		
+		private EntityRef<Country> _Country;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCountryIdChanging(int value);
+    partial void OnCountryIdChanged();
+    #endregion
+		
+		public City()
+		{
+			this._Tours = new EntitySet<Tour>(new Action<Tour>(this.attach_Tours), new Action<Tour>(this.detach_Tours));
+			this._Country = default(EntityRef<Country>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountryId", DbType="Int NOT NULL")]
+		public int CountryId
+		{
+			get
+			{
+				return this._CountryId;
+			}
+			set
+			{
+				if ((this._CountryId != value))
+				{
+					if (this._Country.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCountryIdChanging(value);
+					this.SendPropertyChanging();
+					this._CountryId = value;
+					this.SendPropertyChanged("CountryId");
+					this.OnCountryIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Tour", Storage="_Tours", ThisKey="Id", OtherKey="CityId")]
+		public EntitySet<Tour> Tours
+		{
+			get
+			{
+				return this._Tours;
+			}
+			set
+			{
+				this._Tours.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Country_City", Storage="_Country", ThisKey="CountryId", OtherKey="Id", IsForeignKey=true)]
+		public Country Country
+		{
+			get
+			{
+				return this._Country.Entity;
+			}
+			set
+			{
+				Country previousValue = this._Country.Entity;
+				if (((previousValue != value) 
+							|| (this._Country.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Country.Entity = null;
+						previousValue.Cities.Remove(this);
+					}
+					this._Country.Entity = value;
+					if ((value != null))
+					{
+						value.Cities.Add(this);
+						this._CountryId = value.Id;
+					}
+					else
+					{
+						this._CountryId = default(int);
+					}
+					this.SendPropertyChanged("Country");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Tours(Tour entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = this;
+		}
+		
+		private void detach_Tours(Tour entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tour")]
+	public partial class Tour : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _NameForClients;
+		
+		private int _CityId;
+		
+		private EntitySet<TourExcursion> _TourExcursions;
+		
+		private EntitySet<Trip> _Trips;
+		
+		private EntityRef<City> _City;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnNameForClientsChanging(string value);
+    partial void OnNameForClientsChanged();
+    partial void OnCityIdChanging(int value);
+    partial void OnCityIdChanged();
+    #endregion
+		
+		public Tour()
+		{
+			this._TourExcursions = new EntitySet<TourExcursion>(new Action<TourExcursion>(this.attach_TourExcursions), new Action<TourExcursion>(this.detach_TourExcursions));
+			this._Trips = new EntitySet<Trip>(new Action<Trip>(this.attach_Trips), new Action<Trip>(this.detach_Trips));
+			this._City = default(EntityRef<City>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameForClients", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string NameForClients
+		{
+			get
+			{
+				return this._NameForClients;
+			}
+			set
+			{
+				if ((this._NameForClients != value))
+				{
+					this.OnNameForClientsChanging(value);
+					this.SendPropertyChanging();
+					this._NameForClients = value;
+					this.SendPropertyChanged("NameForClients");
+					this.OnNameForClientsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int NOT NULL")]
+		public int CityId
+		{
+			get
+			{
+				return this._CityId;
+			}
+			set
+			{
+				if ((this._CityId != value))
+				{
+					if (this._City.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCityIdChanging(value);
+					this.SendPropertyChanging();
+					this._CityId = value;
+					this.SendPropertyChanged("CityId");
+					this.OnCityIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_TourExcursion", Storage="_TourExcursions", ThisKey="Id", OtherKey="TourId")]
+		public EntitySet<TourExcursion> TourExcursions
+		{
+			get
+			{
+				return this._TourExcursions;
+			}
+			set
+			{
+				this._TourExcursions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_Trip", Storage="_Trips", ThisKey="Id", OtherKey="TourId")]
+		public EntitySet<Trip> Trips
+		{
+			get
+			{
+				return this._Trips;
+			}
+			set
+			{
+				this._Trips.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Tour", Storage="_City", ThisKey="CityId", OtherKey="Id", IsForeignKey=true)]
+		public City City
+		{
+			get
+			{
+				return this._City.Entity;
+			}
+			set
+			{
+				City previousValue = this._City.Entity;
+				if (((previousValue != value) 
+							|| (this._City.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._City.Entity = null;
+						previousValue.Tours.Remove(this);
+					}
+					this._City.Entity = value;
+					if ((value != null))
+					{
+						value.Tours.Add(this);
+						this._CityId = value.Id;
+					}
+					else
+					{
+						this._CityId = default(int);
+					}
+					this.SendPropertyChanged("City");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TourExcursions(TourExcursion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tour = this;
+		}
+		
+		private void detach_TourExcursions(TourExcursion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tour = null;
+		}
+		
+		private void attach_Trips(Trip entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tour = this;
+		}
+		
+		private void detach_Trips(Trip entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tour = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Trip")]
+	public partial class Trip : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _TourId;
+		
+		private int _MealId;
+		
+		private int _TransportId;
+		
+		private int _HotelId;
+		
+		private System.DateTime _DateDeparture;
+		
+		private System.DateTime _DateArival;
+		
+		private int _Nights;
+		
+		private int _Amount;
+		
+		private int _TourPrice;
+		
+		private int _MealPrice;
+		
+		private int _TransportPrice;
+		
+		private int _HotelPrice;
+		
+		private EntitySet<TripClient> _TripClients;
+		
+		private EntityRef<Hotel> _Hotel;
+		
+		private EntityRef<Meal> _Meal;
+		
+		private EntityRef<Tour> _Tour;
+		
+		private EntityRef<Transport> _Transport;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTourIdChanging(int value);
+    partial void OnTourIdChanged();
+    partial void OnMealIdChanging(int value);
+    partial void OnMealIdChanged();
+    partial void OnTransportIdChanging(int value);
+    partial void OnTransportIdChanged();
+    partial void OnHotelIdChanging(int value);
+    partial void OnHotelIdChanged();
+    partial void OnDateDepartureChanging(System.DateTime value);
+    partial void OnDateDepartureChanged();
+    partial void OnDateArivalChanging(System.DateTime value);
+    partial void OnDateArivalChanged();
+    partial void OnNightsChanging(int value);
+    partial void OnNightsChanged();
+    partial void OnAmountChanging(int value);
+    partial void OnAmountChanged();
+    partial void OnTourPriceChanging(int value);
+    partial void OnTourPriceChanged();
+    partial void OnMealPriceChanging(int value);
+    partial void OnMealPriceChanged();
+    partial void OnTransportPriceChanging(int value);
+    partial void OnTransportPriceChanged();
+    partial void OnHotelPriceChanging(int value);
+    partial void OnHotelPriceChanged();
+    #endregion
+		
+		public Trip()
+		{
+			this._TripClients = new EntitySet<TripClient>(new Action<TripClient>(this.attach_TripClients), new Action<TripClient>(this.detach_TripClients));
+			this._Hotel = default(EntityRef<Hotel>);
+			this._Meal = default(EntityRef<Meal>);
+			this._Tour = default(EntityRef<Tour>);
+			this._Transport = default(EntityRef<Transport>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int NOT NULL")]
+		public int TourId
+		{
+			get
+			{
+				return this._TourId;
+			}
+			set
+			{
+				if ((this._TourId != value))
+				{
+					if (this._Tour.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTourIdChanging(value);
+					this.SendPropertyChanging();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MealId", DbType="Int NOT NULL")]
+		public int MealId
+		{
+			get
+			{
+				return this._MealId;
+			}
+			set
+			{
+				if ((this._MealId != value))
+				{
+					if (this._Meal.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMealIdChanging(value);
+					this.SendPropertyChanging();
+					this._MealId = value;
+					this.SendPropertyChanged("MealId");
+					this.OnMealIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportId", DbType="Int NOT NULL")]
+		public int TransportId
+		{
+			get
+			{
+				return this._TransportId;
+			}
+			set
+			{
+				if ((this._TransportId != value))
+				{
+					if (this._Transport.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransportIdChanging(value);
+					this.SendPropertyChanging();
+					this._TransportId = value;
+					this.SendPropertyChanged("TransportId");
+					this.OnTransportIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HotelId", DbType="Int NOT NULL")]
+		public int HotelId
+		{
+			get
+			{
+				return this._HotelId;
+			}
+			set
+			{
+				if ((this._HotelId != value))
+				{
+					if (this._Hotel.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnHotelIdChanging(value);
+					this.SendPropertyChanging();
+					this._HotelId = value;
+					this.SendPropertyChanged("HotelId");
+					this.OnHotelIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateDeparture", DbType="DateTime NOT NULL")]
+		public System.DateTime DateDeparture
+		{
+			get
+			{
+				return this._DateDeparture;
+			}
+			set
+			{
+				if ((this._DateDeparture != value))
+				{
+					this.OnDateDepartureChanging(value);
+					this.SendPropertyChanging();
+					this._DateDeparture = value;
+					this.SendPropertyChanged("DateDeparture");
+					this.OnDateDepartureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateArival", DbType="DateTime NOT NULL")]
+		public System.DateTime DateArival
+		{
+			get
+			{
+				return this._DateArival;
+			}
+			set
+			{
+				if ((this._DateArival != value))
+				{
+					this.OnDateArivalChanging(value);
+					this.SendPropertyChanging();
+					this._DateArival = value;
+					this.SendPropertyChanged("DateArival");
+					this.OnDateArivalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nights", DbType="Int NOT NULL")]
+		public int Nights
+		{
+			get
+			{
+				return this._Nights;
+			}
+			set
+			{
+				if ((this._Nights != value))
+				{
+					this.OnNightsChanging(value);
+					this.SendPropertyChanging();
+					this._Nights = value;
+					this.SendPropertyChanged("Nights");
+					this.OnNightsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int NOT NULL")]
+		public int Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourPrice", DbType="Int NOT NULL")]
+		public int TourPrice
+		{
+			get
+			{
+				return this._TourPrice;
+			}
+			set
+			{
+				if ((this._TourPrice != value))
+				{
+					this.OnTourPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TourPrice = value;
+					this.SendPropertyChanged("TourPrice");
+					this.OnTourPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MealPrice", DbType="Int NOT NULL")]
+		public int MealPrice
+		{
+			get
+			{
+				return this._MealPrice;
+			}
+			set
+			{
+				if ((this._MealPrice != value))
+				{
+					this.OnMealPriceChanging(value);
+					this.SendPropertyChanging();
+					this._MealPrice = value;
+					this.SendPropertyChanged("MealPrice");
+					this.OnMealPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportPrice", DbType="Int NOT NULL")]
+		public int TransportPrice
+		{
+			get
+			{
+				return this._TransportPrice;
+			}
+			set
+			{
+				if ((this._TransportPrice != value))
+				{
+					this.OnTransportPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TransportPrice = value;
+					this.SendPropertyChanged("TransportPrice");
+					this.OnTransportPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HotelPrice", DbType="Int NOT NULL")]
+		public int HotelPrice
+		{
+			get
+			{
+				return this._HotelPrice;
+			}
+			set
+			{
+				if ((this._HotelPrice != value))
+				{
+					this.OnHotelPriceChanging(value);
+					this.SendPropertyChanging();
+					this._HotelPrice = value;
+					this.SendPropertyChanged("HotelPrice");
+					this.OnHotelPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trip_TripClient", Storage="_TripClients", ThisKey="Id", OtherKey="TripId")]
+		public EntitySet<TripClient> TripClients
+		{
+			get
+			{
+				return this._TripClients;
+			}
+			set
+			{
+				this._TripClients.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Hotel_Trip", Storage="_Hotel", ThisKey="HotelId", OtherKey="Id", IsForeignKey=true)]
+		public Hotel Hotel
+		{
+			get
+			{
+				return this._Hotel.Entity;
+			}
+			set
+			{
+				Hotel previousValue = this._Hotel.Entity;
+				if (((previousValue != value) 
+							|| (this._Hotel.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Hotel.Entity = null;
+						previousValue.Trips.Remove(this);
+					}
+					this._Hotel.Entity = value;
+					if ((value != null))
+					{
+						value.Trips.Add(this);
+						this._HotelId = value.Id;
+					}
+					else
+					{
+						this._HotelId = default(int);
+					}
+					this.SendPropertyChanged("Hotel");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Meal_Trip", Storage="_Meal", ThisKey="MealId", OtherKey="Id", IsForeignKey=true)]
+		public Meal Meal
+		{
+			get
+			{
+				return this._Meal.Entity;
+			}
+			set
+			{
+				Meal previousValue = this._Meal.Entity;
+				if (((previousValue != value) 
+							|| (this._Meal.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Meal.Entity = null;
+						previousValue.Trips.Remove(this);
+					}
+					this._Meal.Entity = value;
+					if ((value != null))
+					{
+						value.Trips.Add(this);
+						this._MealId = value.Id;
+					}
+					else
+					{
+						this._MealId = default(int);
+					}
+					this.SendPropertyChanged("Meal");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_Trip", Storage="_Tour", ThisKey="TourId", OtherKey="Id", IsForeignKey=true)]
+		public Tour Tour
+		{
+			get
+			{
+				return this._Tour.Entity;
+			}
+			set
+			{
+				Tour previousValue = this._Tour.Entity;
+				if (((previousValue != value) 
+							|| (this._Tour.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tour.Entity = null;
+						previousValue.Trips.Remove(this);
+					}
+					this._Tour.Entity = value;
+					if ((value != null))
+					{
+						value.Trips.Add(this);
+						this._TourId = value.Id;
+					}
+					else
+					{
+						this._TourId = default(int);
+					}
+					this.SendPropertyChanged("Tour");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Trip", Storage="_Transport", ThisKey="TransportId", OtherKey="Id", IsForeignKey=true)]
+		public Transport Transport
+		{
+			get
+			{
+				return this._Transport.Entity;
+			}
+			set
+			{
+				Transport previousValue = this._Transport.Entity;
+				if (((previousValue != value) 
+							|| (this._Transport.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Transport.Entity = null;
+						previousValue.Trips.Remove(this);
+					}
+					this._Transport.Entity = value;
+					if ((value != null))
+					{
+						value.Trips.Add(this);
+						this._TransportId = value.Id;
+					}
+					else
+					{
+						this._TransportId = default(int);
+					}
+					this.SendPropertyChanged("Transport");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TripClients(TripClient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Trip = this;
+		}
+		
+		private void detach_TripClients(TripClient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Trip = null;
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
+using CursProject.Helpers;
 using CursProject.Properties;
 
 namespace CursProject.Form
@@ -73,6 +74,7 @@ namespace CursProject.Form
 
                 db.SubmitChanges();
 
+                WordHelper.MakeDogovor(tc);
                 Close();
             }
         }

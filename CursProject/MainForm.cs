@@ -6,6 +6,7 @@ using CursProject.Classes;
 using CursProject.Form;
 using CursProject.Helpers;
 using CursProject.Properties;
+using Tour = CursProject.Grids.GridTour;
 
 namespace CursProject
 {
@@ -40,64 +41,84 @@ namespace CursProject
         private void RefreshTours()
         {
             var db = new TourDbDataContext();
-            List<Tour> list = db.Tours.ToList();
-            tourGrid.DataSource = list;
+            tourGrid.DataSource = db.Tours.Select(p => p.ToGrid()).ToList();
+
+            tourGrid.Columns[5].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            GridHelper.SetHeaders(tourGrid, new[] { "ID", "Название", "Название для клиентов", "Страна", "Город", "Экскурсии" });
+            GridHelper.SetInvisible(tourGrid, new[] { 0 });
         }
 
         private void RefreshExcursions()
         {
             var db = new TourDbDataContext();
-            List<Excursion> list = db.Excursions.ToList();
-            excursionGrid.DataSource = list;
+            excursionGrid.DataSource = db.Excursions.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(excursionGrid, new[] { "ID", "Название", "Описание", "Рейтинг" });
+            GridHelper.SetInvisible(excursionGrid, new[] { 0 });
         }
 
         private void RefreshMeals()
         {
             var db = new TourDbDataContext();
-            List<Meal> list = db.Meals.ToList();
-            mealGrid.DataSource = list;
+            mealGrid.DataSource = db.Meals.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(mealGrid, new[] { "ID", "Название", "Тип"});
+            GridHelper.SetInvisible(mealGrid, new[] { 0 });
         }
 
         private void RefreshTransports()
         {
             var db = new TourDbDataContext();
-            List<Transport> list = db.Transports.ToList();
-            transportGrid.DataSource = list;
+            transportGrid.DataSource = db.Transports.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(transportGrid, new[] { "ID", "Название", "Тип" });
+            GridHelper.SetInvisible(transportGrid, new[] { 0 });
         }
 
         private void RefreshHotels()
         {
             var db = new TourDbDataContext();
-            List<Hotel> list = db.Hotels.ToList();
-            hotelGrid.DataSource = list;
+            hotelGrid.DataSource = db.Hotels.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(hotelGrid, new[] { "ID", "Название", "Тип" });
+            GridHelper.SetInvisible(hotelGrid, new[] { 0 });
         }
 
         private void RefreshDiscounts()
         {
             var db = new TourDbDataContext();
-            List<Discount> list = db.Discounts.ToList();
-            discountGrid.DataSource = list;
+            discountGrid.DataSource = db.Discounts.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(discountGrid, new[] { "ID", "Потраченная сумма", "Размер скидки" });
+            GridHelper.SetInvisible(discountGrid, new[] { 0 });
         }
 
         private void RefreshClients()
         {
             var db = new TourDbDataContext();
-            List<Client> list = db.Clients.ToList();
-            clientGrid.DataSource = list;
+            clientGrid.DataSource = db.Clients.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(clientGrid, new[] { "ID", "ФИО", "Скидка", "Сумма купленных туров" });
+            GridHelper.SetInvisible(clientGrid, new[] { 0 });
         }
 
         private void RefreshTrips()
         {
             var db = new TourDbDataContext();
-            List<Trip> list = db.Trips.ToList();
-            tripGrid.DataSource = list;
+            tripGrid.DataSource = db.Trips.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(tripGrid, new[] { "ID", "Тур", "Дата отбытия", "Дата возвращения", "Кол-во ночей", "Кол-во туров", "Цена" });
+            GridHelper.SetInvisible(tripGrid, new[] { 0 });
         }
 
         private void RefreshTripClients()
         {
             var db = new TourDbDataContext();
-            List<TripClient> list = db.TripClients.ToList();
-            tripClientGrid.DataSource = list;
+            tripClientGrid.DataSource = db.TripClients.Select(p => p.ToGrid()).ToList();
+
+            GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "ФИО покупателя", "Тур", "Цена" });
+            GridHelper.SetInvisible(tripClientGrid, new[] { 0 });
         }
 
         /*
@@ -439,7 +460,7 @@ namespace CursProject
                 return;
             }
 
-            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
             EditTrip(id);
         }
 
@@ -457,7 +478,7 @@ namespace CursProject
                 return;
             }
 
-            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Trips.DeleteAllOnSubmit(from t in db.Trips where t.Id == id select t);
@@ -479,11 +500,11 @@ namespace CursProject
                 return;
             }
 
-            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 1);
+            int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
 
             var form = new AddTripClientForm(0, id);
             form.ShowDialog();
-            RefreshTripClients();
+            RefreshTripClients(); 
         }
 
         private void btnEditTripClient_Click(object sender, EventArgs e)
