@@ -52,7 +52,7 @@ namespace CursProject.Form
             this.btnCancel.Location = new System.Drawing.Point(238, 194);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -61,7 +61,7 @@ namespace CursProject.Form
             this.btnAdd.Location = new System.Drawing.Point(157, 194);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 4;
+            this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -132,7 +132,7 @@ namespace CursProject.Form
             this.txtEmail.MaxLength = 255;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(188, 20);
-            this.txtEmail.TabIndex = 3;
+            this.txtEmail.TabIndex = 5;
             // 
             // txtAddress
             // 
@@ -140,7 +140,7 @@ namespace CursProject.Form
             this.txtAddress.MaxLength = 255;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(188, 20);
-            this.txtAddress.TabIndex = 7;
+            this.txtAddress.TabIndex = 3;
             // 
             // label1
             // 
@@ -157,7 +157,7 @@ namespace CursProject.Form
             this.txtPhone.MaxLength = 255;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(188, 20);
-            this.txtPhone.TabIndex = 9;
+            this.txtPhone.TabIndex = 4;
             // 
             // label2
             // 
@@ -174,7 +174,7 @@ namespace CursProject.Form
             this.txtAccountNumber.MaxLength = 255;
             this.txtAccountNumber.Name = "txtAccountNumber";
             this.txtAccountNumber.Size = new System.Drawing.Size(188, 20);
-            this.txtAccountNumber.TabIndex = 11;
+            this.txtAccountNumber.TabIndex = 6;
             // 
             // label3
             // 
