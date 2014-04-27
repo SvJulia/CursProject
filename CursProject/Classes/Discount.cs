@@ -11,12 +11,7 @@ namespace CursProject.Classes
 
         public GridDiscount ToGrid()
         {
-            return new GridDiscount
-            {
-                Id = Id,
-                Range = "от " + Range + " руб.",
-                Value = Value + "%"
-            };
+            return new GridDiscount { Id = Id, Range = "от " + Range + " руб.", Value = Value + "%" };
         }
     }
 }

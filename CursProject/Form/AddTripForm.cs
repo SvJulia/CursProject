@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
     public partial class AddTripForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddTripForm(int _Id = 0)
         {
@@ -74,7 +72,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var trip = (from t in db.Trips where (t.Id == Id) select t).SingleOrDefault<Trip>();
+            Trip trip = db.Trips.SingleOrDefault(t => (t.Id == Id));
 
             ddlTours.SelectedIndex = IndexByTour(trip.Tour);
             ddlMeals.SelectedIndex = IndexByMeal(trip.Meal);
@@ -93,7 +91,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Trip GetFromControls()
         {
-            Trip trip = (from t in db.Trips where (t.Id == Id) select t).SingleOrDefault<Trip>() ?? new Trip();
+            Trip trip = db.Trips.SingleOrDefault(t => (t.Id == Id)) ?? new Trip();
 
             trip.Id = Id;
             trip.TourId = TourByIndex(ddlTours.SelectedIndex).Id;

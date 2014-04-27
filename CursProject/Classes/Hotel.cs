@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using CursProject.Grids;
+﻿using CursProject.Grids;
 using CursProject.Helpers;
 using CursProject.Types;
 
@@ -15,12 +13,7 @@ namespace CursProject.Classes
 
         public GridHotel ToGrid()
         {
-            return new GridHotel
-            {
-                Id = Id,
-                Name = Name,
-                Type = EnumHelper.Huminize(EnumHelper.FromString<HotelType>(Type))
-            };
+            return new GridHotel { Id = Id, Name = Name, Type = EnumHelper.Huminize(EnumHelper.FromString<HotelType>(Type)) };
         }
     }
 }

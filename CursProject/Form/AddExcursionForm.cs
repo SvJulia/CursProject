@@ -1,15 +1,13 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
     public partial class AddExcursionForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddExcursionForm(int _Id = 0)
         {
@@ -48,7 +46,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var excursion = (from e in db.Excursions where e.Id == Id select e).SingleOrDefault<Excursion>();
+            Excursion excursion = db.Excursions.SingleOrDefault(e => e.Id == Id);
 
             txtName.Text = excursion.Name;
             txtDescription.Text = excursion.Description;
@@ -58,7 +56,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Excursion GetFromControls()
         {
-            var excursion = (from e in db.Excursions where e.Id == Id select e).SingleOrDefault<Excursion>() ?? new Excursion();
+            Excursion excursion = db.Excursions.SingleOrDefault(e => e.Id == Id) ?? new Excursion();
 
             excursion.Name = txtName.Text;
             excursion.Description = txtDescription.Text;

@@ -1,9 +1,7 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
 using CursProject.Helpers;
-using CursProject.Properties;
 using CursProject.Types;
 
 namespace CursProject.Form
@@ -11,12 +9,7 @@ namespace CursProject.Form
     public partial class AddTransportForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);  
-
-        private string[] TransportTypes
-        {
-            get { return (from TransportType transportType in Enum.GetValues(typeof(TransportType)) select EnumHelper.Huminize(transportType)).ToArray(); }
-        }
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddTransportForm(int _Id = 0)
         {
@@ -38,6 +31,11 @@ namespace CursProject.Form
             }
         }
 
+        private string[] TransportTypes
+        {
+            get { return (from TransportType transportType in Enum.GetValues(typeof (TransportType)) select EnumHelper.Huminize(transportType)).ToArray(); }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateControls())
@@ -56,7 +54,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var transport = (from t in db.Transports where (t.Id == Id) select t).SingleOrDefault<Transport>();
+            Transport transport = db.Transports.SingleOrDefault(t => (t.Id == Id));
 
             txtName.Text = transport.Name;
             ddlTransportTypes.SelectedIndex = IndexByTransportType(EnumHelper.FromString<TransportType>(transport.Type));
@@ -65,7 +63,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Transport GetFromControls()
         {
-            var transport = (from t in db.Transports where (t.Id == Id) select t).SingleOrDefault<Transport>() ?? new Transport();
+            Transport transport = db.Transports.SingleOrDefault(t => (t.Id == Id)) ?? new Transport();
 
             transport.Name = txtName.Text;
             transport.Type = TransportTypeByIndex(ddlTransportTypes.SelectedIndex).ToString();
@@ -86,15 +84,15 @@ namespace CursProject.Form
 
         private int IndexByTransportType(TransportType transportType)
         {
-            return Enum.GetValues(typeof(TransportType)).Cast<TransportType>().TakeWhile(r => r != transportType).Count();
+            return Enum.GetValues(typeof (TransportType)).Cast<TransportType>().TakeWhile(r => r != transportType).Count();
         }
 
         private TransportType TransportTypeByIndex(int index)
         {
-            var transportTypes = Enum.GetValues(typeof(TransportType));
+            Array transportTypes = Enum.GetValues(typeof (TransportType));
             if ((index >= 0) && (index < transportTypes.Length))
             {
-                return (TransportType)transportTypes.GetValue(index);
+                return (TransportType) transportTypes.GetValue(index);
             }
 
             return TransportType.Air;

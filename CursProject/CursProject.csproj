@@ -80,6 +80,7 @@
     <Compile Include="Classes\Tour.cs" />
     <Compile Include="Classes\Excursion.cs" />
     <Compile Include="Classes\City.cs" />
+    <Compile Include="DataBase.cs" />
     <Compile Include="Form\AddTripClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

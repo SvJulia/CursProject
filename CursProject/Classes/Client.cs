@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using CursProject.Grids;
-using CursProject.Properties;
 
 namespace CursProject.Classes
 {
@@ -10,7 +9,7 @@ namespace CursProject.Classes
         {
             get
             {
-                var db = new TourDbDataContext(Settings.Default.ConnectionString);
+                TourDbDataContext db = DataBase.Context;
                 IQueryable<TripClient> tcs = db.TripClients.Where(p => p.ClientId == Id);
 
                 if (!tcs.Any())
@@ -26,7 +25,7 @@ namespace CursProject.Classes
         {
             get
             {
-                var db = new TourDbDataContext(Settings.Default.ConnectionString);
+                TourDbDataContext db = DataBase.Context;
 
                 int tp = TotaPurchases;
                 IQueryable<Discount> ds = db.Discounts.Where(p => p.Range < tp);
@@ -46,7 +45,18 @@ namespace CursProject.Classes
 
         public GridClient ToGrid()
         {
-            return new GridClient { Id = Id, Fio = Fio, Discount = Discount + "%", TotaPurchases = TotaPurchases + " руб." };
+            return new GridClient
+            {
+                Id = Id,
+                Fio = Fio,
+                AccountNumber = AccountNumber,
+                Phone = Phone,
+                Doc = DocType + ": " + DocData,
+                Address = Address,
+                Email = Email,
+                Discount = Discount + "%",
+                TotaPurchases = TotaPurchases + " руб."
+            };
         }
     }
 }

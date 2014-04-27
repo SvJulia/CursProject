@@ -13,12 +13,7 @@ namespace CursProject.Classes
 
         public GridTransport ToGrid()
         {
-            return new GridTransport
-            {
-                Id = Id,
-                Name = Name,
-                Type = EnumHelper.Huminize(EnumHelper.FromString<TransportType>(Type))
-            };
+            return new GridTransport { Id = Id, Name = Name, Type = EnumHelper.Huminize(EnumHelper.FromString<TransportType>(Type)) };
         }
     }
 }

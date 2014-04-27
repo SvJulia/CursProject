@@ -4,14 +4,13 @@ using System.Data.Linq;
 using System.Linq;
 using System.Windows.Forms;
 using CursProject.Classes;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
     public partial class AddTourForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddTourForm(int _Id = 0)
         {
@@ -87,6 +86,22 @@ namespace CursProject.Form
             }
         }
 
+        private List<Excursion> CurrentExcursions
+        {
+            get
+            {
+                ListBox.SelectedIndexCollection indexes = lbExcursions.SelectedIndices;
+
+                var list = new List<Excursion>();
+                for (int i = 0; i < indexes.Count; i++)
+                {
+                    list.Add(Excursions[indexes[i]]);
+                }
+
+                return list;
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateControls())
@@ -100,20 +115,18 @@ namespace CursProject.Form
 
                 db.SubmitChanges();
 
-
-                foreach (var te in tour.TourExcursions)
+                foreach (TourExcursion te in tour.TourExcursions)
                 {
                     db.TourExcursions.DeleteOnSubmit(te);
                 }
                 db.SubmitChanges();
 
-                foreach (var ex in CurrentExcursions)
+                foreach (Excursion ex in CurrentExcursions)
                 {
-                    var te = new TourExcursion();
-                    te.Tour = tour;
-                    te.Excursion = ex;
+                    var te = new TourExcursion { Tour = tour, Excursion = ex };
                     db.TourExcursions.InsertOnSubmit(te);
                 }
+
                 db.SubmitChanges();
 
                 Close();
@@ -124,7 +137,7 @@ namespace CursProject.Form
         {
             Country country = GetCountry();
 
-            var city = CurrentCity;
+            City city = CurrentCity;
 
             if (city == null)
             {
@@ -145,7 +158,7 @@ namespace CursProject.Form
 
         private Country GetCountry()
         {
-            var country = CurrentCountry;
+            Country country = CurrentCountry;
 
             if (country == null)
             {
@@ -161,24 +174,24 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var tour = (from t in db.Tours where (t.Id == Id) select t).SingleOrDefault<Tour>();
+            Tour tour = db.Tours.SingleOrDefault(t => (t.Id == Id));
 
             txtName.Text = tour.Name;
             txtNameForClients.Text = tour.NameForClients;
             ddlCities.SelectedIndex = IndexByCity(tour.City);
             ddlCountries.SelectedIndex = IndexByCountry(tour.City.Country);
 
-            foreach (var te in tour.TourExcursions)
+            foreach (TourExcursion te in tour.TourExcursions)
             {
                 int index = IndexByExcursion(te.Excursion);
                 lbExcursions.SelectedIndices.Add(index);
-            }    
+            }
         }
 
         // Получаем объект из формы
         private Tour GetFromControls()
         {
-            Tour tour = (from t in db.Tours where (t.Id == Id) select t).SingleOrDefault<Tour>() ?? new Tour();
+            Tour tour = db.Tours.SingleOrDefault(t => (t.Id == Id)) ?? new Tour();
 
             tour.Name = txtName.Text;
             tour.NameForClients = txtNameForClients.Text;
@@ -233,22 +246,6 @@ namespace CursProject.Form
             }
         }
 
-        private List<Excursion> CurrentExcursions
-        {
-            get
-            {
-                var indexes = lbExcursions.SelectedIndices;
-
-                var list = new List<Excursion>();
-                for (int i = 0; i < indexes.Count; i++)
-                {
-                    list.Add(Excursions[indexes[i]]);
-                }
-
-                return list;
-            }
-        }
-
         private int IndexByExcursion(Excursion excursion)
         {
             return excursion != null ? Excursions.FindIndex(c => c.Id == excursion.Id) : 0;
@@ -256,7 +253,10 @@ namespace CursProject.Form
 
         private void FillExcursions()
         {
-            if (lbExcursions.Items.Count == Excursions.Count) return;
+            if (lbExcursions.Items.Count == Excursions.Count)
+            {
+                return;
+            }
 
             lbExcursions.Items.Clear();
             lbExcursions.Items.AddRange(Excursions.ToArray());

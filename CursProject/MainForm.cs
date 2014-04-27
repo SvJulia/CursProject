@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CursProject.Classes;
@@ -63,7 +62,7 @@ namespace CursProject
             var db = new TourDbDataContext();
             mealGrid.DataSource = db.Meals.Select(p => p.ToGrid()).ToList();
 
-            GridHelper.SetHeaders(mealGrid, new[] { "ID", "Название", "Тип"});
+            GridHelper.SetHeaders(mealGrid, new[] { "ID", "Название", "Тип" });
             GridHelper.SetInvisible(mealGrid, new[] { 0 });
         }
 
@@ -99,7 +98,8 @@ namespace CursProject
             var db = new TourDbDataContext();
             clientGrid.DataSource = db.Clients.Select(p => p.ToGrid()).ToList();
 
-            GridHelper.SetHeaders(clientGrid, new[] { "ID", "ФИО", "Скидка", "Сумма купленных туров" });
+            GridHelper.SetHeaders(clientGrid,
+                new[] { "ID", "Расчётный счёт", "ФИО", "Адрес", "Телефон", "Email", "Документ", "Скидка", "Сумма купленных туров" });
             GridHelper.SetInvisible(clientGrid, new[] { 0 });
         }
 
@@ -117,7 +117,7 @@ namespace CursProject
             var db = new TourDbDataContext();
             tripClientGrid.DataSource = db.TripClients.Select(p => p.ToGrid()).ToList();
 
-            GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "ФИО покупателя", "Тур", "Цена" });
+            GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "Покупатель", "Тур", "Цена" });
             GridHelper.SetInvisible(tripClientGrid, new[] { 0 });
         }
 
@@ -205,6 +205,7 @@ namespace CursProject
             int id = GridHelper.GetIntFromRow(excursionGrid.SelectedRows[0], 0);
 
             var db = new TourDbDataContext(Settings.Default.ConnectionString);
+
             db.Excursions.DeleteAllOnSubmit(from t in db.Excursions where t.Id == id select t);
             db.SubmitChanges();
 
@@ -353,7 +354,7 @@ namespace CursProject
         /*
          **********   Discounts   **********
          */
-                 
+
         private void btnAddDiscount_Click(object sender, EventArgs e)
         {
             var form = new AddDiscountForm();
@@ -393,7 +394,7 @@ namespace CursProject
             db.SubmitChanges();
 
             RefreshDiscounts();
-        }        
+        }
 
         /*
          **********   Clients   **********
@@ -439,7 +440,6 @@ namespace CursProject
 
             RefreshClients();
         }
-
 
 
         /*
@@ -488,11 +488,10 @@ namespace CursProject
         }
 
 
-
         /*
          **********   TripClients   **********
          */
-               
+
         private void btnAddTripClient_Click(object sender, EventArgs e)
         {
             if (tripGrid.SelectedRows.Count == 0)
@@ -504,7 +503,7 @@ namespace CursProject
 
             var form = new AddTripClientForm(0, id);
             form.ShowDialog();
-            RefreshTripClients(); 
+            RefreshTripClients();
         }
 
         private void btnEditTripClient_Click(object sender, EventArgs e)

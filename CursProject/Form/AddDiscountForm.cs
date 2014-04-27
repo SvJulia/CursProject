@@ -1,15 +1,13 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
     public partial class AddDiscountForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddDiscountForm(int _Id = 0)
         {
@@ -48,7 +46,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var discount = (from d in db.Discounts where d.Id == Id select d).SingleOrDefault<Discount>();
+            Discount discount = db.Discounts.SingleOrDefault(d => d.Id == Id);
 
             txtName.Text = discount.Name;
             txtDiscount.Text = discount.Value.ToString();
@@ -58,13 +56,13 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Discount GetFromControls()
         {
-            var discount = (from d in db.Discounts where d.Id == Id select d).SingleOrDefault<Discount>() ?? new Discount();
+            Discount discount = db.Discounts.SingleOrDefault(d => d.Id == Id) ?? new Discount();
 
-           discount.Name = txtName.Text;
-           discount.Value = int.Parse(txtDiscount.Text);
-           discount.Range = int.Parse(txtRange.Text);
+            discount.Name = txtName.Text;
+            discount.Value = int.Parse(txtDiscount.Text);
+            discount.Range = int.Parse(txtRange.Text);
 
-           return discount;
+            return discount;
         }
 
         // Проверяем корректность введенных данных

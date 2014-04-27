@@ -17,10 +17,13 @@ namespace CursProject.Helpers
             File.Copy(filePath, newFilePath);
             return newFilePath;
         }
-                              
+
         internal static string SavePhoto(Image image, int width = 0, int height = 0)
         {
-            if ((width > 0) && (height > 0)) image = CutImage(image, width, height);
+            if ((width > 0) && (height > 0))
+            {
+                image = CutImage(image, width, height);
+            }
 
             CreateDirectory(PhotoDir);
             string newFilePath = string.Format("{0}\\{1}.png", PhotoDir, Guid.NewGuid()).Replace("\\\\", "\\");
@@ -31,12 +34,18 @@ namespace CursProject.Helpers
 
         public static void CreateDirectory(string directory)
         {
-            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
         }
 
         public static void DeleteDirectory(string directory)
         {
-            if (Directory.Exists(directory)) Directory.Delete(directory);
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory);
+            }
         }
 
         public static string GetExtention(string filePath)
@@ -44,7 +53,7 @@ namespace CursProject.Helpers
             string[] values = filePath.Split(".".ToCharArray());
             return values.Length == 1 ? "" : string.Format(".{0}", values[values.Length - 1]);
         }
-                                          
+
         public static Image ResizeImage(Image image, float width, float height)
         {
             var newImage = new Bitmap((int) width, (int) height);

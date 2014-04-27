@@ -1,21 +1,19 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
     public partial class AddClientForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
-        public AddClientForm(int _Id = 0)
+        public AddClientForm(int id = 0)
         {
             InitializeComponent();
 
-            Id = _Id;
+            Id = id;
 
             if (Id > 0)
             {
@@ -48,23 +46,29 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var client = (from c in db.Clients where c.Id == Id select c).SingleOrDefault<Client>();
+            Client client = db.Clients.SingleOrDefault(c => c.Id == Id);
 
             txtFio.Text = client.Fio;
             txtDocType.Text = client.DocType;
             txtDocData.Text = client.DocData;
             txtEmail.Text = client.Email;
+            txtPhone.Text = client.Phone;
+            txtAddress.Text = client.Address;
+            txtAccountNumber.Text = client.AccountNumber;
         }
 
         // Получаем объект из формы
         private Client GetFromControls()
         {
-            var client = (from c in db.Clients where c.Id == Id select c).SingleOrDefault<Client>() ?? new Client();
+            Client client = db.Clients.SingleOrDefault(c => c.Id == Id) ?? new Client();
 
             client.Fio = txtFio.Text;
             client.DocType = txtDocType.Text;
             client.DocData = txtDocData.Text;
             client.Email = txtEmail.Text;
+            client.Phone = txtPhone.Text;
+            client.Address = txtAddress.Text;
+            client.AccountNumber = txtAccountNumber.Text;
 
             return client;
         }
@@ -78,6 +82,8 @@ namespace CursProject.Form
             isValid &= ValidateControl(txtDocType, false);
             isValid &= ValidateControl(txtDocData, false);
             isValid &= ValidateControl(txtEmail, false);
+            isValid &= ValidateControl(txtPhone, false);
+            isValid &= ValidateControl(txtAddress, false);
 
             return isValid;
         }

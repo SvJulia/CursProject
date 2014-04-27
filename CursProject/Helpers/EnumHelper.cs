@@ -7,20 +7,20 @@ namespace CursProject.Helpers
     {
         public static T FromString<T>(string value)
         {
-            return (T)Enum.Parse(typeof(T), value);
+            return (T) Enum.Parse(typeof (T), value);
         }
 
         public static string Huminize(MealType mealType)
         {
             switch (mealType)
             {
-                case MealType.No: 
+                case MealType.No:
                     return "No";
 
-                case MealType.BB: 
+                case MealType.BB:
                     return "BB - завтрак";
 
-                case MealType.HB: 
+                case MealType.HB:
                     return "HB - двухразовое";
 
                 case MealType.FB:

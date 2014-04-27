@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
 using CursProject.Helpers;
-using CursProject.Properties;
 
 namespace CursProject.Form
 {
@@ -12,15 +10,7 @@ namespace CursProject.Form
     {
         private readonly int Id;
         private readonly int TripId;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
-
-        public TripClient Tc
-        {
-            get
-            {
-                return (from tc in db.TripClients where (tc.Id == Id) select tc).SingleOrDefault<TripClient>() ?? null;
-            }
-        }
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddTripClientForm(int id = 0, int tripId = 0)
         {
@@ -49,6 +39,11 @@ namespace CursProject.Form
             }
         }
 
+        public TripClient Tc
+        {
+            get { return db.TripClients.SingleOrDefault(tc => (tc.Id == Id)); }
+        }
+
         private List<Client> Clients
         {
             get { return db.Clients.ToList(); }
@@ -56,9 +51,20 @@ namespace CursProject.Form
 
         private Trip CurrentTrip
         {
+            get { return db.Trips.SingleOrDefault(t => (t.Id == TripId)) ?? new Trip(); }
+        }
+
+        private Client CurrentClient
+        {
             get
             {
-                return (from t in db.Trips where (t.Id == TripId) select t).SingleOrDefault<Trip>() ?? new Trip();
+                int index = ddlClients.SelectedIndex;
+                if ((index >= 0) && (index < Clients.Count))
+                {
+                    return Clients[index];
+                }
+
+                return null;
             }
         }
 
@@ -89,7 +95,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private TripClient GetFromControls()
         {
-            TripClient tripClient = (from t in db.TripClients where (t.Id == Id) select t).SingleOrDefault<TripClient>() ?? new TripClient();
+            TripClient tripClient = db.TripClients.SingleOrDefault(t => (t.Id == Id)) ?? new TripClient();
 
             tripClient.Client = CurrentClient;
             tripClient.Trip = CurrentTrip;
@@ -113,20 +119,6 @@ namespace CursProject.Form
         private int IndexByClient(Client client)
         {
             return client != null ? Clients.FindIndex(c => c.Id == client.Id) : 0;
-        }
-
-        private Client CurrentClient
-        {
-            get
-            {
-                int index = ddlClients.SelectedIndex;
-                if ((index >= 0) && (index < Clients.Count))
-                {
-                    return Clients[index];
-                }
-
-                return null;
-            }
         }
 
         private void FillClients()
@@ -158,7 +150,9 @@ namespace CursProject.Form
         private void ddlClients_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CurrentClient == null)
+            {
                 return;
+            }
 
             txtFio.Text = ddlClients.Text;
             txtDiscount.Text = CurrentClient.Discount.ToString();

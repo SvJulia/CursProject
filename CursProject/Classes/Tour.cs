@@ -12,9 +12,9 @@ namespace CursProject.Classes
 
         public GridTour ToGrid()
         {
-            var excursions = "";
+            string excursions = "";
 
-            if(TourExcursions.Any())
+            if (TourExcursions.Any())
             {
                 excursions = TourExcursions.Aggregate(excursions, (current, te) => current + te.Excursion + "\r\n");
             }

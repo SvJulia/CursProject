@@ -1,9 +1,7 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
 using CursProject.Helpers;
-using CursProject.Properties;
 using CursProject.Types;
 
 namespace CursProject.Form
@@ -11,13 +9,8 @@ namespace CursProject.Form
     public partial class AddMealForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
+        private readonly TourDbDataContext db = DataBase.Context;
 
-        private string[] MealTypes
-        {
-            get { return (from MealType mealType in Enum.GetValues(typeof(MealType)) select EnumHelper.Huminize(mealType)).ToArray(); }
-        }
-                        
         public AddMealForm(int _Id = 0)
         {
             InitializeComponent();
@@ -38,6 +31,11 @@ namespace CursProject.Form
             }
         }
 
+        private string[] MealTypes
+        {
+            get { return (from MealType mealType in Enum.GetValues(typeof (MealType)) select EnumHelper.Huminize(mealType)).ToArray(); }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateControls())
@@ -56,7 +54,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var meal = (from m in db.Meals where (m.Id == Id) select m).SingleOrDefault<Meal>();
+            Meal meal = db.Meals.SingleOrDefault(m => (m.Id == Id));
 
             txtName.Text = meal.Name;
             ddlMealTypes.SelectedIndex = IndexByMealType(EnumHelper.FromString<MealType>(meal.Type));
@@ -65,7 +63,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Meal GetFromControls()
         {
-            var meal = (from m in db.Meals where (m.Id == Id) select m).SingleOrDefault<Meal>() ?? new Meal();
+            Meal meal = db.Meals.SingleOrDefault(m => (m.Id == Id)) ?? new Meal();
 
             meal.Name = txtName.Text;
             meal.Type = MealTypeByIndex(ddlMealTypes.SelectedIndex).ToString();
@@ -86,15 +84,15 @@ namespace CursProject.Form
 
         private int IndexByMealType(MealType mealType)
         {
-            return Enum.GetValues(typeof(MealType)).Cast<MealType>().TakeWhile(r => r != mealType).Count();
+            return Enum.GetValues(typeof (MealType)).Cast<MealType>().TakeWhile(r => r != mealType).Count();
         }
 
         private MealType MealTypeByIndex(int index)
         {
-            var mealTypes = Enum.GetValues(typeof(MealType));
+            Array mealTypes = Enum.GetValues(typeof (MealType));
             if ((index >= 0) && (index < mealTypes.Length))
             {
-                return (MealType)mealTypes.GetValue(index);
+                return (MealType) mealTypes.GetValue(index);
             }
 
             return MealType.No;

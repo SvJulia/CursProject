@@ -1,9 +1,7 @@
 using System;
-using System.Data.Linq;
 using System.Linq;
 using CursProject.Classes;
 using CursProject.Helpers;
-using CursProject.Properties;
 using CursProject.Types;
 
 namespace CursProject.Form
@@ -11,12 +9,7 @@ namespace CursProject.Form
     public partial class AddHotelForm : ValidateForm
     {
         private readonly int Id;
-        private readonly TourDbDataContext db = new TourDbDataContext(Settings.Default.ConnectionString);
-
-        private string[] HotelTypes
-        {
-            get { return (from HotelType hotelType in Enum.GetValues(typeof(HotelType)) select EnumHelper.Huminize(hotelType)).ToArray(); }
-        }
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public AddHotelForm(int _Id = 0)
         {
@@ -38,6 +31,11 @@ namespace CursProject.Form
             }
         }
 
+        private string[] HotelTypes
+        {
+            get { return (from HotelType hotelType in Enum.GetValues(typeof (HotelType)) select EnumHelper.Huminize(hotelType)).ToArray(); }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateControls())
@@ -56,7 +54,7 @@ namespace CursProject.Form
         // Записываем объект в контролы
         private void SetToControls()
         {
-            var hotel = (from h in db.Hotels where h.Id == Id select h).SingleOrDefault<Hotel>();
+            Hotel hotel = db.Hotels.SingleOrDefault(h => h.Id == Id);
 
             txtName.Text = hotel.Name;
             ddlHotelTypes.SelectedIndex = IndexByHotelType(EnumHelper.FromString<HotelType>(hotel.Type));
@@ -65,7 +63,7 @@ namespace CursProject.Form
         // Получаем объект из формы
         private Hotel GetFromControls()
         {
-            var hotel = (from h in db.Hotels where h.Id == Id select h).SingleOrDefault<Hotel>() ?? new Hotel();
+            Hotel hotel = db.Hotels.SingleOrDefault(h => h.Id == Id) ?? new Hotel();
 
             hotel.Name = txtName.Text;
             hotel.Type = HotelTypeByIndex(ddlHotelTypes.SelectedIndex).ToString();
@@ -86,15 +84,15 @@ namespace CursProject.Form
 
         private int IndexByHotelType(HotelType hotelType)
         {
-            return Enum.GetValues(typeof(HotelType)).Cast<HotelType>().TakeWhile(r => r != hotelType).Count();
+            return Enum.GetValues(typeof (HotelType)).Cast<HotelType>().TakeWhile(r => r != hotelType).Count();
         }
 
         private HotelType HotelTypeByIndex(int index)
         {
-            var hotelTypes = Enum.GetValues(typeof(HotelType));
+            Array hotelTypes = Enum.GetValues(typeof (HotelType));
             if ((index >= 0) && (index < hotelTypes.Length))
             {
-                return (HotelType)hotelTypes.GetValue(index);
+                return (HotelType) hotelTypes.GetValue(index);
             }
 
             return HotelType.Stars2;

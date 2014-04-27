@@ -6,13 +6,7 @@ namespace CursProject.Classes
     {
         public GridTripClient ToGrid()
         {
-            return new GridTripClient
-            {
-              Id = Id,
-              Fio = Fio,
-              Name = Trip.Tour.ToString(),
-              TotalPrice = TotalPrice + " руб."
-            };
+            return new GridTripClient { Id = Id, Fio = Fio, Name = Trip.Tour.ToString(), TotalPrice = TotalPrice + " руб." };
         }
     }
 }

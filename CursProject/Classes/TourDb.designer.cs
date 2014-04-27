@@ -48,9 +48,6 @@ namespace CursProject.Classes
     partial void InsertDiscount(Discount instance);
     partial void UpdateDiscount(Discount instance);
     partial void DeleteDiscount(Discount instance);
-    partial void InsertClient(Client instance);
-    partial void UpdateClient(Client instance);
-    partial void DeleteClient(Client instance);
     partial void InsertTourExcursion(TourExcursion instance);
     partial void UpdateTourExcursion(TourExcursion instance);
     partial void DeleteTourExcursion(TourExcursion instance);
@@ -66,6 +63,9 @@ namespace CursProject.Classes
     partial void InsertTrip(Trip instance);
     partial void UpdateTrip(Trip instance);
     partial void DeleteTrip(Trip instance);
+    partial void InsertClient(Client instance);
+    partial void UpdateClient(Client instance);
+    partial void DeleteClient(Client instance);
     #endregion
 		
 		public TourDbDataContext() : 
@@ -146,14 +146,6 @@ namespace CursProject.Classes
 			}
 		}
 		
-		public System.Data.Linq.Table<Client> Clients
-		{
-			get
-			{
-				return this.GetTable<Client>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TourExcursion> TourExcursions
 		{
 			get
@@ -191,6 +183,14 @@ namespace CursProject.Classes
 			get
 			{
 				return this.GetTable<Trip>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Client> Clients
+		{
+			get
+			{
+				return this.GetTable<Client>();
 			}
 		}
 	}
@@ -1019,192 +1019,6 @@ namespace CursProject.Classes
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Fio;
-		
-		private string _DocType;
-		
-		private string _DocData;
-		
-		private string _Email;
-		
-		private EntitySet<TripClient> _TripClients;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnFioChanging(string value);
-    partial void OnFioChanged();
-    partial void OnDocTypeChanging(string value);
-    partial void OnDocTypeChanged();
-    partial void OnDocDataChanging(string value);
-    partial void OnDocDataChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    #endregion
-		
-		public Client()
-		{
-			this._TripClients = new EntitySet<TripClient>(new Action<TripClient>(this.attach_TripClients), new Action<TripClient>(this.detach_TripClients));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fio", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Fio
-		{
-			get
-			{
-				return this._Fio;
-			}
-			set
-			{
-				if ((this._Fio != value))
-				{
-					this.OnFioChanging(value);
-					this.SendPropertyChanging();
-					this._Fio = value;
-					this.SendPropertyChanged("Fio");
-					this.OnFioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string DocType
-		{
-			get
-			{
-				return this._DocType;
-			}
-			set
-			{
-				if ((this._DocType != value))
-				{
-					this.OnDocTypeChanging(value);
-					this.SendPropertyChanging();
-					this._DocType = value;
-					this.SendPropertyChanged("DocType");
-					this.OnDocTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocData", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string DocData
-		{
-			get
-			{
-				return this._DocData;
-			}
-			set
-			{
-				if ((this._DocData != value))
-				{
-					this.OnDocDataChanging(value);
-					this.SendPropertyChanging();
-					this._DocData = value;
-					this.SendPropertyChanged("DocData");
-					this.OnDocDataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_TripClients", ThisKey="Id", OtherKey="ClientId")]
-		public EntitySet<TripClient> TripClients
-		{
-			get
-			{
-				return this._TripClients;
-			}
-			set
-			{
-				this._TripClients.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TripClients(TripClient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_TripClients(TripClient entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TourExcursion")]
 	public partial class TourExcursion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1389,9 +1203,9 @@ namespace CursProject.Classes
 		
 		private int _TotalPrice;
 		
-		private EntityRef<Client> _Client;
-		
 		private EntityRef<Trip> _Trip;
+		
+		private EntityRef<Client> _Client;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1411,8 +1225,8 @@ namespace CursProject.Classes
 		
 		public TripClient()
 		{
-			this._Client = default(EntityRef<Client>);
 			this._Trip = default(EntityRef<Trip>);
+			this._Client = default(EntityRef<Client>);
 			OnCreated();
 		}
 		
@@ -1524,40 +1338,6 @@ namespace CursProject.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.TripClients.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.TripClients.Add(this);
-						this._ClientId = value.Id;
-					}
-					else
-					{
-						this._ClientId = default(int);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trip_TripClient", Storage="_Trip", ThisKey="TripId", OtherKey="Id", IsForeignKey=true)]
 		public Trip Trip
 		{
@@ -1588,6 +1368,40 @@ namespace CursProject.Classes
 						this._TripId = default(int);
 					}
 					this.SendPropertyChanged("Trip");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.TripClients.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.TripClients.Add(this);
+						this._ClientId = value.Id;
+					}
+					else
+					{
+						this._ClientId = default(int);
+					}
+					this.SendPropertyChanged("Client");
 				}
 			}
 		}
@@ -2562,6 +2376,264 @@ namespace CursProject.Classes
 		{
 			this.SendPropertyChanging();
 			entity.Trip = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Fio;
+		
+		private string _DocType;
+		
+		private string _DocData;
+		
+		private string _Address;
+		
+		private string _Phone;
+		
+		private string _Email;
+		
+		private string _AccountNumber;
+		
+		private EntitySet<TripClient> _TripClients;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFioChanging(string value);
+    partial void OnFioChanged();
+    partial void OnDocTypeChanging(string value);
+    partial void OnDocTypeChanged();
+    partial void OnDocDataChanging(string value);
+    partial void OnDocDataChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnAccountNumberChanging(string value);
+    partial void OnAccountNumberChanged();
+    #endregion
+		
+		public Client()
+		{
+			this._TripClients = new EntitySet<TripClient>(new Action<TripClient>(this.attach_TripClients), new Action<TripClient>(this.detach_TripClients));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fio", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Fio
+		{
+			get
+			{
+				return this._Fio;
+			}
+			set
+			{
+				if ((this._Fio != value))
+				{
+					this.OnFioChanging(value);
+					this.SendPropertyChanging();
+					this._Fio = value;
+					this.SendPropertyChanged("Fio");
+					this.OnFioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string DocType
+		{
+			get
+			{
+				return this._DocType;
+			}
+			set
+			{
+				if ((this._DocType != value))
+				{
+					this.OnDocTypeChanging(value);
+					this.SendPropertyChanging();
+					this._DocType = value;
+					this.SendPropertyChanged("DocType");
+					this.OnDocTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocData", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string DocData
+		{
+			get
+			{
+				return this._DocData;
+			}
+			set
+			{
+				if ((this._DocData != value))
+				{
+					this.OnDocDataChanging(value);
+					this.SendPropertyChanging();
+					this._DocData = value;
+					this.SendPropertyChanged("DocData");
+					this.OnDocDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(255)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="NVarChar(255)")]
+		public string AccountNumber
+		{
+			get
+			{
+				return this._AccountNumber;
+			}
+			set
+			{
+				if ((this._AccountNumber != value))
+				{
+					this.OnAccountNumberChanging(value);
+					this.SendPropertyChanging();
+					this._AccountNumber = value;
+					this.SendPropertyChanged("AccountNumber");
+					this.OnAccountNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_TripClients", ThisKey="Id", OtherKey="ClientId")]
+		public EntitySet<TripClient> TripClients
+		{
+			get
+			{
+				return this._TripClients;
+			}
+			set
+			{
+				this._TripClients.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TripClients(TripClient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_TripClients(TripClient entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
 		}
 	}
 }

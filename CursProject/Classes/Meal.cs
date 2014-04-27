@@ -13,12 +13,7 @@ namespace CursProject.Classes
 
         public GridMeal ToGrid()
         {
-            return new GridMeal
-            {
-                Id = Id,
-                Name = Name,
-                Type = EnumHelper.Huminize(EnumHelper.FromString<MealType>(Type))
-            };
+            return new GridMeal { Id = Id, Name = Name, Type = EnumHelper.Huminize(EnumHelper.FromString<MealType>(Type)) };
         }
     }
 }
