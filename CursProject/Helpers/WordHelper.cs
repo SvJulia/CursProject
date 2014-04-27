@@ -67,6 +67,9 @@ namespace CursProject.Helpers
                 FindAndReplace(document, "#totalPrice#", tc.TotalPrice.ToString());
                 FindAndReplace(document, "#passport#", tc.Client.DocData);
                 FindAndReplace(document, "#email#", tc.Client.Email);
+                FindAndReplace(document, "#accountNumber#", tc.Client.AccountNumber);
+                FindAndReplace(document, "#address#", tc.Client.Address);
+                FindAndReplace(document, "#phone#", tc.Client.Phone);
                 InsertTable(document, "#excursionsTable#", tc.Trip.Tour.TourExcursions.Select(p => p.Excursion).ToList());
 
                 document.Save();
