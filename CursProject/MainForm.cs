@@ -6,17 +6,23 @@ using CursProject.Form;
 using CursProject.Helpers;
 using CursProject.Properties;
 using Tour = CursProject.Grids.GridTour;
+using CursProject.Doc;
 
 namespace CursProject
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
+        private TourDbDataContext db = DataBase.Context;
+
         public MainForm()
         {
             InitializeComponent();
 
             RefreshAllGrids();
         }
+
+        public int PriceTo { get; set; }
+        public int PriceFrom { get; set; }
 
         /*
          *********************************** 
@@ -39,7 +45,6 @@ namespace CursProject
 
         private void RefreshTours()
         {
-            var db = new TourDbDataContext();
             tourGrid.DataSource = db.Tours.Select(p => p.ToGrid()).ToList();
 
             tourGrid.Columns[5].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -50,7 +55,6 @@ namespace CursProject
 
         private void RefreshExcursions()
         {
-            var db = new TourDbDataContext();
             excursionGrid.DataSource = db.Excursions.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(excursionGrid, new[] { "ID", "Название", "Описание", "Рейтинг" });
@@ -59,7 +63,6 @@ namespace CursProject
 
         private void RefreshMeals()
         {
-            var db = new TourDbDataContext();
             mealGrid.DataSource = db.Meals.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(mealGrid, new[] { "ID", "Название", "Тип" });
@@ -68,7 +71,6 @@ namespace CursProject
 
         private void RefreshTransports()
         {
-            var db = new TourDbDataContext();
             transportGrid.DataSource = db.Transports.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(transportGrid, new[] { "ID", "Название", "Тип" });
@@ -77,7 +79,6 @@ namespace CursProject
 
         private void RefreshHotels()
         {
-            var db = new TourDbDataContext();
             hotelGrid.DataSource = db.Hotels.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(hotelGrid, new[] { "ID", "Название", "Тип" });
@@ -86,7 +87,6 @@ namespace CursProject
 
         private void RefreshDiscounts()
         {
-            var db = new TourDbDataContext();
             discountGrid.DataSource = db.Discounts.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(discountGrid, new[] { "ID", "Потраченная сумма", "Размер скидки" });
@@ -95,7 +95,6 @@ namespace CursProject
 
         private void RefreshClients()
         {
-            var db = new TourDbDataContext();
             clientGrid.DataSource = db.Clients.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(clientGrid,
@@ -105,16 +104,43 @@ namespace CursProject
 
         private void RefreshTrips()
         {
-            var db = new TourDbDataContext();
-            tripGrid.DataSource = db.Trips.Select(p => p.ToGrid()).ToList();
+            tripGrid.DataSource = Trips.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(tripGrid, new[] { "ID", "Тур", "Дата отбытия", "Дата возвращения", "Кол-во ночей", "Кол-во туров", "Цена" });
             GridHelper.SetInvisible(tripGrid, new[] { 0 });
         }
 
+        private IQueryable<Trip> Trips
+        {
+            get
+            {
+                var trips = db.Trips.Where(p => true);
+
+                if ((PriceFrom != 0) || (PriceTo != 0))
+                {
+                    if ((PriceTo < PriceFrom) && (PriceFrom != 0) && (PriceTo != 0))
+                    {
+                        int temp = PriceFrom;
+                        PriceFrom = PriceTo;
+                        PriceTo = temp;
+                    }
+
+                    if (PriceFrom != 0)
+                    {
+                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice >= PriceFrom);
+                    }
+
+                    if (PriceTo != 0)
+                    {
+                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice <= PriceTo);
+                    }
+                }
+                return trips;
+            }
+        }
+
         private void RefreshTripClients()
         {
-            var db = new TourDbDataContext();
             tripClientGrid.DataSource = db.TripClients.Select(p => p.ToGrid()).ToList();
 
             GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "Покупатель", "Тур", "Цена" });
@@ -159,7 +185,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(tourGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Tours.DeleteAllOnSubmit(from t in db.Tours where t.Id == id select t);
             db.SubmitChanges();
 
@@ -203,9 +228,7 @@ namespace CursProject
             }
 
             int id = GridHelper.GetIntFromRow(excursionGrid.SelectedRows[0], 0);
-
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
-
+            
             db.Excursions.DeleteAllOnSubmit(from t in db.Excursions where t.Id == id select t);
             db.SubmitChanges();
 
@@ -251,7 +274,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(mealGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Meals.DeleteAllOnSubmit(from t in db.Meals where t.Id == id select t);
             db.SubmitChanges();
 
@@ -297,7 +319,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(transportGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Transports.DeleteAllOnSubmit(from t in db.Transports where t.Id == id select t);
             db.SubmitChanges();
 
@@ -343,7 +364,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(hotelGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Hotels.DeleteAllOnSubmit(from t in db.Hotels where t.Id == id select t);
             db.SubmitChanges();
 
@@ -389,7 +409,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(discountGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Discounts.DeleteAllOnSubmit(from t in db.Discounts where t.Id == id select t);
             db.SubmitChanges();
 
@@ -434,7 +453,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(clientGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Clients.DeleteAllOnSubmit(from t in db.Clients where t.Id == id select t);
             db.SubmitChanges();
 
@@ -480,10 +498,35 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(tripGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.Trips.DeleteAllOnSubmit(from t in db.Trips where t.Id == id select t);
             db.SubmitChanges();
 
+            RefreshTrips();
+        }
+
+        private void btnExportTrips_Click(object sender, EventArgs e)
+        {
+            CalcGenerator.ExportTrips(Trips.ToList());
+        }
+
+        private void btnFilterTrip_Click(object sender, EventArgs e)
+        {
+            int value = 0;
+            int.TryParse(txtTripPriceFrom.Text, out value);
+            PriceFrom = value;
+
+            int.TryParse(txtTripPriceTo.Text, out value);
+            PriceTo = value;
+            RefreshTrips();
+        }
+
+        private void btnResetTrip_Click(object sender, EventArgs e)
+        {
+            txtTripPriceTo.Clear();
+            txtTripPriceFrom.Clear();
+
+            PriceFrom = 0;
+            PriceTo = 0;
             RefreshTrips();
         }
 
@@ -533,7 +576,6 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(tripClientGrid.SelectedRows[0], 0);
 
-            var db = new TourDbDataContext(Settings.Default.ConnectionString);
             db.TripClients.DeleteAllOnSubmit(from t in db.TripClients where t.Id == id select t);
             db.SubmitChanges();
 

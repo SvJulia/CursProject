@@ -47,6 +47,13 @@ namespace CursProject
             this.btnEditExcursion = new System.Windows.Forms.Button();
             this.btnAddExcursion = new System.Windows.Forms.Button();
             this.tripsTab = new System.Windows.Forms.TabPage();
+            this.btnExportTrips = new System.Windows.Forms.Button();
+            this.btnResetTrip = new System.Windows.Forms.Button();
+            this.btnFilterTrip = new System.Windows.Forms.Button();
+            this.txtTripPriceTo = new System.Windows.Forms.TextBox();
+            this.txtTripPriceFrom = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnAddTripClient = new System.Windows.Forms.Button();
             this.tripGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteTrip = new System.Windows.Forms.Button();
@@ -258,6 +265,13 @@ namespace CursProject
             // 
             // tripsTab
             // 
+            this.tripsTab.Controls.Add(this.btnExportTrips);
+            this.tripsTab.Controls.Add(this.btnResetTrip);
+            this.tripsTab.Controls.Add(this.btnFilterTrip);
+            this.tripsTab.Controls.Add(this.txtTripPriceTo);
+            this.tripsTab.Controls.Add(this.txtTripPriceFrom);
+            this.tripsTab.Controls.Add(this.label2);
+            this.tripsTab.Controls.Add(this.label1);
             this.tripsTab.Controls.Add(this.btnAddTripClient);
             this.tripsTab.Controls.Add(this.tripGrid);
             this.tripsTab.Controls.Add(this.btnDeleteTrip);
@@ -270,6 +284,70 @@ namespace CursProject
             this.tripsTab.TabIndex = 1;
             this.tripsTab.Text = "Путешествия";
             this.tripsTab.UseVisualStyleBackColor = true;
+            // 
+            // btnExportTrips
+            // 
+            this.btnExportTrips.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportTrips.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnExportTrips.Location = new System.Drawing.Point(8, 516);
+            this.btnExportTrips.Name = "btnExportTrips";
+            this.btnExportTrips.Size = new System.Drawing.Size(75, 23);
+            this.btnExportTrips.TabIndex = 15;
+            this.btnExportTrips.Text = "Экспорт";
+            this.btnExportTrips.UseVisualStyleBackColor = true;
+            this.btnExportTrips.Click += new System.EventHandler(this.btnExportTrips_Click);
+            // 
+            // btnResetTrip
+            // 
+            this.btnResetTrip.Location = new System.Drawing.Point(391, 4);
+            this.btnResetTrip.Name = "btnResetTrip";
+            this.btnResetTrip.Size = new System.Drawing.Size(75, 23);
+            this.btnResetTrip.TabIndex = 14;
+            this.btnResetTrip.Text = "Сброс";
+            this.btnResetTrip.UseVisualStyleBackColor = true;
+            this.btnResetTrip.Click += new System.EventHandler(this.btnResetTrip_Click);
+            // 
+            // btnFilterTrip
+            // 
+            this.btnFilterTrip.Location = new System.Drawing.Point(310, 4);
+            this.btnFilterTrip.Name = "btnFilterTrip";
+            this.btnFilterTrip.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterTrip.TabIndex = 13;
+            this.btnFilterTrip.Text = "Применить";
+            this.btnFilterTrip.UseVisualStyleBackColor = true;
+            this.btnFilterTrip.Click += new System.EventHandler(this.btnFilterTrip_Click);
+            // 
+            // txtTripPriceTo
+            // 
+            this.txtTripPriceTo.Location = new System.Drawing.Point(204, 6);
+            this.txtTripPriceTo.Name = "txtTripPriceTo";
+            this.txtTripPriceTo.Size = new System.Drawing.Size(100, 20);
+            this.txtTripPriceTo.TabIndex = 12;
+            // 
+            // txtTripPriceFrom
+            // 
+            this.txtTripPriceFrom.Location = new System.Drawing.Point(67, 6);
+            this.txtTripPriceFrom.Name = "txtTripPriceFrom";
+            this.txtTripPriceFrom.Size = new System.Drawing.Size(100, 20);
+            this.txtTripPriceFrom.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(173, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "до: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Цена от: ";
             // 
             // btnAddTripClient
             // 
@@ -295,11 +373,11 @@ namespace CursProject
             this.tripGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.tripGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.tripGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tripGrid.Location = new System.Drawing.Point(8, 6);
+            this.tripGrid.Location = new System.Drawing.Point(8, 32);
             this.tripGrid.Name = "tripGrid";
             this.tripGrid.ReadOnly = true;
             this.tripGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tripGrid.Size = new System.Drawing.Size(767, 504);
+            this.tripGrid.Size = new System.Drawing.Size(767, 478);
             this.tripGrid.TabIndex = 4;
             // 
             // btnDeleteTrip
@@ -741,6 +819,7 @@ namespace CursProject
             this.excursionsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.excursionGrid)).EndInit();
             this.tripsTab.ResumeLayout(false);
+            this.tripsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tripGrid)).EndInit();
             this.clientsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.clientGrid)).EndInit();
@@ -818,6 +897,13 @@ namespace CursProject
         private Button btnDeleteTripClient;
         private Button btnEditTripClient;
         private Button btnAddTripClient;
+        private TextBox txtTripPriceTo;
+        private TextBox txtTripPriceFrom;
+        private Label label2;
+        private Label label1;
+        private Button btnResetTrip;
+        private Button btnFilterTrip;
+        private Button btnExportTrips;
     }
 }
 
