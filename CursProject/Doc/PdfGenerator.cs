@@ -84,7 +84,7 @@ namespace CursProject.Doc
             paragraph.AddText("Заказчик: Иванов Иван Иванович");
 
             paragraph = document.LastSection.AddParagraph();
-            paragraph.AddText(string.Format("Платильщик: {0}", tc.Fio));
+            paragraph.AddText(string.Format("Платильщик: {0}; p/c: {1}", tc.Fio, tc.Client.AccountNumber));
 
             AddTable(document, tc);
 
