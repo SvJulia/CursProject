@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CursProject.Classes;
+using CursProject.Doc;
 using CursProject.Helpers;
 
 namespace CursProject.Form
@@ -80,7 +81,8 @@ namespace CursProject.Form
 
                 db.SubmitChanges();
 
-                WordHelper.MakeDogovor(tc);
+                WordGenerator.MakeContract(tc);
+                PdfGenerator.MakeInvoice(tc);
                 Close();
             }
         }
