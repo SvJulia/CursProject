@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using CursProject.Classes;
 using CursProject.Helpers;
-using CursProject.Properties;
 using MigraDoc.DocumentObjectModel.IO;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
@@ -44,7 +44,7 @@ namespace CursProject.Doc
             }
 
             // Create a MigraDoc document
-            var document = Documents.CreateDocument(tc);
+            var document = Documents.CreateInvoice(tc);
 
             //string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
             DdlWriter.WriteToFile(document, "MigraDoc.mdddl");
@@ -60,6 +60,46 @@ namespace CursProject.Doc
             Process.Start(fileName);
         }
 
+        public static string MakeOffer(List<Trip> trips)
+        {
+            FileHelper.CreateDirectory(Dir);
+            var fileName = Dir + "\\" + GetFileName();
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    File.Delete(fileName);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(string.Format("В настоящий момент используется файл:\r\n{0}\r\nДля создания счёта закройте пожалуйста файл.", fileName),
+                        "Невозможно создать счёт", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return "";
+                }
+            }
+
+            // Create a MigraDoc document
+            var document = Documents.CreateOffer(trips);
+
+            //string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+            DdlWriter.WriteToFile(document, "MigraDoc.mdddl");
+
+            var renderer = new PdfDocumentRenderer(true, PdfFontEmbedding.Always);
+            renderer.Document = document;
+
+            renderer.RenderDocument();
+
+            // Save the document...
+            renderer.PdfDocument.Save(fileName);
+            // ...and start a viewer.
+            return fileName;
+        }
+
+        private static string GetFileName()
+        {
+            return string.Format("{0}.pdf", Guid.NewGuid()).Replace(" ", "_");
+        }
+
         private static string GetFileName(TripClient tc)
         {
             return string.Format("{0}_{1}.pdf", tc.Id, tc.Client.Fio).Replace(" ", "_");
@@ -68,7 +108,7 @@ namespace CursProject.Doc
 
     class Documents
     {
-        public static Document CreateDocument(TripClient tc)
+        public static Document CreateInvoice(TripClient tc)
         {
             // Create a new MigraDoc document
             var document = new Document { Info = { Title = string.Format("Договор №{0}", tc.Id) } };
@@ -86,17 +126,33 @@ namespace CursProject.Doc
             paragraph = document.LastSection.AddParagraph();
             paragraph.AddText(string.Format("Платильщик: {0}; p/c: {1}", tc.Fio, tc.Client.AccountNumber));
 
-            AddTable(document, tc);
+            AddInvoiceTable(document, tc);
 
             paragraph = document.LastSection.AddParagraph();
             paragraph.AddText(string.Format("Всего наименований 1, на сумму {0},00 RUB", tc.TotalPrice));
             paragraph = document.LastSection.AddParagraph();
             paragraph.AddText(StringHelper.RurPhrase(tc.TotalPrice));
- 
-            document.LastSection.AddParagraph(); 
+
+            document.LastSection.AddParagraph();
             document.LastSection.AddParagraph();
 
             AddStamp(document);
+
+            return document;
+        }
+
+        public static Document CreateOffer(List<Trip> trips)
+        {
+            // Create a new MigraDoc document
+            var document = new Document { Info = { Title = "Спецпредложения!" } };
+
+            DefineStyles(document);
+            DefineContentSection(document);
+
+            var paragraph = document.LastSection.AddParagraph("Спецпредложения!", "Heading3");
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
+
+            AddOfferTable(document, trips);
 
             return document;
         }
@@ -114,7 +170,7 @@ namespace CursProject.Doc
 
 
 
-        private static void AddTable(Document document, TripClient tc)
+        private static void AddInvoiceTable(Document document, TripClient tc)
         {
             document.LastSection.AddParagraph();
 
@@ -136,7 +192,7 @@ namespace CursProject.Doc
             row.Cells[2].AddParagraph("Кол-во, шт.");
             row.Cells[3].AddParagraph("Цена");
             row.Cells[4].AddParagraph("Стоимость");
-            
+
             row = table.AddRow();
             row.Cells[0].AddParagraph("1");
             row.Cells[1].AddParagraph(string.Format("Оплата по договору №{0} от {1} за туристические услуги", tc.Id, DateTime.Now.ToShortDateString()));
@@ -159,7 +215,55 @@ namespace CursProject.Doc
             document.LastSection.AddParagraph(" ");
             document.LastSection.AddParagraph(" ");
         }
-        
+
+        private static void AddOfferTable(Document document, List<Trip> trips)
+        {
+            document.LastSection.AddParagraph();
+
+            var table = new Table();
+            table.Borders.Width = 0.75;
+
+            Column column = table.AddColumn(Unit.FromCentimeter(0.5F));
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            table.AddColumn(Unit.FromCentimeter(7));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(1));
+            table.AddColumn(Unit.FromCentimeter(1));
+            table.AddColumn(Unit.FromCentimeter(2));
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.PaleGoldenrod;
+            row.Cells[0].AddParagraph("№");
+            row.Cells[1].AddParagraph("Тур");
+            row.Cells[2].AddParagraph("Дата отбытия");
+            row.Cells[3].AddParagraph("Дата возвращения");
+            row.Cells[4].AddParagraph("Кол-во ночей");
+            row.Cells[5].AddParagraph("Кол-во туров");
+            row.Cells[6].AddParagraph("Цена");
+
+            for (int i = 0; i < trips.Count; i++)
+            {
+                row = table.AddRow();
+                row.Cells[0].AddParagraph(i.ToString());
+                row.Cells[1].AddParagraph(trips[i].ToString());
+                row.Cells[2].AddParagraph(trips[i].DateDeparture.ToShortDateString());
+                row.Cells[3].AddParagraph(trips[i].DateArival.ToShortDateString());
+                row.Cells[4].AddParagraph(trips[i].Nights.ToString());
+                row.Cells[5].AddParagraph(trips[i].Amount.ToString());
+                row.Cells[6].AddParagraph(trips[i].TotalPrice.ToString());
+            }
+
+            table.SetEdge(0, 0, 7, trips.Count + 1, Edge.Box, MigraDoc.DocumentObjectModel.BorderStyle.Single, 1.5, Colors.Black);
+
+            document.LastSection.AddParagraph(" ");
+            document.LastSection.AddParagraph(" ");
+            document.LastSection.Add(table);
+            document.LastSection.AddParagraph(" ");
+            document.LastSection.AddParagraph(" ");
+        }
+
         static void DefineStyles(Document document)
         {
             // Get the predefined style Normal.

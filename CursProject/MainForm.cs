@@ -1,10 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text;
 using System.Windows.Forms;
 using CursProject.Classes;
 using CursProject.Form;
 using CursProject.Helpers;
-using CursProject.Properties;
 using Tour = CursProject.Grids.GridTour;
 using CursProject.Doc;
 
@@ -19,6 +22,7 @@ namespace CursProject
             InitializeComponent();
 
             RefreshAllGrids();
+            LoadSettings();
         }
 
         public int PriceTo { get; set; }
@@ -228,7 +232,7 @@ namespace CursProject
             }
 
             int id = GridHelper.GetIntFromRow(excursionGrid.SelectedRows[0], 0);
-            
+
             db.Excursions.DeleteAllOnSubmit(from t in db.Excursions where t.Id == id select t);
             db.SubmitChanges();
 
@@ -459,6 +463,29 @@ namespace CursProject
             RefreshClients();
         }
 
+        private void btnSendEmail_Click(object sender, EventArgs e)
+        {
+            var fileName = PdfGenerator.MakeOffer(Trips.ToList());
+            foreach (var client in db.Clients)
+            { 
+                MailSender.SendOffer(client, fileName);
+            }
+
+            MessageBox.Show("Рассылка завершена.", "Рассылка");
+        }
+
+        private void btnClientBank_Click(object sender, EventArgs e)
+        {
+            var fileName = "ClientBank.txt";
+
+            var writer = new StreamWriter(fileName);
+            foreach (var client in db.Clients)
+            {
+                writer.WriteLine(client.AccountNumber + " - " + client.TotaPurchases + ".00 руб");
+            }
+
+            writer.Close();
+        }
 
         /*
          **********   Trips   **********
@@ -580,6 +607,37 @@ namespace CursProject
             db.SubmitChanges();
 
             RefreshTripClients();
+        }
+
+
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            ExcelGenerator.ExportTrips(db.TripClients.ToList());
+        }
+
+
+        /*
+         **********   Settings   **********
+         */
+
+        private void LoadSettings()
+        {
+            txtHost.Text = Settings.Host;
+            txtPort.Text = Settings.Port.ToString();
+            txtLogin.Text = Settings.Login;
+            txtPassword.Text = Settings.Password;
+        }
+
+        private void btnSaveSettings_Click(object sender, EventArgs e)
+        {
+            var port = 0;
+            Int32.TryParse(txtPort.Text, out port);
+
+            Settings.Host = txtHost.Text;
+            Settings.Port = port;
+            Settings.Login = txtLogin.Text;
+            Settings.Password = txtPassword.Text;
         }
     }
 }

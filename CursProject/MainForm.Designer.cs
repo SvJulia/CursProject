@@ -60,6 +60,7 @@ namespace CursProject
             this.btnEditTrip = new System.Windows.Forms.Button();
             this.btnAddTrip = new System.Windows.Forms.Button();
             this.clientsTab = new System.Windows.Forms.TabPage();
+            this.btnSendEmail = new System.Windows.Forms.Button();
             this.clientGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteClient = new System.Windows.Forms.Button();
             this.btnEditClient = new System.Windows.Forms.Button();
@@ -88,6 +89,21 @@ namespace CursProject
             this.tripClientGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteTripClient = new System.Windows.Forms.Button();
             this.btnEditTripClient = new System.Windows.Forms.Button();
+            this.settingsTab = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSaveSettings = new System.Windows.Forms.Button();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtLogin = new System.Windows.Forms.TextBox();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.txtHost = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.btnClientBank = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.toursTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).BeginInit();
@@ -107,6 +123,8 @@ namespace CursProject
             ((System.ComponentModel.ISupportInitialize)(this.hotelGrid)).BeginInit();
             this.tripClientsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).BeginInit();
+            this.settingsTab.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -120,6 +138,7 @@ namespace CursProject
             this.tabControl.Controls.Add(this.transportsTab);
             this.tabControl.Controls.Add(this.hotelsTab);
             this.tabControl.Controls.Add(this.tripClientsTab);
+            this.tabControl.Controls.Add(this.settingsTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -415,6 +434,8 @@ namespace CursProject
             // 
             // clientsTab
             // 
+            this.clientsTab.Controls.Add(this.btnClientBank);
+            this.clientsTab.Controls.Add(this.btnSendEmail);
             this.clientsTab.Controls.Add(this.clientGrid);
             this.clientsTab.Controls.Add(this.btnDeleteClient);
             this.clientsTab.Controls.Add(this.btnEditClient);
@@ -426,6 +447,17 @@ namespace CursProject
             this.clientsTab.TabIndex = 1;
             this.clientsTab.Text = "Клиенты";
             this.clientsTab.UseVisualStyleBackColor = true;
+            // 
+            // btnSendEmail
+            // 
+            this.btnSendEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSendEmail.Location = new System.Drawing.Point(8, 516);
+            this.btnSendEmail.Name = "btnSendEmail";
+            this.btnSendEmail.Size = new System.Drawing.Size(75, 23);
+            this.btnSendEmail.TabIndex = 8;
+            this.btnSendEmail.Text = "Рассылка";
+            this.btnSendEmail.UseVisualStyleBackColor = true;
+            this.btnSendEmail.Click += new System.EventHandler(this.btnSendEmail_Click);
             // 
             // clientGrid
             // 
@@ -750,6 +782,9 @@ namespace CursProject
             // 
             // tripClientsTab
             // 
+            this.tripClientsTab.Controls.Add(this.dtpTo);
+            this.tripClientsTab.Controls.Add(this.dtpFrom);
+            this.tripClientsTab.Controls.Add(this.btnReport);
             this.tripClientsTab.Controls.Add(this.tripClientGrid);
             this.tripClientsTab.Controls.Add(this.btnDeleteTripClient);
             this.tripClientsTab.Controls.Add(this.btnEditTripClient);
@@ -803,6 +838,145 @@ namespace CursProject
             this.btnEditTripClient.UseVisualStyleBackColor = true;
             this.btnEditTripClient.Click += new System.EventHandler(this.btnEditTripClient_Click);
             // 
+            // settingsTab
+            // 
+            this.settingsTab.Controls.Add(this.groupBox1);
+            this.settingsTab.Location = new System.Drawing.Point(4, 22);
+            this.settingsTab.Name = "settingsTab";
+            this.settingsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTab.Size = new System.Drawing.Size(783, 547);
+            this.settingsTab.TabIndex = 2;
+            this.settingsTab.Text = "Настройки";
+            this.settingsTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSaveSettings);
+            this.groupBox1.Controls.Add(this.txtPassword);
+            this.groupBox1.Controls.Add(this.txtLogin);
+            this.groupBox1.Controls.Add(this.txtPort);
+            this.groupBox1.Controls.Add(this.txtHost);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(301, 154);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Настройки точки";
+            // 
+            // btnSaveSettings
+            // 
+            this.btnSaveSettings.Location = new System.Drawing.Point(219, 123);
+            this.btnSaveSettings.Name = "btnSaveSettings";
+            this.btnSaveSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveSettings.TabIndex = 9;
+            this.btnSaveSettings.Text = "Сохранить";
+            this.btnSaveSettings.UseVisualStyleBackColor = true;
+            this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click);
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(88, 97);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(206, 20);
+            this.txtPassword.TabIndex = 8;
+            // 
+            // txtLogin
+            // 
+            this.txtLogin.Location = new System.Drawing.Point(88, 71);
+            this.txtLogin.Name = "txtLogin";
+            this.txtLogin.Size = new System.Drawing.Size(206, 20);
+            this.txtLogin.TabIndex = 7;
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(88, 45);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(206, 20);
+            this.txtPort.TabIndex = 6;
+            // 
+            // txtHost
+            // 
+            this.txtHost.Location = new System.Drawing.Point(88, 19);
+            this.txtHost.Name = "txtHost";
+            this.txtHost.Size = new System.Drawing.Size(206, 20);
+            this.txtHost.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(31, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Пароль: ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(38, 74);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Логин: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(44, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Порт: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Smtp сервер: ";
+            // 
+            // btnReport
+            // 
+            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReport.Location = new System.Drawing.Point(8, 516);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 8;
+            this.btnReport.Text = "Отчёт";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.Location = new System.Drawing.Point(89, 518);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(140, 20);
+            this.dtpFrom.TabIndex = 9;
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.Location = new System.Drawing.Point(235, 518);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(140, 20);
+            this.dtpTo.TabIndex = 10;
+            // 
+            // btnClientBank
+            // 
+            this.btnClientBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClientBank.Location = new System.Drawing.Point(89, 516);
+            this.btnClientBank.Name = "btnClientBank";
+            this.btnClientBank.Size = new System.Drawing.Size(85, 23);
+            this.btnClientBank.TabIndex = 9;
+            this.btnClientBank.Text = "Клиент банк";
+            this.btnClientBank.UseVisualStyleBackColor = true;
+            this.btnClientBank.Click += new System.EventHandler(this.btnClientBank_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -833,6 +1007,9 @@ namespace CursProject
             ((System.ComponentModel.ISupportInitialize)(this.hotelGrid)).EndInit();
             this.tripClientsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).EndInit();
+            this.settingsTab.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -904,6 +1081,22 @@ namespace CursProject
         private Button btnResetTrip;
         private Button btnFilterTrip;
         private Button btnExportTrips;
+        private Button btnSendEmail;
+        private TabPage settingsTab;
+        private GroupBox groupBox1;
+        private TextBox txtPassword;
+        private TextBox txtLogin;
+        private TextBox txtPort;
+        private TextBox txtHost;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Button btnSaveSettings;
+        private Button btnReport;
+        private DateTimePicker dtpTo;
+        private DateTimePicker dtpFrom;
+        private Button btnClientBank;
     }
 }
 

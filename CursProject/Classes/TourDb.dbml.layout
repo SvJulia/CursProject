@@ -137,12 +137,18 @@
         <elementListCompartment Id="07691df6-fcf8-49fd-8139-9af013b61a0e" absoluteBounds="7.265, 9.71, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.25 : 9.25); (8.25 : 8.71419514973958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 9.25); (8.25 : 8.71419514973958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/TourDbDataContext/Client/Client_TripClient" />
       <nodes>
         <classShapeMoniker Id="e03582ef-07aa-4940-9dad-1bbb8bb26530" />
         <classShapeMoniker Id="153dd45f-4956-450b-9a5c-2de8b7aec01d" />
       </nodes>
     </associationConnector>
+    <classShape Id="173d5e24-7666-4396-bc3a-efbf5b5fcdec" absoluteBounds="4.5, 0.875, 2, 1.26050048828125">
+      <DataClassMoniker Name="/TourDbDataContext/Setting" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d18b6e6-ff58-4c2d-9371-9c49ac7ee06e" absoluteBounds="4.515, 1.335, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

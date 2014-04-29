@@ -68,6 +68,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\cli\cli_uretypes.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -102,6 +106,7 @@
     <Compile Include="Classes\Discount.cs" />
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\TourDb.cs">
       <DependentUpon>TourDb.dbml</DependentUpon>
     </Compile>
@@ -114,6 +119,7 @@
     <Compile Include="Classes\Excursion.cs" />
     <Compile Include="Classes\City.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="Doc\ExcelGenerator.cs" />
     <Compile Include="Doc\PdfGenerator.cs" />
     <Compile Include="Doc\CalcGenerator.cs" />
     <Compile Include="Form\AddTripClientForm.cs">
@@ -186,6 +192,7 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\GridHelper.cs" />
     <Compile Include="Doc\WordGenerator.cs" />
+    <Compile Include="Helpers\MailSender.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
