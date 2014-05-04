@@ -60,6 +60,7 @@ namespace CursProject
             this.btnEditTrip = new System.Windows.Forms.Button();
             this.btnAddTrip = new System.Windows.Forms.Button();
             this.clientsTab = new System.Windows.Forms.TabPage();
+            this.btnClientBank = new System.Windows.Forms.Button();
             this.btnSendEmail = new System.Windows.Forms.Button();
             this.clientGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteClient = new System.Windows.Forms.Button();
@@ -86,6 +87,9 @@ namespace CursProject
             this.btnEditHotel = new System.Windows.Forms.Button();
             this.btnAddHotel = new System.Windows.Forms.Button();
             this.tripClientsTab = new System.Windows.Forms.TabPage();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.btnReport = new System.Windows.Forms.Button();
             this.tripClientGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteTripClient = new System.Windows.Forms.Button();
             this.btnEditTripClient = new System.Windows.Forms.Button();
@@ -100,10 +104,10 @@ namespace CursProject
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnReport = new System.Windows.Forms.Button();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
-            this.btnClientBank = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ddlParseCountries = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnParse = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.toursTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).BeginInit();
@@ -125,6 +129,7 @@ namespace CursProject
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).BeginInit();
             this.settingsTab.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -447,6 +452,17 @@ namespace CursProject
             this.clientsTab.TabIndex = 1;
             this.clientsTab.Text = "Клиенты";
             this.clientsTab.UseVisualStyleBackColor = true;
+            // 
+            // btnClientBank
+            // 
+            this.btnClientBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClientBank.Location = new System.Drawing.Point(89, 516);
+            this.btnClientBank.Name = "btnClientBank";
+            this.btnClientBank.Size = new System.Drawing.Size(85, 23);
+            this.btnClientBank.TabIndex = 9;
+            this.btnClientBank.Text = "Клиент банк";
+            this.btnClientBank.UseVisualStyleBackColor = true;
+            this.btnClientBank.Click += new System.EventHandler(this.btnClientBank_Click);
             // 
             // btnSendEmail
             // 
@@ -796,6 +812,31 @@ namespace CursProject
             this.tripClientsTab.Text = "Продажи";
             this.tripClientsTab.UseVisualStyleBackColor = true;
             // 
+            // dtpTo
+            // 
+            this.dtpTo.Location = new System.Drawing.Point(235, 518);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(140, 20);
+            this.dtpTo.TabIndex = 10;
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.Location = new System.Drawing.Point(89, 518);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(140, 20);
+            this.dtpFrom.TabIndex = 9;
+            // 
+            // btnReport
+            // 
+            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReport.Location = new System.Drawing.Point(8, 516);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 8;
+            this.btnReport.Text = "Отчёт";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // tripClientGrid
             // 
             this.tripClientGrid.AllowUserToAddRows = false;
@@ -840,6 +881,7 @@ namespace CursProject
             // 
             // settingsTab
             // 
+            this.settingsTab.Controls.Add(this.groupBox2);
             this.settingsTab.Controls.Add(this.groupBox1);
             this.settingsTab.Location = new System.Drawing.Point(4, 22);
             this.settingsTab.Name = "settingsTab";
@@ -860,18 +902,18 @@ namespace CursProject
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Location = new System.Drawing.Point(8, 88);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(301, 154);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Настройки точки";
+            this.groupBox1.Text = "Настройки почты";
             // 
             // btnSaveSettings
             // 
             this.btnSaveSettings.Location = new System.Drawing.Point(219, 123);
             this.btnSaveSettings.Name = "btnSaveSettings";
-            this.btnSaveSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveSettings.Size = new System.Drawing.Size(76, 23);
             this.btnSaveSettings.TabIndex = 9;
             this.btnSaveSettings.Text = "Сохранить";
             this.btnSaveSettings.UseVisualStyleBackColor = true;
@@ -881,28 +923,28 @@ namespace CursProject
             // 
             this.txtPassword.Location = new System.Drawing.Point(88, 97);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(206, 20);
+            this.txtPassword.Size = new System.Drawing.Size(207, 20);
             this.txtPassword.TabIndex = 8;
             // 
             // txtLogin
             // 
             this.txtLogin.Location = new System.Drawing.Point(88, 71);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(206, 20);
+            this.txtLogin.Size = new System.Drawing.Size(207, 20);
             this.txtLogin.TabIndex = 7;
             // 
             // txtPort
             // 
             this.txtPort.Location = new System.Drawing.Point(88, 45);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(206, 20);
+            this.txtPort.Size = new System.Drawing.Size(207, 20);
             this.txtPort.TabIndex = 6;
             // 
             // txtHost
             // 
             this.txtHost.Location = new System.Drawing.Point(88, 19);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(206, 20);
+            this.txtHost.Size = new System.Drawing.Size(207, 20);
             this.txtHost.TabIndex = 5;
             // 
             // label6
@@ -941,41 +983,44 @@ namespace CursProject
             this.label3.TabIndex = 1;
             this.label3.Text = "Smtp сервер: ";
             // 
-            // btnReport
+            // groupBox2
             // 
-            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReport.Location = new System.Drawing.Point(8, 516);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(75, 23);
-            this.btnReport.TabIndex = 8;
-            this.btnReport.Text = "Отчёт";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            this.groupBox2.Controls.Add(this.btnParse);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.ddlParseCountries);
+            this.groupBox2.Location = new System.Drawing.Point(8, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(301, 76);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Парсинг данных";
             // 
-            // dtpFrom
+            // ddlParseCountries
             // 
-            this.dtpFrom.Location = new System.Drawing.Point(89, 518);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(140, 20);
-            this.dtpFrom.TabIndex = 9;
+            this.ddlParseCountries.FormattingEnabled = true;
+            this.ddlParseCountries.Location = new System.Drawing.Point(61, 19);
+            this.ddlParseCountries.Name = "ddlParseCountries";
+            this.ddlParseCountries.Size = new System.Drawing.Size(234, 21);
+            this.ddlParseCountries.TabIndex = 0;
             // 
-            // dtpTo
+            // label7
             // 
-            this.dtpTo.Location = new System.Drawing.Point(235, 518);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(140, 20);
-            this.dtpTo.TabIndex = 10;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Страна: ";
             // 
-            // btnClientBank
+            // btnParse
             // 
-            this.btnClientBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClientBank.Location = new System.Drawing.Point(89, 516);
-            this.btnClientBank.Name = "btnClientBank";
-            this.btnClientBank.Size = new System.Drawing.Size(85, 23);
-            this.btnClientBank.TabIndex = 9;
-            this.btnClientBank.Text = "Клиент банк";
-            this.btnClientBank.UseVisualStyleBackColor = true;
-            this.btnClientBank.Click += new System.EventHandler(this.btnClientBank_Click);
+            this.btnParse.Location = new System.Drawing.Point(220, 46);
+            this.btnParse.Name = "btnParse";
+            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.TabIndex = 11;
+            this.btnParse.Text = "Парсить";
+            this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
             // MainForm
             // 
@@ -983,7 +1028,6 @@ namespace CursProject
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 573);
             this.Controls.Add(this.tabControl);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Система учёта клиентов";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1010,6 +1054,8 @@ namespace CursProject
             this.settingsTab.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1097,6 +1143,10 @@ namespace CursProject
         private DateTimePicker dtpTo;
         private DateTimePicker dtpFrom;
         private Button btnClientBank;
+        private GroupBox groupBox2;
+        private Button btnParse;
+        private Label label7;
+        private ComboBox ddlParseCountries;
     }
 }
 
