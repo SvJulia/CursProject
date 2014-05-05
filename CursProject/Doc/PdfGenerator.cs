@@ -116,7 +116,7 @@ namespace CursProject.Doc
             DefineStyles(document);
             DefineContentSection(document);
 
-            var paragraph = document.LastSection.AddParagraph(string.Format("СЧЕТ №{0} от {1} г.", tc.Id, DateTime.Now.ToShortDateString()), "Heading3");
+            var paragraph = document.LastSection.AddParagraph(string.Format("СЧЕТ №{0} от {1} г.", tc.Id, tc.SaleDate.ToShortDateString()), "Heading3");
             paragraph.Format.Alignment = ParagraphAlignment.Center;
 
             document.LastSection.AddParagraph();
@@ -195,7 +195,7 @@ namespace CursProject.Doc
 
             row = table.AddRow();
             row.Cells[0].AddParagraph("1");
-            row.Cells[1].AddParagraph(string.Format("Оплата по договору №{0} от {1} за туристические услуги", tc.Id, DateTime.Now.ToShortDateString()));
+            row.Cells[1].AddParagraph(string.Format("Оплата по договору №{0} от {1} за туристические услуги", tc.Id, tc.SaleDate.ToShortDateString()));
             row.Cells[2].AddParagraph("1");
             row.Cells[3].AddParagraph(tc.TotalPrice.ToString());
             row.Cells[4].AddParagraph(tc.TotalPrice.ToString());

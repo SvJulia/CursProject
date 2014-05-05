@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using CursProject.Classes;
+using CursProject.Helpers;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CursProject.Doc
@@ -12,7 +14,7 @@ namespace CursProject.Doc
     {
         private static readonly string Dir = Application.StartupPath + "\\ExcelFiles";
 
-        public static void ExportTrips(List<TripClient> tcs)
+        public static void ExportTrips(List<TripClient> tcs, DateTime from, DateTime to)
         {
             string fileName = Dir + "\\" + GetFileName();
             if (File.Exists(fileName))
@@ -29,7 +31,6 @@ namespace CursProject.Doc
                 }
             }
 
-            Random random = new Random();
             Excel.Application xla = new Excel.Application();
             xla.Visible = true;
             Excel.Workbook wb = xla.Workbooks.Add(Excel.XlSheetType.xlWorksheet);
@@ -43,19 +44,27 @@ namespace CursProject.Doc
             xlChart.ChartType = Excel.XlChartType.xlLine;
 
             // generate some random data
-            ws.Cells[2, 2] = "Результативность работы фирмы за период с  _________  по  __________";
+            from = from.Date.AddDays(1 - from.Day);
+            to = to.Date.AddMonths(1).AddDays(-to.Day);
+
+            ws.Cells[2, 2] = string.Format("Результативность работы фирмы за период с {0} по {1}", from, to);
             ws.Cells[4, 3] = "№";
             ws.Cells[4, 4] = "Кол-во туров";
             ws.Cells[4, 5] = "Выручка";
-            for (int i = 0; i < tcs.Count; i++)
+
+            int row = 5;
+            for (var dateFrom = from; dateFrom <= to; dateFrom = dateFrom.AddMonths(1))
             {
-                ws.Cells[5 + i, 3] = i + 1;
-                ws.Cells[5 + i, 4] = 1;
-                ws.Cells[5 + i, 5] = tcs[i].TotalPrice;
+                var dateTo = dateFrom.AddMonths(1).AddDays(-1);
+                var trips = tcs.Where(t => t.SaleDate >= dateFrom && t.SaleDate <= dateFrom);
+                ws.Cells[row, 3] = StringHelper.GetMonth(dateFrom.Month);
+                ws.Cells[row, 4] = trips.Count();
+                ws.Cells[row, 5] = trips.Sum(t => t.TotalPrice);
+                row++;
             }
 
-            Excel.Range xValues = ws.Range["C5", "C" + (5 + tcs.Count - 1)];
-            Excel.Range values = ws.Range["E5", "E" + (5 + tcs.Count - 1)];
+            Excel.Range xValues = ws.Range["C5", "C" + (row - 1)];
+            Excel.Range values = ws.Range["E5", "E" + (row - 1)];
 
             Excel.SeriesCollection seriesCollection = xlChart.SeriesCollection();
 

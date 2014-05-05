@@ -76,6 +76,7 @@ namespace CursProject.Form
                 TripClient tc = GetFromControls();
                 if (Id <= 0)
                 {
+                    tc.SaleDate = DateTime.Now;
                     db.TripClients.InsertOnSubmit(tc);
                 }
 

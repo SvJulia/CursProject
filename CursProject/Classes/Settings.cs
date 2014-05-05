@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CursProject.Classes
 {
-    public static class Settings
+    public partial class Settings
     {
         private static readonly TourDbDataContext Db = new TourDbDataContext(Properties.Settings.Default.ConnectionString);
         public static string Host
@@ -49,7 +47,7 @@ namespace CursProject.Classes
 
             if (setting == null)
             {
-                setting = new Setting { Name = name, Value = value };
+                setting = new Settings { Name = name, Value = value };
                 Db.Settings.InsertOnSubmit(setting);
             }
             else

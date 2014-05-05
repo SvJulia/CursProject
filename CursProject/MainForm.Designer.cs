@@ -34,7 +34,6 @@ namespace CursProject
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.toursTab = new System.Windows.Forms.TabPage();
             this.tourGrid = new System.Windows.Forms.DataGridView();
@@ -87,6 +86,7 @@ namespace CursProject
             this.btnEditHotel = new System.Windows.Forms.Button();
             this.btnAddHotel = new System.Windows.Forms.Button();
             this.tripClientsTab = new System.Windows.Forms.TabPage();
+            this.btnSale = new System.Windows.Forms.Button();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.btnReport = new System.Windows.Forms.Button();
@@ -94,6 +94,10 @@ namespace CursProject
             this.btnDeleteTripClient = new System.Windows.Forms.Button();
             this.btnEditTripClient = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnParse = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ddlParseCountries = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSaveSettings = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -104,10 +108,6 @@ namespace CursProject
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ddlParseCountries = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnParse = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.toursTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).BeginInit();
@@ -128,8 +128,8 @@ namespace CursProject
             this.tripClientsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).BeginInit();
             this.settingsTab.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -798,6 +798,7 @@ namespace CursProject
             // 
             // tripClientsTab
             // 
+            this.tripClientsTab.Controls.Add(this.btnSale);
             this.tripClientsTab.Controls.Add(this.dtpTo);
             this.tripClientsTab.Controls.Add(this.dtpFrom);
             this.tripClientsTab.Controls.Add(this.btnReport);
@@ -812,8 +813,20 @@ namespace CursProject
             this.tripClientsTab.Text = "Продажи";
             this.tripClientsTab.UseVisualStyleBackColor = true;
             // 
+            // btnSale
+            // 
+            this.btnSale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSale.Location = new System.Drawing.Point(539, 516);
+            this.btnSale.Name = "btnSale";
+            this.btnSale.Size = new System.Drawing.Size(75, 23);
+            this.btnSale.TabIndex = 11;
+            this.btnSale.Text = "Оплачено";
+            this.btnSale.UseVisualStyleBackColor = true;
+            this.btnSale.Click += new System.EventHandler(this.btnSale_Click);
+            // 
             // dtpTo
             // 
+            this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpTo.Location = new System.Drawing.Point(235, 518);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(140, 20);
@@ -821,6 +834,7 @@ namespace CursProject
             // 
             // dtpFrom
             // 
+            this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpFrom.Location = new System.Drawing.Point(89, 518);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(140, 20);
@@ -890,6 +904,45 @@ namespace CursProject
             this.settingsTab.TabIndex = 2;
             this.settingsTab.Text = "Настройки";
             this.settingsTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnParse);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.ddlParseCountries);
+            this.groupBox2.Location = new System.Drawing.Point(8, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(301, 76);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Парсинг данных";
+            // 
+            // btnParse
+            // 
+            this.btnParse.Location = new System.Drawing.Point(220, 46);
+            this.btnParse.Name = "btnParse";
+            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.TabIndex = 11;
+            this.btnParse.Text = "Парсить";
+            this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Страна: ";
+            // 
+            // ddlParseCountries
+            // 
+            this.ddlParseCountries.FormattingEnabled = true;
+            this.ddlParseCountries.Location = new System.Drawing.Point(61, 19);
+            this.ddlParseCountries.Name = "ddlParseCountries";
+            this.ddlParseCountries.Size = new System.Drawing.Size(234, 21);
+            this.ddlParseCountries.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -983,45 +1036,6 @@ namespace CursProject
             this.label3.TabIndex = 1;
             this.label3.Text = "Smtp сервер: ";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnParse);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.ddlParseCountries);
-            this.groupBox2.Location = new System.Drawing.Point(8, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(301, 76);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Парсинг данных";
-            // 
-            // ddlParseCountries
-            // 
-            this.ddlParseCountries.FormattingEnabled = true;
-            this.ddlParseCountries.Location = new System.Drawing.Point(61, 19);
-            this.ddlParseCountries.Name = "ddlParseCountries";
-            this.ddlParseCountries.Size = new System.Drawing.Size(234, 21);
-            this.ddlParseCountries.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Страна: ";
-            // 
-            // btnParse
-            // 
-            this.btnParse.Location = new System.Drawing.Point(220, 46);
-            this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(75, 23);
-            this.btnParse.TabIndex = 11;
-            this.btnParse.Text = "Парсить";
-            this.btnParse.UseVisualStyleBackColor = true;
-            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1052,10 +1066,10 @@ namespace CursProject
             this.tripClientsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).EndInit();
             this.settingsTab.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1147,6 +1161,7 @@ namespace CursProject
         private Button btnParse;
         private Label label7;
         private ComboBox ddlParseCountries;
+        private Button btnSale;
     }
 }
 

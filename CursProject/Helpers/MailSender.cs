@@ -15,7 +15,7 @@ namespace CursProject.Helpers
                 Port = Settings.Port, // 587
                 Host = Settings.Host, // "smtp.gmail.com"
                 EnableSsl = true,
-                Timeout = 10000,
+                Timeout = 60000,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new System.Net.NetworkCredential(Settings.Login, Settings.Password)

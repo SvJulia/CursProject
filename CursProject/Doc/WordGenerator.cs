@@ -55,7 +55,7 @@ namespace CursProject.Doc
                 document.Activate();
 
                 FindAndReplace(document, "#number#", tc.Id.ToString());
-                FindAndReplace(document, "#date#", DateTime.Now.ToShortDateString());
+                FindAndReplace(document, "#date#", tc.SaleDate.ToShortDateString());
                 FindAndReplace(document, "#clientFio#", tc.Fio);
                 FindAndReplace(document, "#country#", tc.Trip.Tour.City.Country.ToString());
                 FindAndReplace(document, "#city#", tc.Trip.Tour.City.ToString());

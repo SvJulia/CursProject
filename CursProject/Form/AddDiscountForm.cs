@@ -48,7 +48,6 @@ namespace CursProject.Form
         {
             Discount discount = db.Discounts.SingleOrDefault(d => d.Id == Id);
 
-            txtName.Text = discount.Name;
             txtDiscount.Text = discount.Value.ToString();
             txtRange.Text = discount.Range.ToString();
         }
@@ -57,8 +56,8 @@ namespace CursProject.Form
         private Discount GetFromControls()
         {
             Discount discount = db.Discounts.SingleOrDefault(d => d.Id == Id) ?? new Discount();
-
-            discount.Name = txtName.Text;
+            
+            discount.Name = string.Format("от {0} - {1}%", txtRange.Text, txtDiscount.Text);
             discount.Value = int.Parse(txtDiscount.Text);
             discount.Range = int.Parse(txtRange.Text);
 
@@ -70,7 +69,6 @@ namespace CursProject.Form
         {
             bool isValid = true;
 
-            isValid &= ValidateControl(txtName, false);
             isValid &= ValidateControl(txtDiscount, true);
             isValid &= ValidateControl(txtRange, true);
 

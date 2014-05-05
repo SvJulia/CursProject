@@ -196,6 +196,7 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\GridHelper.cs" />
     <Compile Include="Doc\WordGenerator.cs" />
+    <Compile Include="Helpers\HtmlParser.cs" />
     <Compile Include="Helpers\MailSender.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="MainForm.cs">
@@ -311,9 +312,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
