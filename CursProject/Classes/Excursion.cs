@@ -11,7 +11,7 @@ namespace CursProject.Classes
 
         public GridExcursion ToGrid()
         {
-            return new GridExcursion { Id = Id, Name = Name, Description = Description, Rating = Rating };
+            return new GridExcursion { Id = Id, Name = Name, Description = Description, Rating = string.Format("{0} из 10", Rating) };
         }
     }
 }

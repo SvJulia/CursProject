@@ -121,7 +121,7 @@ namespace CursProject.Doc
 
             document.LastSection.AddParagraph();
             paragraph = document.LastSection.AddParagraph();
-            paragraph.AddText("Заказчик: Иванов Иван Иванович");
+            paragraph.AddText("Заказчик: " + Settings.DirectorsFio);
 
             paragraph = document.LastSection.AddParagraph();
             paragraph.AddText(string.Format("Платильщик: {0}; p/c: {1}", tc.Fio, tc.Client.AccountNumber));
@@ -164,7 +164,7 @@ namespace CursProject.Doc
             Image image = paragraph.AddImage("stamp.png");
             image.Width = "3cm";
 
-            paragraph.AddText(" Иванов И.И.");
+            paragraph.AddText(" " + Settings.DirectorsFio);
             paragraph.Format.Alignment = ParagraphAlignment.Center;
         }
 
@@ -184,29 +184,32 @@ namespace CursProject.Doc
             table.AddColumn(Unit.FromCentimeter(3));
             table.AddColumn(Unit.FromCentimeter(2));
             table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(2));
 
             Row row = table.AddRow();
             row.Shading.Color = Colors.PaleGoldenrod;
             row.Cells[0].AddParagraph("№");
             row.Cells[1].AddParagraph("Наименование товара");
             row.Cells[2].AddParagraph("Кол-во, шт.");
-            row.Cells[3].AddParagraph("Цена");
-            row.Cells[4].AddParagraph("Стоимость");
+            row.Cells[3].AddParagraph("Цена без скидки");
+            row.Cells[4].AddParagraph("Цена со скидкой");
+            row.Cells[5].AddParagraph("Стоимость");
 
             row = table.AddRow();
             row.Cells[0].AddParagraph("1");
             row.Cells[1].AddParagraph(string.Format("Оплата по договору №{0} от {1} за туристические услуги", tc.Id, tc.SaleDate.ToShortDateString()));
             row.Cells[2].AddParagraph("1");
-            row.Cells[3].AddParagraph(tc.TotalPrice.ToString());
+            row.Cells[3].AddParagraph(tc.Trip.TotalPrice.ToString());
             row.Cells[4].AddParagraph(tc.TotalPrice.ToString());
+            row.Cells[5].AddParagraph(tc.TotalPrice.ToString());
 
             row = table.AddRow();
             var paragraf = row.Cells[0].AddParagraph("Итого:");
             paragraf.Format.Alignment = ParagraphAlignment.Right;
-            row.Cells[0].MergeRight = 3;
-            row.Cells[4].AddParagraph(tc.TotalPrice.ToString());
+            row.Cells[0].MergeRight = 4;
+            row.Cells[5].AddParagraph(tc.TotalPrice.ToString());
 
-            table.SetEdge(0, 0, 5, 3, Edge.Box, MigraDoc.DocumentObjectModel.BorderStyle.Single, 1.5, Colors.Black);
+            table.SetEdge(0, 0, 6, 3, Edge.Box, MigraDoc.DocumentObjectModel.BorderStyle.Single, 1.5, Colors.Black);
 
 
             document.LastSection.AddParagraph(" ");

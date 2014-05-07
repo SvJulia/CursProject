@@ -33,7 +33,6 @@ namespace CursProject
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.toursTab = new System.Windows.Forms.TabPage();
             this.tourGrid = new System.Windows.Forms.DataGridView();
@@ -86,6 +85,7 @@ namespace CursProject
             this.btnEditHotel = new System.Windows.Forms.Button();
             this.btnAddHotel = new System.Windows.Forms.Button();
             this.tripClientsTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnSale = new System.Windows.Forms.Button();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
@@ -94,6 +94,18 @@ namespace CursProject
             this.btnDeleteTripClient = new System.Windows.Forms.Button();
             this.btnEditTripClient = new System.Windows.Forms.Button();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtDirectorsFio = new System.Windows.Forms.TextBox();
+            this.txtAccountNumber = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtFirmName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnSaveInfo = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnParse = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -128,6 +140,7 @@ namespace CursProject
             this.tripClientsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).BeginInit();
             this.settingsTab.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -238,8 +251,6 @@ namespace CursProject
             this.excursionGrid.AllowUserToAddRows = false;
             this.excursionGrid.AllowUserToDeleteRows = false;
             this.excursionGrid.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.excursionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.excursionGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -315,9 +326,9 @@ namespace CursProject
             this.btnExportTrips.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnExportTrips.Location = new System.Drawing.Point(8, 516);
             this.btnExportTrips.Name = "btnExportTrips";
-            this.btnExportTrips.Size = new System.Drawing.Size(75, 23);
+            this.btnExportTrips.Size = new System.Drawing.Size(190, 23);
             this.btnExportTrips.TabIndex = 15;
-            this.btnExportTrips.Text = "Экспорт";
+            this.btnExportTrips.Text = "Сохранить в виде таблицы calc";
             this.btnExportTrips.UseVisualStyleBackColor = true;
             this.btnExportTrips.Click += new System.EventHandler(this.btnExportTrips_Click);
             // 
@@ -389,7 +400,7 @@ namespace CursProject
             this.tripGrid.AllowUserToAddRows = false;
             this.tripGrid.AllowUserToDeleteRows = false;
             this.tripGrid.AllowUserToOrderColumns = true;
-            this.tripGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tripGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.tripGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -403,6 +414,7 @@ namespace CursProject
             this.tripGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tripGrid.Size = new System.Drawing.Size(767, 478);
             this.tripGrid.TabIndex = 4;
+            this.tripGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tripGrid_CellMouseDoubleClick);
             // 
             // btnDeleteTrip
             // 
@@ -480,7 +492,7 @@ namespace CursProject
             this.clientGrid.AllowUserToAddRows = false;
             this.clientGrid.AllowUserToDeleteRows = false;
             this.clientGrid.AllowUserToOrderColumns = true;
-            this.clientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.clientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.clientGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -494,6 +506,7 @@ namespace CursProject
             this.clientGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.clientGrid.Size = new System.Drawing.Size(768, 504);
             this.clientGrid.TabIndex = 4;
+            this.clientGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.clientGrid_CellMouseDoubleClick);
             // 
             // btnDeleteClient
             // 
@@ -547,7 +560,7 @@ namespace CursProject
             this.discountGrid.AllowUserToAddRows = false;
             this.discountGrid.AllowUserToDeleteRows = false;
             this.discountGrid.AllowUserToOrderColumns = true;
-            this.discountGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.discountGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.discountGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -614,7 +627,7 @@ namespace CursProject
             this.mealGrid.AllowUserToAddRows = false;
             this.mealGrid.AllowUserToDeleteRows = false;
             this.mealGrid.AllowUserToOrderColumns = true;
-            this.mealGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.mealGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.mealGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -681,7 +694,7 @@ namespace CursProject
             this.transportGrid.AllowUserToAddRows = false;
             this.transportGrid.AllowUserToDeleteRows = false;
             this.transportGrid.AllowUserToOrderColumns = true;
-            this.transportGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.transportGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.transportGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -748,7 +761,7 @@ namespace CursProject
             this.hotelGrid.AllowUserToAddRows = false;
             this.hotelGrid.AllowUserToDeleteRows = false;
             this.hotelGrid.AllowUserToOrderColumns = true;
-            this.hotelGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.hotelGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.hotelGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -798,6 +811,7 @@ namespace CursProject
             // 
             // tripClientsTab
             // 
+            this.tripClientsTab.Controls.Add(this.button1);
             this.tripClientsTab.Controls.Add(this.btnSale);
             this.tripClientsTab.Controls.Add(this.dtpTo);
             this.tripClientsTab.Controls.Add(this.dtpFrom);
@@ -813,6 +827,17 @@ namespace CursProject
             this.tripClientsTab.Text = "Продажи";
             this.tripClientsTab.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(121, 516);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "График";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnSale
             // 
             this.btnSale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -827,7 +852,7 @@ namespace CursProject
             // dtpTo
             // 
             this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpTo.Location = new System.Drawing.Point(235, 518);
+            this.dtpTo.Location = new System.Drawing.Point(348, 518);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(140, 20);
             this.dtpTo.TabIndex = 10;
@@ -835,7 +860,7 @@ namespace CursProject
             // dtpFrom
             // 
             this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpFrom.Location = new System.Drawing.Point(89, 518);
+            this.dtpFrom.Location = new System.Drawing.Point(202, 518);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(140, 20);
             this.dtpFrom.TabIndex = 9;
@@ -845,9 +870,9 @@ namespace CursProject
             this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReport.Location = new System.Drawing.Point(8, 516);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.Size = new System.Drawing.Size(107, 23);
             this.btnReport.TabIndex = 8;
-            this.btnReport.Text = "Отчёт";
+            this.btnReport.Text = "Отчёт о продажах";
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
@@ -856,7 +881,7 @@ namespace CursProject
             this.tripClientGrid.AllowUserToAddRows = false;
             this.tripClientGrid.AllowUserToDeleteRows = false;
             this.tripClientGrid.AllowUserToOrderColumns = true;
-            this.tripClientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tripClientGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.tripClientGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -895,6 +920,7 @@ namespace CursProject
             // 
             // settingsTab
             // 
+            this.settingsTab.Controls.Add(this.groupBox3);
             this.settingsTab.Controls.Add(this.groupBox2);
             this.settingsTab.Controls.Add(this.groupBox1);
             this.settingsTab.Location = new System.Drawing.Point(4, 22);
@@ -904,6 +930,116 @@ namespace CursProject
             this.settingsTab.TabIndex = 2;
             this.settingsTab.Text = "Настройки";
             this.settingsTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtDirectorsFio);
+            this.groupBox3.Controls.Add(this.txtAccountNumber);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.txtPhone);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.txtAddress);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtFirmName);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.btnSaveInfo);
+            this.groupBox3.Location = new System.Drawing.Point(315, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(301, 236);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Информация о фирме";
+            // 
+            // txtDirectorsFio
+            // 
+            this.txtDirectorsFio.Location = new System.Drawing.Point(89, 45);
+            this.txtDirectorsFio.Name = "txtDirectorsFio";
+            this.txtDirectorsFio.Size = new System.Drawing.Size(206, 20);
+            this.txtDirectorsFio.TabIndex = 21;
+            // 
+            // txtAccountNumber
+            // 
+            this.txtAccountNumber.Location = new System.Drawing.Point(89, 123);
+            this.txtAccountNumber.Name = "txtAccountNumber";
+            this.txtAccountNumber.Size = new System.Drawing.Size(206, 20);
+            this.txtAccountNumber.TabIndex = 20;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(53, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(30, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "р/с: ";
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(89, 97);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(206, 20);
+            this.txtPhone.TabIndex = 18;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 100);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(58, 13);
+            this.label12.TabIndex = 17;
+            this.label12.Text = "Телефон: ";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(89, 71);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(206, 20);
+            this.txtAddress.TabIndex = 16;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(39, 74);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Адрес: ";
+            // 
+            // txtFirmName
+            // 
+            this.txtFirmName.Location = new System.Drawing.Point(89, 19);
+            this.txtFirmName.Name = "txtFirmName";
+            this.txtFirmName.Size = new System.Drawing.Size(206, 20);
+            this.txtFirmName.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(18, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Турфирма: ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Директор: ";
+            // 
+            // btnSaveInfo
+            // 
+            this.btnSaveInfo.Location = new System.Drawing.Point(158, 205);
+            this.btnSaveInfo.Name = "btnSaveInfo";
+            this.btnSaveInfo.Size = new System.Drawing.Size(137, 23);
+            this.btnSaveInfo.TabIndex = 9;
+            this.btnSaveInfo.Text = "Сохранить информацию";
+            this.btnSaveInfo.UseVisualStyleBackColor = true;
+            this.btnSaveInfo.Click += new System.EventHandler(this.btnSaveInfo_Click);
             // 
             // groupBox2
             // 
@@ -919,11 +1055,11 @@ namespace CursProject
             // 
             // btnParse
             // 
-            this.btnParse.Location = new System.Drawing.Point(220, 46);
+            this.btnParse.Location = new System.Drawing.Point(148, 46);
             this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.Size = new System.Drawing.Size(147, 23);
             this.btnParse.TabIndex = 11;
-            this.btnParse.Text = "Парсить";
+            this.btnParse.Text = "Получить данные с сайта";
             this.btnParse.UseVisualStyleBackColor = true;
             this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
@@ -964,11 +1100,11 @@ namespace CursProject
             // 
             // btnSaveSettings
             // 
-            this.btnSaveSettings.Location = new System.Drawing.Point(219, 123);
+            this.btnSaveSettings.Location = new System.Drawing.Point(158, 123);
             this.btnSaveSettings.Name = "btnSaveSettings";
-            this.btnSaveSettings.Size = new System.Drawing.Size(76, 23);
+            this.btnSaveSettings.Size = new System.Drawing.Size(137, 23);
             this.btnSaveSettings.TabIndex = 9;
-            this.btnSaveSettings.Text = "Сохранить";
+            this.btnSaveSettings.Text = "Сохранить настройки";
             this.btnSaveSettings.UseVisualStyleBackColor = true;
             this.btnSaveSettings.Click += new System.EventHandler(this.btnSaveSettings_Click);
             // 
@@ -1066,6 +1202,8 @@ namespace CursProject
             this.tripClientsTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tripClientGrid)).EndInit();
             this.settingsTab.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1162,6 +1300,19 @@ namespace CursProject
         private Label label7;
         private ComboBox ddlParseCountries;
         private Button btnSale;
+        private GroupBox groupBox3;
+        private TextBox txtAccountNumber;
+        private Label label8;
+        private TextBox txtPhone;
+        private Label label12;
+        private TextBox txtAddress;
+        private Label label11;
+        private TextBox txtFirmName;
+        private Label label10;
+        private Label label9;
+        private Button btnSaveInfo;
+        private TextBox txtDirectorsFio;
+        private Button button1;
     }
 }
 

@@ -7,29 +7,29 @@
             switch (month)
             {
                 case 1:
-                    return "января";
+                    return "январь";
                 case 2:
-                    return "февраля";
+                    return "февраль";
                 case 3:
-                    return "марта";
+                    return "март";
                 case 4:
-                    return "апреля";
+                    return "апрель";
                 case 5:
-                    return "мая";
+                    return "май";
                 case 6:
-                    return "июня";
+                    return "июнь";
                 case 7:
-                    return "июля";
+                    return "июль";
                 case 8:
-                    return "августа";
+                    return "август";
                 case 9:
-                    return "сентября";
+                    return "сентябрь";
                 case 10:
-                    return "октября";
+                    return "октябрь";
                 case 11:
-                    return "ноября";
+                    return "ноябрь";
                 case 12:
-                    return "декабря";
+                    return "декабрь";
                 default:
                     return "нет такого месяца";
             }

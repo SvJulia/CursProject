@@ -13,8 +13,9 @@ namespace CursProject.Doc
     public class ExcelGenerator
     {
         private static readonly string Dir = Application.StartupPath + "\\ExcelFiles";
+        private static TourDbDataContext db = DataBase.Context;
 
-        public static void ExportTrips(List<TripClient> tcs, DateTime from, DateTime to)
+        public static void ExportTrips(DateTime from, DateTime to)
         {
             string fileName = Dir + "\\" + GetFileName();
             if (File.Exists(fileName))
@@ -56,7 +57,7 @@ namespace CursProject.Doc
             for (var dateFrom = from; dateFrom <= to; dateFrom = dateFrom.AddMonths(1))
             {
                 var dateTo = dateFrom.AddMonths(1).AddDays(-1);
-                var trips = tcs.Where(t => t.SaleDate >= dateFrom && t.SaleDate <= dateFrom);
+                var trips = db.TripClients.ToList().Where(t => t.SaleDate >= dateFrom && t.SaleDate <= dateTo);
                 ws.Cells[row, 3] = StringHelper.GetMonth(dateFrom.Month);
                 ws.Cells[row, 4] = trips.Count();
                 ws.Cells[row, 5] = trips.Sum(t => t.TotalPrice);

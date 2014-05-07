@@ -57,6 +57,7 @@ namespace CursProject.Doc
                 FindAndReplace(document, "#number#", tc.Id.ToString());
                 FindAndReplace(document, "#date#", tc.SaleDate.ToShortDateString());
                 FindAndReplace(document, "#clientFio#", tc.Fio);
+                FindAndReplace(document, "#directorsFio#", Settings.DirectorsFio);
                 FindAndReplace(document, "#country#", tc.Trip.Tour.City.Country.ToString());
                 FindAndReplace(document, "#city#", tc.Trip.Tour.City.ToString());
                 FindAndReplace(document, "#dateFrom#", tc.Trip.DateDeparture.ToShortDateString());
@@ -71,7 +72,24 @@ namespace CursProject.Doc
                 FindAndReplace(document, "#accountNumber#", tc.Client.AccountNumber);
                 FindAndReplace(document, "#address#", tc.Client.Address);
                 FindAndReplace(document, "#phone#", tc.Client.Phone);
-                InsertTable(document, "#excursionsTable#", tc.Trip.Tour.TourExcursions.Select(p => p.Excursion).ToList());
+
+
+                FindAndReplace(document, "#fEmail#", Settings.Login);
+                FindAndReplace(document, "#fDirectorsFio#", Settings.DirectorsFio);
+                FindAndReplace(document, "#fAddress#", Settings.Address);
+                FindAndReplace(document, "#fAccountNumber#", Settings.AccountNumber);
+                FindAndReplace(document, "#fFirmName#", Settings.FirmName);
+                FindAndReplace(document, "#fPhone#", Settings.Phone);
+
+                var excursion = tc.Trip.Tour.TourExcursions.Select(p => p.Excursion).ToList();
+                if (excursion.Any())
+                {
+                    InsertTable(document, "#excursionsTable#", excursion);
+                }
+                else
+                {
+                    FindAndReplace(document, "#excursionsTable#", "Без эксурсий");
+                }
 
                 document.Save();
             }

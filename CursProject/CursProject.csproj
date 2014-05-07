@@ -104,6 +104,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +132,24 @@
     </Compile>
     <Compile Include="Form\AddTripClientForm.designer.cs">
       <DependentUpon>AddTripClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ShowClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ShowClientForm.Designer.cs">
+      <DependentUpon>ShowClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ShowGraphicsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ShowGraphicsForm.Designer.cs">
+      <DependentUpon>ShowGraphicsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ShowTripForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ShowTripForm.designer.cs">
+      <DependentUpon>ShowTripForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Grids\GridClient.cs" />
     <Compile Include="Grids\GridExcursion.cs" />
@@ -220,6 +239,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\AddClientForm.resx">
       <DependentUpon>AddClientForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\AddDiscountForm.resx">
       <DependentUpon>AddDiscountForm.cs</DependentUpon>
@@ -238,6 +258,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\AddTripClientForm.resx">
       <DependentUpon>AddTripClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ShowClientForm.resx">
+      <DependentUpon>ShowClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ShowGraphicsForm.resx">
+      <DependentUpon>ShowGraphicsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ShowTripForm.resx">
+      <DependentUpon>ShowTripForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\AddTripForm.resx">
       <DependentUpon>AddTripForm.cs</DependentUpon>

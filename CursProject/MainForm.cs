@@ -149,6 +149,9 @@ namespace CursProject
                         trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice <= PriceTo);
                     }
                 }
+
+                trips = trips.Where(p => p.DateDeparture.Date > DateTime.Now.Date);
+
                 return trips;
             }
         }
@@ -203,6 +206,15 @@ namespace CursProject
             db.SubmitChanges();
 
             RefreshTours();
+        }
+
+        private void clientGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            int id = GridHelper.GetIntFromRow(clientGrid.Rows[e.RowIndex], 0);
+            var form = new ShowClient(id);
+            form.ShowDialog();
         }
 
         /*
@@ -569,6 +581,15 @@ namespace CursProject
             RefreshTrips();
         }
 
+        private void tripGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            int id = GridHelper.GetIntFromRow(tripGrid.Rows[e.RowIndex], 0);
+            var form = new ShowTripForm(id);
+            form.ShowDialog();
+        }
+
 
         /*
          **********   TripClients   **********
@@ -641,7 +662,13 @@ namespace CursProject
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            ExcelGenerator.ExportTrips(db.TripClients.ToList(), dtpFrom.Value, dtpTo.Value);
+            ExcelGenerator.ExportTrips(dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new ShowGraphicsForm(dtpFrom.Value, dtpTo.Value);
+            form.ShowDialog();
         }
 
 
@@ -684,6 +711,15 @@ namespace CursProject
                 Cursor = Cursors.Arrow;
                 MessageBox.Show("Нет данных на сайте", "Парсинг");
             }
+        }
+
+        private void btnSaveInfo_Click(object sender, EventArgs e)
+        {
+            Settings.DirectorsFio = txtDirectorsFio.Text;
+            Settings.Address = txtAddress.Text;
+            Settings.AccountNumber = txtAccountNumber.Text;
+            Settings.FirmName = txtFirmName.Text;
+            Settings.Phone = txtPhone.Text;
         }
     }
 
