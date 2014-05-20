@@ -77,6 +77,7 @@ namespace CursProject.Form
                 if (Id <= 0)
                 {
                     tc.SaleDate = DateTime.Now;
+                    tc.LeftPrice = tc.TotalPrice;
                     db.TripClients.InsertOnSubmit(tc);
                 }
 

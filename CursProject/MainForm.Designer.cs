@@ -58,7 +58,6 @@ namespace CursProject
             this.btnEditTrip = new System.Windows.Forms.Button();
             this.btnAddTrip = new System.Windows.Forms.Button();
             this.clientsTab = new System.Windows.Forms.TabPage();
-            this.btnClientBank = new System.Windows.Forms.Button();
             this.btnSendEmail = new System.Windows.Forms.Button();
             this.clientGrid = new System.Windows.Forms.DataGridView();
             this.btnDeleteClient = new System.Windows.Forms.Button();
@@ -120,6 +119,7 @@ namespace CursProject
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnClientBank = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.toursTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tourGrid)).BeginInit();
@@ -451,7 +451,6 @@ namespace CursProject
             // 
             // clientsTab
             // 
-            this.clientsTab.Controls.Add(this.btnClientBank);
             this.clientsTab.Controls.Add(this.btnSendEmail);
             this.clientsTab.Controls.Add(this.clientGrid);
             this.clientsTab.Controls.Add(this.btnDeleteClient);
@@ -464,17 +463,6 @@ namespace CursProject
             this.clientsTab.TabIndex = 1;
             this.clientsTab.Text = "Клиенты";
             this.clientsTab.UseVisualStyleBackColor = true;
-            // 
-            // btnClientBank
-            // 
-            this.btnClientBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClientBank.Location = new System.Drawing.Point(89, 516);
-            this.btnClientBank.Name = "btnClientBank";
-            this.btnClientBank.Size = new System.Drawing.Size(85, 23);
-            this.btnClientBank.TabIndex = 9;
-            this.btnClientBank.Text = "Клиент банк";
-            this.btnClientBank.UseVisualStyleBackColor = true;
-            this.btnClientBank.Click += new System.EventHandler(this.btnClientBank_Click);
             // 
             // btnSendEmail
             // 
@@ -811,6 +799,7 @@ namespace CursProject
             // 
             // tripClientsTab
             // 
+            this.tripClientsTab.Controls.Add(this.btnClientBank);
             this.tripClientsTab.Controls.Add(this.button1);
             this.tripClientsTab.Controls.Add(this.btnSale);
             this.tripClientsTab.Controls.Add(this.dtpTo);
@@ -893,7 +882,7 @@ namespace CursProject
             this.tripClientGrid.Name = "tripClientGrid";
             this.tripClientGrid.ReadOnly = true;
             this.tripClientGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tripClientGrid.Size = new System.Drawing.Size(768, 504);
+            this.tripClientGrid.Size = new System.Drawing.Size(768, 475);
             this.tripClientGrid.TabIndex = 4;
             // 
             // btnDeleteTripClient
@@ -1172,6 +1161,17 @@ namespace CursProject
             this.label3.TabIndex = 1;
             this.label3.Text = "Smtp сервер: ";
             // 
+            // btnClientBank
+            // 
+            this.btnClientBank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClientBank.Location = new System.Drawing.Point(8, 487);
+            this.btnClientBank.Name = "btnClientBank";
+            this.btnClientBank.Size = new System.Drawing.Size(188, 23);
+            this.btnClientBank.TabIndex = 13;
+            this.btnClientBank.Text = "Клиент банк";
+            this.btnClientBank.UseVisualStyleBackColor = true;
+            this.btnClientBank.Click += new System.EventHandler(this.btnClientBank_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1294,7 +1294,6 @@ namespace CursProject
         private Button btnReport;
         private DateTimePicker dtpTo;
         private DateTimePicker dtpFrom;
-        private Button btnClientBank;
         private GroupBox groupBox2;
         private Button btnParse;
         private Label label7;
@@ -1313,6 +1312,7 @@ namespace CursProject
         private Button btnSaveInfo;
         private TextBox txtDirectorsFio;
         private Button button1;
+        private Button btnClientBank;
     }
 }
 

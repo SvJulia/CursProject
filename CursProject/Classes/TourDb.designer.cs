@@ -63,12 +63,12 @@ namespace CursProject.Classes
     partial void InsertSettings(Settings instance);
     partial void UpdateSettings(Settings instance);
     partial void DeleteSettings(Settings instance);
-    partial void InsertTripClient(TripClient instance);
-    partial void UpdateTripClient(TripClient instance);
-    partial void DeleteTripClient(TripClient instance);
     partial void InsertTrip(Trip instance);
     partial void UpdateTrip(Trip instance);
     partial void DeleteTrip(Trip instance);
+    partial void InsertTripClient(TripClient instance);
+    partial void UpdateTripClient(TripClient instance);
+    partial void DeleteTripClient(TripClient instance);
     #endregion
 		
 		public TourDbDataContext() : 
@@ -189,19 +189,19 @@ namespace CursProject.Classes
 			}
 		}
 		
-		public System.Data.Linq.Table<TripClient> TripClients
-		{
-			get
-			{
-				return this.GetTable<TripClient>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Trip> Trips
 		{
 			get
 			{
 				return this.GetTable<Trip>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TripClient> TripClients
+		{
+			get
+			{
+				return this.GetTable<TripClient>();
 			}
 		}
 	}
@@ -1976,294 +1976,6 @@ namespace CursProject.Classes
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TripClient")]
-	public partial class TripClient : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _TripId;
-		
-		private int _ClientId;
-		
-		private string _Fio;
-		
-		private int _TotalPrice;
-		
-		private System.DateTime _SaleDate;
-		
-		private bool _IsPaid;
-		
-		private EntityRef<Client> _Client;
-		
-		private EntityRef<Trip> _Trip;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnTripIdChanging(int value);
-    partial void OnTripIdChanged();
-    partial void OnClientIdChanging(int value);
-    partial void OnClientIdChanged();
-    partial void OnFioChanging(string value);
-    partial void OnFioChanged();
-    partial void OnTotalPriceChanging(int value);
-    partial void OnTotalPriceChanged();
-    partial void OnSaleDateChanging(System.DateTime value);
-    partial void OnSaleDateChanged();
-    partial void OnIsPaidChanging(bool value);
-    partial void OnIsPaidChanged();
-    #endregion
-		
-		public TripClient()
-		{
-			this._Client = default(EntityRef<Client>);
-			this._Trip = default(EntityRef<Trip>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TripId", DbType="Int NOT NULL")]
-		public int TripId
-		{
-			get
-			{
-				return this._TripId;
-			}
-			set
-			{
-				if ((this._TripId != value))
-				{
-					if (this._Trip.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTripIdChanging(value);
-					this.SendPropertyChanging();
-					this._TripId = value;
-					this.SendPropertyChanged("TripId");
-					this.OnTripIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientId", DbType="Int NOT NULL")]
-		public int ClientId
-		{
-			get
-			{
-				return this._ClientId;
-			}
-			set
-			{
-				if ((this._ClientId != value))
-				{
-					if (this._Client.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnClientIdChanging(value);
-					this.SendPropertyChanging();
-					this._ClientId = value;
-					this.SendPropertyChanged("ClientId");
-					this.OnClientIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fio", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Fio
-		{
-			get
-			{
-				return this._Fio;
-			}
-			set
-			{
-				if ((this._Fio != value))
-				{
-					this.OnFioChanging(value);
-					this.SendPropertyChanging();
-					this._Fio = value;
-					this.SendPropertyChanged("Fio");
-					this.OnFioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Int NOT NULL")]
-		public int TotalPrice
-		{
-			get
-			{
-				return this._TotalPrice;
-			}
-			set
-			{
-				if ((this._TotalPrice != value))
-				{
-					this.OnTotalPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TotalPrice = value;
-					this.SendPropertyChanged("TotalPrice");
-					this.OnTotalPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SaleDate", DbType="DateTime NOT NULL")]
-		public System.DateTime SaleDate
-		{
-			get
-			{
-				return this._SaleDate;
-			}
-			set
-			{
-				if ((this._SaleDate != value))
-				{
-					this.OnSaleDateChanging(value);
-					this.SendPropertyChanging();
-					this._SaleDate = value;
-					this.SendPropertyChanged("SaleDate");
-					this.OnSaleDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPaid", DbType="Bit NOT NULL")]
-		public bool IsPaid
-		{
-			get
-			{
-				return this._IsPaid;
-			}
-			set
-			{
-				if ((this._IsPaid != value))
-				{
-					this.OnIsPaidChanging(value);
-					this.SendPropertyChanging();
-					this._IsPaid = value;
-					this.SendPropertyChanged("IsPaid");
-					this.OnIsPaidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.TripClients.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.TripClients.Add(this);
-						this._ClientId = value.Id;
-					}
-					else
-					{
-						this._ClientId = default(int);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trip_TripClient", Storage="_Trip", ThisKey="TripId", OtherKey="Id", IsForeignKey=true)]
-		public Trip Trip
-		{
-			get
-			{
-				return this._Trip.Entity;
-			}
-			set
-			{
-				Trip previousValue = this._Trip.Entity;
-				if (((previousValue != value) 
-							|| (this._Trip.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Trip.Entity = null;
-						previousValue.TripClients.Remove(this);
-					}
-					this._Trip.Entity = value;
-					if ((value != null))
-					{
-						value.TripClients.Add(this);
-						this._TripId = value.Id;
-					}
-					else
-					{
-						this._TripId = default(int);
-					}
-					this.SendPropertyChanged("Trip");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Trip")]
 	public partial class Trip : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2803,6 +2515,318 @@ namespace CursProject.Classes
 		{
 			this.SendPropertyChanging();
 			entity.Trip = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TripClient")]
+	public partial class TripClient : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _TripId;
+		
+		private int _ClientId;
+		
+		private string _Fio;
+		
+		private int _TotalPrice;
+		
+		private int _LeftPrice;
+		
+		private System.DateTime _SaleDate;
+		
+		private bool _IsPaid;
+		
+		private EntityRef<Client> _Client;
+		
+		private EntityRef<Trip> _Trip;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTripIdChanging(int value);
+    partial void OnTripIdChanged();
+    partial void OnClientIdChanging(int value);
+    partial void OnClientIdChanged();
+    partial void OnFioChanging(string value);
+    partial void OnFioChanged();
+    partial void OnTotalPriceChanging(int value);
+    partial void OnTotalPriceChanged();
+    partial void OnLeftPriceChanging(int value);
+    partial void OnLeftPriceChanged();
+    partial void OnSaleDateChanging(System.DateTime value);
+    partial void OnSaleDateChanged();
+    partial void OnIsPaidChanging(bool value);
+    partial void OnIsPaidChanged();
+    #endregion
+		
+		public TripClient()
+		{
+			this._Client = default(EntityRef<Client>);
+			this._Trip = default(EntityRef<Trip>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TripId", DbType="Int NOT NULL")]
+		public int TripId
+		{
+			get
+			{
+				return this._TripId;
+			}
+			set
+			{
+				if ((this._TripId != value))
+				{
+					if (this._Trip.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTripIdChanging(value);
+					this.SendPropertyChanging();
+					this._TripId = value;
+					this.SendPropertyChanged("TripId");
+					this.OnTripIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientId", DbType="Int NOT NULL")]
+		public int ClientId
+		{
+			get
+			{
+				return this._ClientId;
+			}
+			set
+			{
+				if ((this._ClientId != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientIdChanging(value);
+					this.SendPropertyChanging();
+					this._ClientId = value;
+					this.SendPropertyChanged("ClientId");
+					this.OnClientIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fio", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Fio
+		{
+			get
+			{
+				return this._Fio;
+			}
+			set
+			{
+				if ((this._Fio != value))
+				{
+					this.OnFioChanging(value);
+					this.SendPropertyChanging();
+					this._Fio = value;
+					this.SendPropertyChanged("Fio");
+					this.OnFioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Int NOT NULL")]
+		public int TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LeftPrice", DbType="Int NOT NULL")]
+		public int LeftPrice
+		{
+			get
+			{
+				return this._LeftPrice;
+			}
+			set
+			{
+				if ((this._LeftPrice != value))
+				{
+					this.OnLeftPriceChanging(value);
+					this.SendPropertyChanging();
+					this._LeftPrice = value;
+					this.SendPropertyChanged("LeftPrice");
+					this.OnLeftPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SaleDate", DbType="DateTime NOT NULL")]
+		public System.DateTime SaleDate
+		{
+			get
+			{
+				return this._SaleDate;
+			}
+			set
+			{
+				if ((this._SaleDate != value))
+				{
+					this.OnSaleDateChanging(value);
+					this.SendPropertyChanging();
+					this._SaleDate = value;
+					this.SendPropertyChanged("SaleDate");
+					this.OnSaleDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPaid", DbType="Bit NOT NULL")]
+		public bool IsPaid
+		{
+			get
+			{
+				return this._IsPaid;
+			}
+			set
+			{
+				if ((this._IsPaid != value))
+				{
+					this.OnIsPaidChanging(value);
+					this.SendPropertyChanging();
+					this._IsPaid = value;
+					this.SendPropertyChanged("IsPaid");
+					this.OnIsPaidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_TripClient", Storage="_Client", ThisKey="ClientId", OtherKey="Id", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.TripClients.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.TripClients.Add(this);
+						this._ClientId = value.Id;
+					}
+					else
+					{
+						this._ClientId = default(int);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trip_TripClient", Storage="_Trip", ThisKey="TripId", OtherKey="Id", IsForeignKey=true)]
+		public Trip Trip
+		{
+			get
+			{
+				return this._Trip.Entity;
+			}
+			set
+			{
+				Trip previousValue = this._Trip.Entity;
+				if (((previousValue != value) 
+							|| (this._Trip.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Trip.Entity = null;
+						previousValue.TripClients.Remove(this);
+					}
+					this._Trip.Entity = value;
+					if ((value != null))
+					{
+						value.TripClients.Add(this);
+						this._TripId = value.Id;
+					}
+					else
+					{
+						this._TripId = default(int);
+					}
+					this.SendPropertyChanged("Trip");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

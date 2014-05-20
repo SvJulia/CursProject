@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using CursProject.Classes;
+using CursProject.Doc;
 using CursProject.Form;
 using CursProject.Helpers;
 using CursProject.Properties;
-using CursProject.Doc;
-using CursProject.Types;
 using Settings = CursProject.Classes.Settings;
 
 namespace CursProject
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
-        private TourDbDataContext db = DataBase.Context;
+        private readonly TourDbDataContext db = DataBase.Context;
 
         public MainForm()
         {
@@ -26,9 +23,9 @@ namespace CursProject
             RefreshAllGrids();
             LoadSettings();
 
-            foreach (var country in Resources.Countries.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+            foreach (string country in Resources.Countries.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
             {
-                var data = country.Split(';');
+                string[] data = country.Split(';');
                 ddlParseCountries.Items.Add(new ComboBoxItem(data[0], data[1]));
             }
 
@@ -37,6 +34,38 @@ namespace CursProject
 
         public int PriceTo { get; set; }
         public int PriceFrom { get; set; }
+
+        private IQueryable<Trip> Trips
+        {
+            get
+            {
+                IQueryable<Trip> trips = db.Trips.Where(p => true);
+
+                if ((PriceFrom != 0) || (PriceTo != 0))
+                {
+                    if ((PriceTo < PriceFrom) && (PriceFrom != 0) && (PriceTo != 0))
+                    {
+                        int temp = PriceFrom;
+                        PriceFrom = PriceTo;
+                        PriceTo = temp;
+                    }
+
+                    if (PriceFrom != 0)
+                    {
+                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice >= PriceFrom);
+                    }
+
+                    if (PriceTo != 0)
+                    {
+                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice <= PriceTo);
+                    }
+                }
+
+                trips = trips.Where(p => p.DateDeparture.Date > DateTime.Now.Date);
+
+                return trips;
+            }
+        }
 
         /*
          *********************************** 
@@ -124,43 +153,11 @@ namespace CursProject
             GridHelper.SetInvisible(tripGrid, new[] { 0 });
         }
 
-        private IQueryable<Trip> Trips
-        {
-            get
-            {
-                var trips = db.Trips.Where(p => true);
-
-                if ((PriceFrom != 0) || (PriceTo != 0))
-                {
-                    if ((PriceTo < PriceFrom) && (PriceFrom != 0) && (PriceTo != 0))
-                    {
-                        int temp = PriceFrom;
-                        PriceFrom = PriceTo;
-                        PriceTo = temp;
-                    }
-
-                    if (PriceFrom != 0)
-                    {
-                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice >= PriceFrom);
-                    }
-
-                    if (PriceTo != 0)
-                    {
-                        trips = trips.Where(p => p.HotelPrice + p.MealPrice + p.TourPrice + p.TransportPrice <= PriceTo);
-                    }
-                }
-
-                trips = trips.Where(p => p.DateDeparture.Date > DateTime.Now.Date);
-
-                return trips;
-            }
-        }
-
         private void RefreshTripClients()
         {
             tripClientGrid.DataSource = db.TripClients.Select(p => p.ToGrid()).ToList();
 
-            GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "Покупатель", "Тур", "Цена", "Дата продажи", "Оплачено" });
+            GridHelper.SetHeaders(tripClientGrid, new[] { "ID", "Покупатель", "Тур", "Цена", "К оплате осталось", "Дата продажи", "Оплачено" });
             GridHelper.SetInvisible(tripClientGrid, new[] { 0 });
         }
 
@@ -210,7 +207,10 @@ namespace CursProject
 
         private void clientGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
 
             int id = GridHelper.GetIntFromRow(clientGrid.Rows[e.RowIndex], 0);
             var form = new ShowClient(id);
@@ -487,9 +487,9 @@ namespace CursProject
 
         private void btnSendEmail_Click(object sender, EventArgs e)
         {
-            var fileName = PdfGenerator.MakeOffer(Trips.ToList());
-            foreach (var client in db.Clients)
-            { 
+            string fileName = PdfGenerator.MakeOffer(Trips.ToList());
+            foreach (Client client in db.Clients)
+            {
                 MailSender.SendOffer(client, fileName);
             }
 
@@ -498,16 +498,62 @@ namespace CursProject
 
         private void btnClientBank_Click(object sender, EventArgs e)
         {
-            var fileName = "ClientBank.txt";
+            var dialog = new OpenFileDialog();
 
-            var writer = new StreamWriter(fileName);
-            foreach (var client in db.Clients)
+            if (dialog.ShowDialog() == DialogResult.Cancel)
             {
-                writer.WriteLine(client.AccountNumber + " - " + client.TotaPurchases + ".00 руб");
+                return;
             }
-            writer.Close();
 
-            Process.Start(fileName);
+            string[] blocks = File.ReadAllText(dialog.FileName, Encoding.Default).ToLower().Split(new[] { "СекцияДокумент=Движение по счету".ToLower() },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 1; i < blocks.Length; i++)
+            {
+                string[] lines = blocks[i].Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                decimal sum = 0;
+                string accountNumber = "";
+
+                foreach (string line in lines)
+                {
+                    string[] data = line.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    if (data.Length != 2) continue;
+
+                    if (data[0] == "Сумма".ToLower())
+                    {
+                        decimal.TryParse(data[1].Trim(), out sum);
+                    }
+
+                    if (data[0] == "ПлательщикСчет".ToLower())
+                    {
+                        accountNumber = data[1].Trim();
+                    }
+                }
+
+                while (sum > 0)
+                {
+                    var tripClient = db.TripClients.FirstOrDefault(p => p.Client.AccountNumber == accountNumber && !p.IsPaid);
+
+                    if (tripClient == null) break;
+
+                    if (sum > tripClient.LeftPrice)
+                    {
+                        tripClient.LeftPrice = 0;
+                        sum -= tripClient.LeftPrice;
+                        tripClient.IsPaid = true;
+                    }
+                    else
+                    {
+                        tripClient.LeftPrice -= (int)sum;
+                        sum = 0;
+                    }
+
+                    db.SubmitChanges();
+                }
+            }
+
+            RefreshTripClients();
         }
 
 
@@ -583,7 +629,10 @@ namespace CursProject
 
         private void tripGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
 
             int id = GridHelper.GetIntFromRow(tripGrid.Rows[e.RowIndex], 0);
             var form = new ShowTripForm(id);
@@ -651,7 +700,7 @@ namespace CursProject
 
             int id = GridHelper.GetIntFromRow(tripClientGrid.SelectedRows[0], 0);
 
-            var tripClient = db.TripClients.SingleOrDefault(p => p.Id == id);
+            TripClient tripClient = db.TripClients.SingleOrDefault(p => p.Id == id);
 
             if (tripClient != null)
             {
@@ -686,7 +735,7 @@ namespace CursProject
 
         private void btnSaveSettings_Click(object sender, EventArgs e)
         {
-            var port = 0;
+            int port = 0;
             Int32.TryParse(txtPort.Text, out port);
 
             Settings.Host = txtHost.Text;
@@ -705,7 +754,7 @@ namespace CursProject
                 RefreshAllGrids();
                 Cursor = Cursors.Arrow;
                 MessageBox.Show("Парсинг завершён", "Парсинг");
-                }
+            }
             else
             {
                 Cursor = Cursors.Arrow;
@@ -725,14 +774,14 @@ namespace CursProject
 
     public class ComboBoxItem
     {
-        public string Text { get; set; }
-        public string Value { get; set; }
-
         public ComboBoxItem(string text, string value)
         {
             Text = text;
             Value = value;
         }
+
+        public string Text { get; set; }
+        public string Value { get; set; }
 
         public override string ToString()
         {

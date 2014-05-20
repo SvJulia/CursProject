@@ -53,7 +53,7 @@ namespace CursProject.Form
 
         private List<Excursion> Excursions
         {
-            get { return db.Excursions.ToList(); }
+            get { return db.Excursions.OrderByDescending(p=> p.Rating).ToList(); }
         }
 
         private City CurrentCity

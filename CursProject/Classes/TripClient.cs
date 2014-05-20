@@ -12,6 +12,7 @@ namespace CursProject.Classes
                 Fio = Fio,
                 Name = Trip.Tour.ToString(),
                 TotalPrice = TotalPrice + " руб.",
+                LeftPrice = LeftPrice + " руб.",
                 SaleDate = SaleDate.ToShortDateString(),
                 IsPaid = IsPaid
             };

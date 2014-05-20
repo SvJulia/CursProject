@@ -96,19 +96,6 @@
       <Column Name="Value" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.TripClient" Member="TripClients">
-    <Type Name="TripClient">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TripId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ClientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Fio" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="TotalPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="SaleDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Client_TripClient" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
-      <Association Name="Trip_TripClient" Member="Trip" ThisKey="TripId" OtherKey="Id" Type="Trip" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Trip" Member="Trips">
     <Type Name="Trip">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -129,6 +116,20 @@
       <Association Name="Meal_Trip" Member="Meal" ThisKey="MealId" OtherKey="Id" Type="Meal" IsForeignKey="true" />
       <Association Name="Tour_Trip" Member="Tour" ThisKey="TourId" OtherKey="Id" Type="Tour" IsForeignKey="true" />
       <Association Name="Transport_Trip" Member="Transport" ThisKey="TransportId" OtherKey="Id" Type="Transport" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TripClient" Member="TripClients">
+    <Type Name="TripClient">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TripId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fio" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LeftPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SaleDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Client_TripClient" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Trip_TripClient" Member="Trip" ThisKey="TripId" OtherKey="Id" Type="Trip" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
